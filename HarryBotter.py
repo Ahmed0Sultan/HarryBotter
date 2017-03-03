@@ -12,7 +12,7 @@ def hello_world():
 def webhook():
     if request.method == 'GET':
         if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
-            if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
+            if not request.args.get("hub.verify_token") == os.environ["Z7Ylb5tyL5JR9EFYWHdw"]:
                 return "Verification token mismatch", 403
             return request.args["hub.challenge"], 200
     elif request.method == 'POST':
