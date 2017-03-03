@@ -1,1 +1,1 @@
-web: gunicorn app:HarryBotter --log-file=-
+web: gunicorn app:app --log-file=-
