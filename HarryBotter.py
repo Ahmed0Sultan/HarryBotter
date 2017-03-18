@@ -49,7 +49,7 @@ def webhook():
                     pass
 
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
-
+                    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text="This is postback"))
                     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
@@ -64,16 +64,6 @@ def webhook():
 
     return "ok", 200
 
-
-def postback_events(payload):
-    data = json.loads(payload)
-
-    postbacks = data["entry"][0]["messaging"]
-
-    for event in postbacks:
-        sender_id = event["sender"]["id"]
-        postback_payload = event["postback"]["payload"]
-        yield sender_id, postback_payload
 
 def handle_help(user_id):
     intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"
