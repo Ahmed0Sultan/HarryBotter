@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-import FacebookAPI as FB
+import FacebookAPI as FB, NLP
 
 import requests
 from flask import Flask, request
@@ -67,6 +67,19 @@ def handle_help(user_id):
     intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"
     FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     # FB.send_intro_screenshots(app, app.config['PAT'], user_id)
+
+
+def handle_first_time_user(sender_id):
+    user_id = sender_id
+    token = os.environ["PAGE_ACCESS_TOKEN"]
+
+    hi = "%s Wizard, Nice to meet you :)" % (NLP.sayHiTimeZone(user))
+    FB.send_message(token, user_id, hi)
+
+    FB.send_picture(token, user_id, 'https://harrybottermessenger.herokuapp.com/static/assets/img/Harry_Botter.png')
+
+    handle_help(user_id)
+    FB.send_message(token, user_id, "Next time just tell me \"help\" to view this again :D")
 
 
 def send_message(recipient_id, message_text):
