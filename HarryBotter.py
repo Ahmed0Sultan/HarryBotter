@@ -65,7 +65,7 @@ def webhook():
 
 def handle_help(user_id):
     intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"
-    FB.send_message(app.config['PAT'], user_id, intro)
+    FB.send_message(app.config['PAGE_ACCESS_TOKEN'], user_id, intro)
     # FB.send_intro_screenshots(app, app.config['PAT'], user_id)
 
 
