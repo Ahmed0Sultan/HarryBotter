@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import FacebookAPI as FB
 
 import requests
 from flask import Flask, request
@@ -48,9 +49,36 @@ def webhook():
                     pass
 
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
-                    pass
+
+                    sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
+                    recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+                    message_text = messaging_event["message"]["text"]  # the message's text
+                    message_payload = messaging_event["postback"]["payload"]
+
+                    if message_payload == "Harry_Botter_Help":
+                        handle_help(sender_id)
+
+                    elif message_payload == "Harry_Botter_Get_Started":
+                        pass
+
 
     return "ok", 200
+
+
+def postback_events(payload):
+    data = json.loads(payload)
+
+    postbacks = data["entry"][0]["messaging"]
+
+    for event in postbacks:
+        sender_id = event["sender"]["id"]
+        postback_payload = event["postback"]["payload"]
+        yield sender_id, postback_payload
+
+def handle_help(user_id):
+    intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"
+    FB.send_message(app.config['PAT'], user_id, intro)
+    # FB.send_intro_screenshots(app, app.config['PAT'], user_id)
 
 
 def send_message(recipient_id, message_text):
