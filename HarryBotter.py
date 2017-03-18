@@ -57,7 +57,7 @@ def webhook():
                         handle_help(sender_id)
 
                     elif message_payload == "Harry_Botter_Get_Started":
-                        pass
+                        handle_first_time_user(sender_id)
 
 
     return "ok", 200
