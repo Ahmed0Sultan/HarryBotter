@@ -134,7 +134,7 @@ def processIncoming(user_id, message):
         response = deviseAnswer(tagged_input)
     elif intent == Intent.NONSENSE:
         print("Harry THINKS YOU ARE UNCLEAR.")
-        response = "%s, %s" % (userName, RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
+        response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
 
     return response
 
