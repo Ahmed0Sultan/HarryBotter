@@ -26,6 +26,12 @@ QUERY_RESULT_LIMIT = 25
 SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
+class Intent:
+    QUERY = 1
+    STATEMENT = 2
+    NONSENSE = 3
+    DEVIOUS = 4
+
 grammar = r"""
 	NP: {<DT|PRP\$>?<JJ|JJS>*<NN|NNS>+}
 		{<NNP|NNPS><IN><DT>?<NNP|NNPS>}
