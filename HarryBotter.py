@@ -231,11 +231,11 @@ def deviseAnswer(taggedInput):
 
         # Add NP to list of queries
         if subtree.label() == 'NP':
-            queries.append(' '.join([str(a[0]) for a in subtree.leaves()]))
+            queries.append(' '.join([(a[0]).encode('utf-8') for a in subtree.leaves()]))
 
         # Add VP and PPs to additional search keywords
         else:
-            additionalSearchKeywords.append(' '.join([str(a[0]) for a in subtree.leaves()]))
+            additionalSearchKeywords.append(' '.join([(a[0]).encode('utf-8') for a in subtree.leaves()]))
 
         i = i + 1
 
