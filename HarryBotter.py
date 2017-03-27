@@ -81,44 +81,12 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
 
-                    if not message:
-                        return "ok"
+                    FB.show_typing(token, sender_id)
+                    response = processIncoming(sender_id, message)
+                    FB.show_typing(token, sender_id, 'typing_off')
 
-                    # Handle Facebook's bug when receiving long audio
-                    # The bug: The app keeps receiving the same POST request
-                    # This acts as a rescue exit signal
-                    global temp_message_id
-                    mid = messaging_event["message"]['message_id']
-                    if mid == temp_message_id:
-                        return 'ok'
-                    temp_message_id = mid
+                    FB.send_message(token, sender_id, response)
 
-                    # Start processing valid requests
-                    if app.config['PRINT_INCOMING_MESSAGE']:
-                        print "User ID: %s\nMessage:%s" % (sender_id, message)
-                    try:
-                        FB.show_typing(token, sender_id)
-                        response = processIncoming(sender_id, message)
-                        FB.show_typing(token, sender_id, 'typing_off')
-
-                        if response is not None and response != 'pseudo':
-                            # 'pseudo' is an "ok" signal for functions that sends response on their own
-                            # without returning anything back this function
-                            print response
-                            FB.send_message(token, sender_id, response)
-
-                        elif response != 'pseudo':
-                            if NLP.randOneIn(7):
-                                FB.send_message(token, sender_id, NLP.oneOf(NLP.no_response))
-                                FB.send_picture(token, sender_id,
-                                                'https://harrybottermessenger.herokuapp.com/static/assets/img/Harry_Botter.png')
-                    except Exception, e:
-                        print e
-                        traceback.print_exc()
-                        FB.send_message(token, sender_id, NLP.oneOf(NLP.error))
-                        if NLP.randOneIn(7):
-                            FB.send_picture(token, sender_id,
-                                            'https://harrybottermessenger.herokuapp.com/static/assets/img/Harry_Botter.png')
                 return "ok"
 
                 if messaging_event.get("delivery"):  # delivery confirmation
