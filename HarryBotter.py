@@ -111,7 +111,7 @@ def webhook():
 
 
 def processIncoming(user_id, message):
-    userInput = message
+    userInput = message['data']
 
     ## TEMP: to see & verify POS tagging
     print("User Input : %s" % userInput)
