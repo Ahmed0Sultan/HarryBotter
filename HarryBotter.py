@@ -1,5 +1,7 @@
 import os
 import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 import json
 import FacebookAPI as FB, NLP
 
