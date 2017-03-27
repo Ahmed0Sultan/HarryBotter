@@ -1,4 +1,4 @@
 Flask==0.11.1
-nltk==3.2.1
+nltk
 requests==2.9.1
 pattern==2.6
