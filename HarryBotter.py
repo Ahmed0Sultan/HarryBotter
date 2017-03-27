@@ -120,20 +120,20 @@ def processIncoming(user_id, message):
     userInput = message['text']
 
     ## TEMP: to see & verify POS tagging
-    print("User Input : %s" % userInput)
+    # print("User Input : %s" % userInput)
 
     response = ''
 
     ## Perform POS-tagging on user input
     tagged_input = pos_tag(word_tokenize(userInput))
-    print("POS-Tagged User Input : %s " % tagged_input)
+    # print("POS-Tagged User Input : %s " % tagged_input)
     intent = obtainUserIntent(tagged_input)
 
     if intent == Intent.QUERY:
-        print("Harry IS THINKING...")
+        # print("Harry IS THINKING...")
         response = deviseAnswer(tagged_input)
     elif intent == Intent.NONSENSE:
-        print("Harry THINKS YOU ARE UNCLEAR.")
+        # print("Harry THINKS YOU ARE UNCLEAR.")
         response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
 
     return response
@@ -182,8 +182,8 @@ def deviseAnswer(taggedInput):
     answer = NO_INFORMATION_AVAILABLE
 
     result = parser.parse(taggedInput)
-    print("Regexp Parser Result for input %s : " % taggedInput),
-    print(result)
+    # print("Regexp Parser Result for input %s : " % taggedInput),
+    # print(result)
 
     # Determine the query to enter into the wikia search and add any additional
     # search terms now so that when article refinement is performed the most accurate reply is returned
@@ -274,8 +274,8 @@ def deviseAnswer(taggedInput):
     additionalSearchKeywords = [value for value in additionalSearchKeywords if value != ' ' and value != '']
     queries = [value for value in queries if value != '']
 
-    print("Wikia Queries : %s " % queries)
-    print("Search Keywords : %s " % additionalSearchKeywords)
+    # print("Wikia Queries : %s " % queries)
+    # print("Search Keywords : %s " % additionalSearchKeywords)
 
     ## If there are queries perform wikia search
     ## for articles and scan through article text for a relevant response
@@ -316,7 +316,7 @@ def deviseAnswer(taggedInput):
 
             answer = tempAnswer
 
-    print("Harry's Response: %s" % answer)
+    # print("Harry's Response: %s" % answer)
     return answer
 
 def spellCheck(word):
@@ -538,7 +538,7 @@ def send_message(recipient_id, message_text):
 
 
 def log(message):  # simple wrapper for logging to stdout on heroku
-    print str(message)
+    # print str(message)
     sys.stdout.flush()
 
 
