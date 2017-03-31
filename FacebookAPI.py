@@ -256,17 +256,17 @@ def send_intro_screenshots(app, token, user_id):
     characters = {
         "title": "Get to know characters better",
         "image_url": url_for('static', filename="assets/img/hpcast1.jpg", _external=True),
-        "subtitle": "I can tell you all the information you want about a certain character\nSo please Type Characters or choose it from Menu below"
+        "subtitle": "Type \"Characters\" to use this option"
     }
     spells = {
         "title": "Get to know spells and how they work",
         "image_url": url_for('static', filename="assets/img/harrypotterspells.jpg", _external=True),
-        "subtitle": "I can tell you about spells, how they work and what they are used for\nSo please Type Spells or choose it from Menu below",
+        "subtitle": "Type \"Spells\" to use this option",
     }
     places = {
         "title": "Get to know more places in the magic world",
         "image_url": url_for('static', filename="assets/img/places.jpg", _external=True),
-        "subtitle": "I can tell you about places in the Harry Potter world and their history\nSo please Type Places or choose it from Menu below"
+        "subtitle": "Type \"Places\" to use this option"
     }
 
 

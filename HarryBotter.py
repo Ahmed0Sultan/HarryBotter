@@ -517,7 +517,7 @@ def handle_first_time_user(sender_id,user):
     FB.send_picture(token, user_id, 'https://media.giphy.com/media/12kmDEDUpTWe3e/giphy.gif')
 
     handle_help(user_id)
-    FB.send_message(token, user_id, "Next time just tell me \"help\" to view this again :D")
+    FB.send_message(token, user_id, "Next time just tell me \"Help\" to view this again :D")
 
 
 def send_message(recipient_id, message_text):
