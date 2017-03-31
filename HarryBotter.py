@@ -129,7 +129,7 @@ def webhook():
 
 def processIncoming(user_id, message):
     userInput = message['text']
-
+    userInput = userInput.lower()
     ## TEMP: to see & verify POS tagging
     # print("User Input : %s" % userInput)
 
