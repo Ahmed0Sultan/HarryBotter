@@ -226,7 +226,7 @@ def deviseCharacter(queries):
 
 def deviseAnswer(taggedInput):
     # Before querying the wiki -- perform spell check!
-    for word in [word for word in taggedInput if
+    for word in [word.lower() for word in taggedInput if
                  len(word[0]) > 3 and (word[1].startswith('N') or word[1].startswith('J') or word[1].startswith('V'))]:
         correctSpelling = spellCheck(word[0])
         if not correctSpelling == word[0]:
