@@ -374,7 +374,7 @@ def deviseAnswer(taggedInput):
     return answer
 
 def spellCheck(word):
-    correctSpelling = correct(word)
+    correctSpelling = correct(word.lower())
     if correctSpelling:
         return correctSpelling
     return
