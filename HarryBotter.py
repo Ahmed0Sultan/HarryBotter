@@ -507,7 +507,7 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
 def handle_help(user_id):
     intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"
     FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
-    FB.send_intro_screenshots(app, app.config['PAT'], user_id)
+    FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
 
 def handle_first_time_user(sender_id):
