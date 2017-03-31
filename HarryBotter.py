@@ -411,9 +411,11 @@ def known(words): return set(w.lower() for w in words if w in NWORDS)
 
 
 def correct(word):
-    new_word = []
+    new_word = ()
     for w in word:
-        new_word.append(w.lower())
+        wor = ()
+        wor = w.lower()
+        new_word = new_word + wor
     candidates = known([new_word]) or known(edits1(new_word)) or known_edits2(new_word) or [new_word]
     return max(candidates, key=NWORDS.get)
 
