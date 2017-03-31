@@ -90,7 +90,7 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_payload = messaging_event["postback"]["payload"]
-                    user = get_user_fb(token,sender_id)
+                    user = FB.get_user_fb(token,sender_id)
                     print 'Message Payload is '+ str(message_payload)
                     if message_payload == "Harry_Botter_Help":
                         handle_help(sender_id)
