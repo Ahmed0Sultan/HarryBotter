@@ -98,13 +98,19 @@ def webhook():
                     elif message_payload == "Harry_Botter_Get_Started":
                         handle_first_time_user(sender_id,user)
 
+                    elif message_payload == "Harry_Botter_Characters":
+                        deviseCharacter(sender_id,user)
+
+                    elif message_payload == "Harry_Botter_Spells":
+                        handle_first_time_user(sender_id,user)
+
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
-                    user = get_user_fb(token, sender_id)
+                    user = FB.get_user_fb(token, sender_id)
                     FB.show_typing(token, sender_id)
                     response = processIncoming(sender_id, message)
                     if response == 'help':
@@ -176,6 +182,47 @@ def isQuestion(taggedInput):
         return True
 
     return False
+
+def deviseCharacter(queries):
+    # First query wikia to get possible matching articles
+    articleIDs = queryWikiaSearch(queries)
+
+    ## If the search result returned articleIDs matching the query then scan them
+    ## and then refine the optimal result returned to appear more human
+    if articleIDs:
+        answer = queryWikiaArticles(articleIDs, queries, additionalSearchKeywords)
+
+        # Refinement 1. Append the response to a random response prefix
+        filler = RESPONSE_STARTERS[random.randint(0, len(RESPONSE_STARTERS) - 1)]
+        if filler:
+            if pos_tag(word_tokenize(answer))[0][1] == 'NNP' or word_tokenize(answer)[0] == 'I':
+                first = answer[0]
+            else:
+                first = answer[0].lower()
+
+            answer = "%s%s%s" % (filler, first, answer[1:])
+
+        # Refinement 2. Remove Parentheses in answer
+        tempAnswer = ''
+        removeText = 0
+        removeSpace = False
+        for i in answer:
+            if removeSpace:
+                removeSpace = False
+            elif i == '(':
+                removeText = removeText + 1
+            elif removeText == 0:
+                tempAnswer += i
+            elif i == ')':
+                removeText = removeText - 1
+                removeSpace = True
+
+        answer = tempAnswer
+
+        # print("Harry's Response: %s" % answer)
+
+
+    return answer
 
 def deviseAnswer(taggedInput):
     # Before querying the wiki -- perform spell check!
