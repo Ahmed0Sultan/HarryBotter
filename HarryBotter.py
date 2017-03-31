@@ -95,9 +95,12 @@ def webhook():
 
                     FB.show_typing(token, sender_id)
                     response = processIncoming(sender_id, message)
-                    FB.show_typing(token, sender_id, 'typing_off')
-
-                    FB.send_message(token, sender_id, response)
+                    if response == 'help':
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handle_help(sender_id)
+                    else:
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        FB.send_message(token, sender_id, response)
 
                 return "ok"
 
@@ -129,6 +132,8 @@ def processIncoming(user_id, message):
     # print("User Input : %s" % userInput)
 
     response = ''
+    if userInput.lower() == 'help':
+        return 'help'
 
     ## Perform POS-tagging on user input
     tagged_input = pos_tag(word_tokenize(userInput))
