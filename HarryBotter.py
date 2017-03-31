@@ -397,9 +397,9 @@ alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 def edits1(word):
     splits = tuple((word[:i], word[i:]) for i in range(len(word) + 1))
     deletes = tuple(tuple(a) + tuple(b[1:]) for a, b in splits if b)
-    transposes = [tuple(a) + tuple(b[1]) + tuple(b[0]) + tuple(b[2:]) for a, b in splits if len(b) > 1]
-    replaces = [tuple(a) + tuple(c) + tuple(b[1:]) for a, b in splits for c in alphabet if b]
-    inserts = [tuple(a) + tuple(c) + tuple(b) for a, b in splits for c in alphabet]
+    transposes = tuple(tuple(a) + tuple(b[1]) + tuple(b[0]) + tuple(b[2:]) for a, b in splits if len(b) > 1)
+    replaces = tuple(tuple(a) + tuple(c) + tuple(b[1:]) for a, b in splits for c in alphabet if b)
+    inserts = tuple(tuple(a) + tuple(c) + tuple(b) for a, b in splits for c in alphabet)
     return set(deletes + transposes + replaces + inserts)
 
 
