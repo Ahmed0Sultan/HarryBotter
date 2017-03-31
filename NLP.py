@@ -42,7 +42,7 @@ def isGreetings(inp_str):
     string = inp_str.lower().split(" ")
     if len(string) > 3:
         return False
-    greetings = ['hi','hey','hello', 'greetings', 'good morning', 'good afternoon', 'good evening']
+    greetings = ['hi','hey','hello', 'hola','greetings', 'good morning', 'good afternoon', 'good evening']
     for word in greetings:
         if word in string[:3]:
             return True

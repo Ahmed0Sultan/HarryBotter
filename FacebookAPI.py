@@ -249,37 +249,28 @@ def send_url(token, user_id, text, title, url):
 
 def send_intro_screenshots(app, token, user_id):
     chat_speak = {
-        "title": 'You can both chat and speak to me',
-        "image_url": url_for('static', filename="assets/img/intro/1-voice-and-text.jpg", _external=True),
-        "subtitle": 'I understand voice and natural language (I try to be smarter everyday :D)'
+        "title": 'You can chat with me and ask me anything about Harry Potter world',
+        "image_url": url_for('static', filename="assets/img/chat.jpg", _external=True),
+        "subtitle": 'I understand natural language (I try to be smarter everyday :D)'
     }
-    location_text = {
-        "title": "Find a restaurant/shop for you",
-        "image_url": url_for('static', filename="assets/img/intro/2-yelp-gps-location.jpg", _external=True),
-        "subtitle": "Tell me what you want, then your location name, address or GPS"
+    characters = {
+        "title": "Get to know characters better",
+        "image_url": url_for('static', filename="assets/img/hpcast1.jpg", _external=True),
+        "subtitle": "I can tell you all the information you want about a certain character\nSo please Type Characters or choose it from Menu below"
     }
-    location_gps = {
-        "title": "In case you've never sent location in Messenger",
-        "image_url": url_for('static', filename="assets/img/intro/3-how-to-send-location.jpg", _external=True),
-        "subtitle": "GPS will be the best option, but just a distinctive name would do",
+    spells = {
+        "title": "Get to know spells and how they work",
+        "image_url": url_for('static', filename="assets/img/harrypotterspells.jpg", _external=True),
+        "subtitle": "I can tell you about spells, how they work and what they are used for\nSo please Type Spells or choose it from Menu below",
     }
-    location_save = {
-        "title": "Save your favorite locations",
-        "image_url": url_for('static', filename="assets/img/intro/4-save-location.jpg", _external=True),
-        "subtitle": "Make it convenient for you"
-    }
-    memo1 = {
-        "title": "Say \"Memorize\" or \"Memorize this for me\"",
-        "image_url": url_for('static', filename="assets/img/intro/5-memo.jpg", _external=True),
-        "subtitle": "Then your memo in the same/separate message"
-    }
-    news = {
-      "title": "Keep you updated",
-      "image_url": url_for('static', filename="assets/img/intro/6-news.jpg", _external=True),
-      "subtitle": "With the most trending news"
+    places = {
+        "title": "Get to know more places in the magic world",
+        "image_url": url_for('static', filename="assets/img/places.jpg", _external=True),
+        "subtitle": "I can tell you about places in the Harry Potter world and their history\nSo please Type Places or choose it from Menu below"
     }
 
-    options = [chat_speak, location_text, location_gps, location_save, memo1, news]
+
+    options = [chat_speak, characters, spells, places]
 
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
           params={"access_token": token},
