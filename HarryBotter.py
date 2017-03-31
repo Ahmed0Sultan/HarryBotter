@@ -16,7 +16,7 @@ from nltk.tokenize import word_tokenize, sent_tokenize
 
 
 import requests
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 token = os.environ["PAGE_ACCESS_TOKEN"]
