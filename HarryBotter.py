@@ -96,7 +96,7 @@ def webhook():
 
                     elif message_payload == "Harry_Botter_Get_Started":
                         handle_first_time_user(sender_id)
-                        
+
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
 
@@ -359,7 +359,7 @@ def known_edits2(word):
     return set(e2 for e1 in edits1(word) for e2 in edits1(e1) if e2 in NWORDS)
 
 
-def known(words): return set(w for w in words if w in NWORDS)
+def known(words): return set(w.lower() for w in words if w in NWORDS)
 
 
 def correct(word):
