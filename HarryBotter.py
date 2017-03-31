@@ -411,7 +411,10 @@ def known(words): return set(w.lower() for w in words if w in NWORDS)
 
 
 def correct(word):
-    candidates = known([word]) or known(edits1(word)) or known_edits2(word) or [word]
+    new_word = []
+    for w in word:
+        new_word.append(w.lower())
+    candidates = known([new_word]) or known(edits1(new_word)) or known_edits2(new_word) or [new_word]
     return max(candidates, key=NWORDS.get)
 
 def queryWikiaSearch(queries):
