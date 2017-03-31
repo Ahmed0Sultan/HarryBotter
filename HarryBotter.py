@@ -228,7 +228,7 @@ def deviseAnswer(taggedInput):
     # Before querying the wiki -- perform spell check!
     for word in [word for word in taggedInput if
                  len(word[0]) > 3 and (word[1].startswith('N') or word[1].startswith('J') or word[1].startswith('V'))]:
-        correctSpelling = spellCheck(word[0].lower())
+        correctSpelling = spellCheck(word[0])
         if not correctSpelling == word[0]:
             return SPELLING_ERROR % (correctSpelling, word[0])
 
@@ -395,11 +395,11 @@ alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
 def edits1(word):
-    splits = tuple((word[:i], word[i:]) for i in range(len(word) + 1))
-    deletes = tuple(tuple(a) + tuple(b[1:]) for a, b in splits if b)
-    transposes = tuple(tuple(a) + tuple(b[1]) + tuple(b[0]) + tuple(b[2:]) for a, b in splits if len(b) > 1)
-    replaces = tuple(tuple(a) + tuple(c) + tuple(b[1:]) for a, b in splits for c in alphabet if b)
-    inserts = tuple(tuple(a) + tuple(c) + tuple(b) for a, b in splits for c in alphabet)
+    splits = [(word[:i], word[i:]) for i in range(len(word) + 1)]
+    deletes = [a + b[1:] for a, b in splits if b]
+    transposes = [a + b[1] + b[0] + b[2:] for a, b in splits if len(b) > 1]
+    replaces = [a + c + b[1:] for a, b in splits for c in alphabet if b]
+    inserts = [a + c + b for a, b in splits for c in alphabet]
     return set(deletes + transposes + replaces + inserts)
 
 
@@ -411,11 +411,7 @@ def known(words): return set(w.lower() for w in words if w in NWORDS)
 
 
 def correct(word):
-    new_word = []
-    for w in word:
-        new_word.append(w.lower())
-    new_word = tuple(new_word)
-    candidates = known([new_word]) or known(edits1(new_word)) or known_edits2(new_word) or [new_word]
+    candidates = known([word]) or known(edits1(word)) or known_edits2(word) or [word]
     return max(candidates, key=NWORDS.get)
 
 def queryWikiaSearch(queries):
