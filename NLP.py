@@ -85,23 +85,12 @@ def get_memo_content(inp_str):
 # input: g.user, i.e. mongodb user object
 def sayHiTimeZone(user):
     user_now = getUserTime(user)
-    if recentChat(user):
-        response = ["Hi again", "Hey hey hey again", "What's up", "Hey there again"]
-        if user_now.hour > 5 and user_now.hour < 12:
-            response.extend(["Shiny day isn't it", "What a morning", "Morningggg"])
-        elif user_now.hour < 19:
-            response.extend(["How's your afternoon", "Afternoooooon", "What a day"])
-        elif user_now.hour < 4 or user_now.hour > 22:
-            response.extend(["Hmm... you're a night owl", "Long night hah", "You know, science has shown that sleeping early is good for you health", "The night is still young, I'm here"])
-        else:
-            response.extend(["Good evening", "What's rolling for dinner"])
-        return oneOf(response)
     if user_now.hour > 5 and user_now.hour <= 12:
-        return "Good morning"
+        return oneOf(["Good morning","Shiny day isn't it", "What a morning", "Morningggg"])
     elif user_now.hour > 12 and user_now.hour < 19:
-        return "Good afternoon"
+        return oneOf(["Good afternoon","How's your afternoon", "Afternoooooon", "What a day"])
     else:
-        return "Good evening"
+        return oneOf(["Good evening","Good evening", "What's rolling for dinner"])
 
 # input: g.user
 def sayByeTimeZone(user):
