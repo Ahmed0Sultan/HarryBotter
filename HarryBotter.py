@@ -90,12 +90,13 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_payload = messaging_event["postback"]["payload"]
+                    user = get_user_fb(token,sender_id)
                     print 'Message Payload is '+ str(message_payload)
                     if message_payload == "Harry_Botter_Help":
                         handle_help(sender_id)
 
                     elif message_payload == "Harry_Botter_Get_Started":
-                        handle_first_time_user(sender_id)
+                        handle_first_time_user(sender_id,user)
 
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
@@ -103,7 +104,7 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
-
+                    user = get_user_fb(token, sender_id)
                     FB.show_typing(token, sender_id)
                     response = processIncoming(sender_id, message)
                     if response == 'help':
@@ -505,7 +506,7 @@ def handle_help(user_id):
     FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
 
-def handle_first_time_user(sender_id):
+def handle_first_time_user(sender_id,user):
     user_id = sender_id
     token = os.environ["PAGE_ACCESS_TOKEN"]
 
