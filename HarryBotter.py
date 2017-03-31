@@ -511,10 +511,10 @@ def handle_first_time_user(sender_id,user):
     token = os.environ["PAGE_ACCESS_TOKEN"]
 
     # hi = "%s Wizard, Nice to meet you :)" % (NLP.sayHiTimeZone(user))
-    hi = "%s wizards, witches and muggles, Nice to meet you " % (NLP.sayHiTimeZone(user))
+    hi = "%s %s, nice to meet you" % (NLP.sayHiTimeZone(user), user['first_name'])
     FB.send_message(token, user_id, hi)
 
-    FB.send_picture(token, user_id, 'https://harrybottermessenger.herokuapp.com/static/assets/img/Harry_Botter.png')
+    FB.send_picture(token, user_id, 'https://media.giphy.com/media/12kmDEDUpTWe3e/giphy.gif')
 
     handle_help(user_id)
     FB.send_message(token, user_id, "Next time just tell me \"help\" to view this again :D")
