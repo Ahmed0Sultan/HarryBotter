@@ -99,7 +99,7 @@ def webhook():
                         handle_first_time_user(sender_id,user)
 
                     elif message_payload == "Harry_Botter_Characters":
-                        deviseCharacter(sender_id,user)
+                        deviseCharacter(sender_id)
 
                     elif message_payload == "Harry_Botter_Spells":
                         handle_first_time_user(sender_id,user)
@@ -128,6 +128,8 @@ def webhook():
 
 
 def processIncoming(user_id, message):
+    if message['sticker_id']:
+        return 'Sorry, I can\'t understand stickers yet'
     userInput = message['text']
     userInput = userInput.lower()
     ## TEMP: to see & verify POS tagging
