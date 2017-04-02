@@ -150,7 +150,7 @@ def processIncoming(user_id, message):
         elif intent == Intent.NONSENSE:
             # print("Harry THINKS YOU ARE UNCLEAR.")
             response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
-    except:
+    except Exception, e:
         print e
         traceback.print_exc()
         return 'Sorry, I can\'t handle this type of messages yet.'
