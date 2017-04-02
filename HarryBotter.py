@@ -128,29 +128,30 @@ def webhook():
 
 
 def processIncoming(user_id, message):
-    if message['sticker_id']:
-        return 'Sorry, I can\'t understand stickers yet'
-    userInput = message['text']
-    userInput = userInput.lower()
-    ## TEMP: to see & verify POS tagging
-    # print("User Input : %s" % userInput)
+    if message['type'] == 'text':
 
-    response = ''
-    if userInput.lower() == 'help':
-        return 'help'
+        userInput = message['text']
+        userInput = userInput.lower()
+        ## TEMP: to see & verify POS tagging
+        # print("User Input : %s" % userInput)
 
-    ## Perform POS-tagging on user input
-    tagged_input = pos_tag(word_tokenize(userInput))
-    # print("POS-Tagged User Input : %s " % tagged_input)
-    intent = obtainUserIntent(tagged_input)
+        response = ''
+        if userInput.lower() == 'help':
+            return 'help'
 
-    if intent == Intent.QUERY:
-        # print("Harry IS THINKING...")
-        response = deviseAnswer(tagged_input)
-    elif intent == Intent.NONSENSE:
-        # print("Harry THINKS YOU ARE UNCLEAR.")
-        response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
+        ## Perform POS-tagging on user input
+        tagged_input = pos_tag(word_tokenize(userInput))
+        # print("POS-Tagged User Input : %s " % tagged_input)
+        intent = obtainUserIntent(tagged_input)
 
+        if intent == Intent.QUERY:
+            # print("Harry IS THINKING...")
+            response = deviseAnswer(tagged_input)
+        elif intent == Intent.NONSENSE:
+            # print("Harry THINKS YOU ARE UNCLEAR.")
+            response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
+    else:
+        return 'Sorry, I can\'t handle this type of messages yet.'
     return response
 
 ## This method takes the POS tagged user input and determines what the intention of the user was
