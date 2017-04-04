@@ -32,7 +32,7 @@ def isAskingBotInformation(sentence):
     if len(m) > 0:
         return True
 
-    m = search('who made|create|wrote|built you', sentence)
+    m = search('who made|are|created|create|wrote|gave_birth|built you', sentence)
     if len(m) > 0:
         return True
 
@@ -297,7 +297,7 @@ def handleBotInfo(sentence):
     if len(m) > 0:
         return oneOf(creator)
 
-    m = search('who *+ creates|created|gave_birth *+ you', sentence)
+    m = search('who *+ made|are|created|create|wrote|gave_birth|built *+ you', sentence)
     if len(m) > 0:
         return oneOf(creator)
 
