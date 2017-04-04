@@ -50,7 +50,7 @@ def isGreetings(inp_str):
 
 def isGoodbye(inp_str):
     string = inp_str.lower().split(" ")
-    byes = ['bye', 'see you']
+    byes = ['bye', 'see you','good bye','bye bye']
     for word in byes:
         if word in string:
             return True

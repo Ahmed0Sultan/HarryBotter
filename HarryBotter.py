@@ -48,7 +48,10 @@ parser = RegexpParser(grammar)
 
 ## Pre-defined responses to statements and undecipherable user questions
 GREETING = 'I\'m Harry Botter pleasure to meet you.'
-RESPONSE_TO_NONSENSE = ['I\'m sorry but that is simply not a question!',
+RESPONSE_TO_NONSENSE = ['I\'m sorry but that is simply not a question!',"*scratch my head* :(",
+                        "How do I respond to that... :O", "I don't know you can ask Hermione... :/",
+                        "I can be not-so-smart from time to time... :(",
+                        "Err... you know I'm not the real Harry Potter, right? :O",
                         'Is that a real question? Well it\'s not very good now is it?',
                         'Honestly, that is not funny, you\'re lucky I don\'t report you to the headmaster!',
                         'It appears you haven\'t asked a question. How do you expect me to perform any magic without a question?',
@@ -99,10 +102,10 @@ def webhook():
                         handle_first_time_user(sender_id,user)
 
                     elif message_payload == "Harry_Botter_Characters":
-                        deviseCharacter(sender_id)
+                        handle_characters(sender_id)
 
                     elif message_payload == "Harry_Botter_Spells":
-                        handle_first_time_user(sender_id,user)
+                        handle_spells(sender_id)
 
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
@@ -114,6 +117,15 @@ def webhook():
                     FB.show_typing(token, sender_id)
                     response = processIncoming(sender_id, message)
                     if response == 'help':
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handle_help(sender_id)
+                    elif response == 'characters':
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handle_characters(sender_id)
+                    elif response == 'spells':
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handle_spells(sender_id)
+                    elif response == 'places':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_help(sender_id)
                     else:
@@ -138,6 +150,20 @@ def processIncoming(user_id, message):
         response = ''
         if userInput.lower() == 'help':
             return 'help'
+        elif userInput.lower() == 'characters' or userInput.lower() == 'character':
+            return 'characters'
+        elif userInput.lower() == 'spells' or userInput.lower() == 'spell':
+            return 'spells'
+        elif userInput.lower() == 'places' or userInput.lower() == 'place':
+            return 'places'
+
+        if NLP.isGreetings(message_text):
+            greeting = "%s %s :D" % (NLP.sayHiTimeZone(g.user), g.user['first_name'])
+            FB.send_message(token, user_id, greeting)
+            return "How can I help you?"
+
+        elif NLP.isGoodbye(message_text):
+            return NLP.sayByeTimeZone(g.user)
 
         ## Perform POS-tagging on user input
         tagged_input = pos_tag(word_tokenize(userInput))
@@ -153,7 +179,7 @@ def processIncoming(user_id, message):
     except Exception, e:
         print e
         traceback.print_exc()
-        return 'Sorry, I can\'t handle this type of messages yet.'
+        return NLP.oneOf(NLP.error)
     return response
 
 ## This method takes the POS tagged user input and determines what the intention of the user was
@@ -556,6 +582,16 @@ def handle_help(user_id):
     intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"
     FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
+
+def handle_characters(user_id):
+    intro = "You can ask me about any character simply by asking me :D !!\nJust like that \"Who's Harry Potter?\"\n\"Who's pet was Fang?\""
+    FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
+    # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
+
+def handle_spells(user_id):
+    intro = "You can ask me about any spell simply by asking me :D !!\nJust like that \"What is Wingardium Leviosa?\"\n\"What is Expecto Patronum?\""
+    FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
+    # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
 
 def handle_first_time_user(sender_id,user):
