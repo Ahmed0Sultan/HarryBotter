@@ -268,8 +268,8 @@ def deviseAnswer(taggedInput):
     answer = NO_INFORMATION_AVAILABLE
 
     result = parser.parse(taggedInput)
-    # print("Regexp Parser Result for input %s : " % taggedInput),
-    # print(result)
+    print("Regexp Parser Result for input %s : " % taggedInput),
+    print(result)
 
     # Determine the query to enter into the wikia search and add any additional
     # search terms now so that when article refinement is performed the most accurate reply is returned
@@ -506,6 +506,7 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         # If there is no answer then take the first two sentences from the article as a relevant answer
         if not answer:
             try:
+                print 'No Answer'
                 sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('b.', 'born'))
                 # Replace any keyword hinting at Hermione with the proper personal pronoun and if followed by 'is' replace with 'am'
                 # answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
