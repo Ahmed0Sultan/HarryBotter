@@ -168,7 +168,7 @@ def processIncoming(user_id, message):
 
         ## Perform POS-tagging on user input
         tagged_input = pos_tag(word_tokenize(userInput))
-        # print("POS-Tagged User Input : %s " % tagged_input)
+        print("POS-Tagged User Input : %s " % tagged_input)
         intent = obtainUserIntent(tagged_input)
 
         if intent == Intent.QUERY:
@@ -360,8 +360,8 @@ def deviseAnswer(taggedInput):
     additionalSearchKeywords = [value for value in additionalSearchKeywords if value != ' ' and value != '']
     queries = [value for value in queries if value != '']
 
-    # print("Wikia Queries : %s " % queries)
-    # print("Search Keywords : %s " % additionalSearchKeywords)
+    print("Wikia Queries : %s " % queries)
+    print("Search Keywords : %s " % additionalSearchKeywords)
 
     ## If there are queries perform wikia search
     ## for articles and scan through article text for a relevant response
