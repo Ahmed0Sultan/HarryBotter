@@ -335,22 +335,22 @@ def deviseAnswer(taggedInput):
     # Refinement 2. Remove posseive affix from keywords if it exists
     additionalSearchKeywords = [keyword.replace("'s", "") for keyword in additionalSearchKeywords]
 
-    # Refinement 3. Replace 'you' and 'your' with 'Hermione Granger' in queries and keywords
-    addHarryQuery = False
+    # # Refinement 3. Replace 'you' and 'your' with 'Hermione Granger' in queries and keywords
+    # addHarryQuery = False
+    #
+    # for query in queries:
+    #     if 'your' in query or 'you' in query:
+    #         addHarryQuery = True
+    #
+    # for keyword in additionalSearchKeywords:
+    #     if 'your' in keyword or 'you' in keyword:
+    #         addHarryQuery = True
+    #
+    # queries = [query.replace('your', '').replace('you', '') for query in queries]
+    # additionalSearchKeywords = [keyword.replace('your', '').replace('you', '') for keyword in additionalSearchKeywords]
 
-    for query in queries:
-        if 'your' in query or 'you' in query:
-            addHarryQuery = True
-
-    for keyword in additionalSearchKeywords:
-        if 'your' in keyword or 'you' in keyword:
-            addHarryQuery = True
-
-    queries = [query.replace('your', '').replace('you', '') for query in queries]
-    additionalSearchKeywords = [keyword.replace('your', '').replace('you', '') for keyword in additionalSearchKeywords]
-
-    if addHarryQuery:
-        queries.append('Harry Potter')
+    # if addHarryQuery:
+    #     queries.append('Harry Potter')
 
     # Refinement 4. Remove query terms from additionalSearchKeywords to avoid duplication
     for query in queries:
@@ -495,21 +495,22 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
             answer = answerWithScore[0]
 
             # If response has to do with Hermione replace 3rd person pronouns with 1st person pronouns
-            for query in queries:
-                if 'Harry' in query.rsplit(" "):
-                    answer = answer.replace('He', 'I').replace('his', 'my')
+            # for query in queries:
+            #     if 'Harry' in query.rsplit(" "):
+            #         answer = answer.replace('He', 'I').replace('his', 'my')
 
             # Replace any keyword hinting at Hermione with the proper personal pronoun and if followed by 'is' replace with 'am'
-            answer = answer.replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
-                'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
+            # answer = answer.replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
+            #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
 
         # If there is no answer then take the first two sentences from the article as a relevant answer
         if not answer:
             try:
                 sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('b.', 'born'))
                 # Replace any keyword hinting at Hermione with the proper personal pronoun and if followed by 'is' replace with 'am'
-                answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
-                    'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
+                # answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
+                #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
+                answer = ' '.join(sentences[0:2])
 
             except IndexError:
                 continue
