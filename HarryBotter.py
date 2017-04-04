@@ -476,7 +476,7 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
     answerScore = 0
 
     for articleID in articleIDs:
-
+        print 'Article ID: '+ str(articleID[0])
         # Format Article URL
         ARTICLE_QUERY_TEMPLATE['id'] = articleID[0]
         articleUrl = WIKIA_API_URL
