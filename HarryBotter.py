@@ -157,12 +157,12 @@ def processIncoming(user_id, message):
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places'
 
-        if NLP.isGreetings(message_text):
+        if NLP.isGreetings(userInput):
             greeting = "%s %s :D" % (NLP.sayHiTimeZone(g.user), g.user['first_name'])
             FB.send_message(token, user_id, greeting)
             return "How can I help you?"
 
-        elif NLP.isGoodbye(message_text):
+        elif NLP.isGoodbye(userInput):
             return NLP.sayByeTimeZone(g.user)
 
         ## Perform POS-tagging on user input
