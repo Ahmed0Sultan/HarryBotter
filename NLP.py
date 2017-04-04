@@ -278,8 +278,8 @@ def getNewsQuery(sentence):
         return m[0].group(2).string.replace('.','')
 
 def handleBotInfo(sentence):
-    name = ["Optimus... ah no, Optimist Prime :D", "I.am.the.legendary.Optimist.Prime B-)", "The most Optimist Prime! B-)", "You knew already *tsk tsk*"]
-    creator = ["It's a mystery :O", "Are you optimist enough to know? ;)", "You are among the few who I tell: All I know about my creator is the initials HT :)", "It remains a mystery to me even :(", "It was erased from my memory from the start :("]
+    name = ["Botter ... Harry Botter B-)", "The most powerful Bot! ;)", "You knew already *tsk tsk*"]
+    creator = ["It's a mystery :O", "You are among the few who I tell: All I know about my creator is the initials AS :D", "It remains a mystery to me even :(", "It was erased from my memory from the start :("]
 
     m = search('what *+ your name', sentence)
     if len(m) > 0:

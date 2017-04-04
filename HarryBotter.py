@@ -158,6 +158,9 @@ def processIncoming(user_id, message):
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places'
 
+        if NLP.isAskingBotInformation(userInput):
+            return NLP.handleBotInfo(userInput)
+
         if NLP.isGreetings(userInput):
             greeting = "%s %s :D" % (NLP.sayHiTimeZone(user), user['first_name'])
             FB.send_message(token, user_id, greeting)
