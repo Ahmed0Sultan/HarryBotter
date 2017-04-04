@@ -164,7 +164,7 @@ def processIncoming(user_id, message):
             return "How can I help you?"
 
         elif NLP.isGoodbye(userInput):
-            return NLP.sayByeTimeZone(g.user)
+            return NLP.sayByeTimeZone(user)
 
         ## Perform POS-tagging on user input
         tagged_input = pos_tag(word_tokenize(userInput))
