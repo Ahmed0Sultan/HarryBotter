@@ -116,6 +116,7 @@ def webhook():
                     message = messaging_event["message"]  # the message's text
                     user = FB.get_user_fb(token, sender_id)
                     FB.show_typing(token, sender_id)
+                    
                     response, images = processIncoming(sender_id, message)
                     if response == 'help':
                         FB.show_typing(token, sender_id, 'typing_off')
