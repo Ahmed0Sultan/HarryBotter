@@ -186,7 +186,7 @@ def processIncoming(user_id, message):
         print e
         traceback.print_exc()
         return NLP.oneOf(NLP.error)
-    return response
+    return response ,images
 
 ## This method takes the POS tagged user input and determines what the intention of the user was
 ## returns Intent.NONSENSE, Intent.QUERY or Intent.STATEMENT
