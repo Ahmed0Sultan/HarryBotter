@@ -131,6 +131,7 @@ def webhook():
                         FB.show_typing(token, sender_id, 'typing_off')
                         FB.send_message(token, sender_id, response)
                         if images:
+                            print 'Images here ' + str(images)
                             FB.send_message(token, sender_id, 'Here is some pictures ;)')
                             FB.send_group_pictures(app,token,sender_id,images)
 
@@ -543,7 +544,7 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
             if not 'src' in image:
                 continue
             src = image['src'].split("/revision/")[0]
-            print image['src']
+            print src
             image_element ={
                 "title": image['caption'],
                 "image_url": src
@@ -552,6 +553,8 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
             counter +=1
             if counter >5:
                 break
+        if counter >5:
+            break
 
         ## loop through content
         for content in section['content']:
