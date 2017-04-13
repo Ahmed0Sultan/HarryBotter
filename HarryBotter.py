@@ -546,7 +546,7 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
             print image['src']
             image_element ={
                 "title": image['caption'],
-                "image_url": url_for('static', filename='"'+ src +'"', _external=True)
+                "image_url": src
             }
             images.append(image_element)
             counter +=1
