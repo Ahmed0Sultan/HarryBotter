@@ -107,7 +107,6 @@ def webhook():
                     elif message_payload == "Harry_Botter_Spells":
                         handle_spells(sender_id)
 
-
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
 
@@ -116,7 +115,6 @@ def webhook():
                     message = messaging_event["message"]  # the message's text
                     user = FB.get_user_fb(token, sender_id)
                     FB.show_typing(token, sender_id)
-
                     response, images = processIncoming(sender_id, message)
                     if response == 'help':
                         FB.show_typing(token, sender_id, 'typing_off')
@@ -149,18 +147,19 @@ def processIncoming(user_id, message):
         userInput = message['text']
         userInput = userInput.lower()
         user = FB.get_user_fb(token, user_id)
+        response =''
         ## TEMP: to see & verify POS tagging
         # print("User Input : %s" % userInput)
 
         response = ''
         if userInput.lower() == 'help':
-            return 'help'
+            response = 'help'
         elif userInput.lower() == 'characters' or userInput.lower() == 'character':
-            return 'characters'
+            response = 'characters'
         elif userInput.lower() == 'spells' or userInput.lower() == 'spell':
-            return 'spells'
+            response = 'spells'
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
-            return 'places'
+            response = 'places'
 
         if NLP.isAskingBotInformation(userInput):
             return NLP.handleBotInfo(userInput)
