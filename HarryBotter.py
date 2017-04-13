@@ -107,6 +107,7 @@ def webhook():
                     elif message_payload == "Harry_Botter_Spells":
                         handle_spells(sender_id)
 
+
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
 
