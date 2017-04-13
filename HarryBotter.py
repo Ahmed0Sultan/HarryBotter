@@ -116,7 +116,7 @@ def webhook():
                     message = messaging_event["message"]  # the message's text
                     user = FB.get_user_fb(token, sender_id)
                     FB.show_typing(token, sender_id)
-                    
+
                     response, images = processIncoming(sender_id, message)
                     if response == 'help':
                         FB.show_typing(token, sender_id, 'typing_off')
@@ -187,7 +187,7 @@ def processIncoming(user_id, message):
     except Exception, e:
         print e
         traceback.print_exc()
-        return NLP.oneOf(NLP.error),[]
+        return NLP.oneOf(NLP.error),images
     return response ,images
 
 ## This method takes the POS tagged user input and determines what the intention of the user was
