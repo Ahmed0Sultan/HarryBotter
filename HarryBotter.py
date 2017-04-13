@@ -550,7 +550,6 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
                         images.append(image_element)
                         break
 
-
         ## loop through content
         for content in section['content']:
             ## fetch text and loop through sentences
