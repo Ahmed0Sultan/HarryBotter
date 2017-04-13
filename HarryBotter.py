@@ -178,9 +178,10 @@ def processIncoming(user_id, message):
 
         if intent == Intent.QUERY:
             # print("Harry IS THINKING...")
-            response , images = deviseAnswer(tagged_input)
+            response,images = deviseAnswer(tagged_input)
         elif intent == Intent.NONSENSE:
             # print("Harry THINKS YOU ARE UNCLEAR.")
+            images = []
             response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
     except Exception, e:
         print e
