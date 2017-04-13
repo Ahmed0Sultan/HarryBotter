@@ -109,7 +109,6 @@ def webhook():
 
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
-
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
@@ -153,24 +152,24 @@ def processIncoming(user_id, message):
 
         response = ''
         if userInput.lower() == 'help':
-            response = 'help'
+            return 'help',[]
         elif userInput.lower() == 'characters' or userInput.lower() == 'character':
-            response = 'characters'
+            return 'characters',[]
         elif userInput.lower() == 'spells' or userInput.lower() == 'spell':
-            response = 'spells'
+            return 'spells',[]
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
-            response = 'places'
+            return 'places',[]
 
         if NLP.isAskingBotInformation(userInput):
-            return NLP.handleBotInfo(userInput)
+            return NLP.handleBotInfo(userInput),[]
 
         if NLP.isGreetings(userInput):
             greeting = "%s %s :D" % (NLP.sayHiTimeZone(user), user['first_name'])
             FB.send_message(token, user_id, greeting)
-            return "How can I help you?"
+            return "How can I help you?",[]
 
         elif NLP.isGoodbye(userInput):
-            return NLP.sayByeTimeZone(user)
+            return NLP.sayByeTimeZone(user),[]
 
         ## Perform POS-tagging on user input
         tagged_input = pos_tag(word_tokenize(userInput))
@@ -186,7 +185,7 @@ def processIncoming(user_id, message):
     except Exception, e:
         print e
         traceback.print_exc()
-        return NLP.oneOf(NLP.error),images
+        return NLP.oneOf(NLP.error),[]
     return response ,images
 
 ## This method takes the POS tagged user input and determines what the intention of the user was
