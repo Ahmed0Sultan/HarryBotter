@@ -115,7 +115,7 @@ def webhook():
                     message = messaging_event["message"]  # the message's text
                     user = FB.get_user_fb(token, sender_id)
                     FB.show_typing(token, sender_id)
-                    response = processIncoming(sender_id, message)
+                    response, images = processIncoming(sender_id, message)
                     if response == 'help':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_help(sender_id)
@@ -131,6 +131,7 @@ def webhook():
                     else:
                         FB.show_typing(token, sender_id, 'typing_off')
                         FB.send_message(token, sender_id, response)
+                        FB.send_group_pictures(app,token,sender_id,images)
 
                 return "ok"
 
@@ -176,7 +177,7 @@ def processIncoming(user_id, message):
 
         if intent == Intent.QUERY:
             # print("Harry IS THINKING...")
-            response = deviseAnswer(tagged_input)
+            response , images = deviseAnswer(tagged_input)
         elif intent == Intent.NONSENSE:
             # print("Harry THINKS YOU ARE UNCLEAR.")
             response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
@@ -225,7 +226,7 @@ def deviseCharacter(queries):
     ## If the search result returned articleIDs matching the query then scan them
     ## and then refine the optimal result returned to appear more human
     if articleIDs:
-        answer = queryWikiaArticles(articleIDs, queries, additionalSearchKeywords)
+        answer , images = queryWikiaArticles(articleIDs, queries, additionalSearchKeywords)
 
         # Refinement 1. Append the response to a random response prefix
         filler = RESPONSE_STARTERS[random.randint(0, len(RESPONSE_STARTERS) - 1)]
@@ -376,7 +377,7 @@ def deviseAnswer(taggedInput):
         ## If the search result returned articleIDs matching the query then scan them
         ## and then refine the optimal result returned to appear more human
         if articleIDs:
-            answer = queryWikiaArticles(articleIDs, queries, additionalSearchKeywords)
+            answer ,images = queryWikiaArticles(articleIDs, queries, additionalSearchKeywords)
 
             # Refinement 1. Append the response to a random response prefix
             filler = RESPONSE_STARTERS[random.randint(0, len(RESPONSE_STARTERS) - 1)]
@@ -406,7 +407,7 @@ def deviseAnswer(taggedInput):
             answer = tempAnswer
 
     # print("Harry's Response: %s" % answer)
-    return answer
+    return answer, images
 
 def spellCheck(word):
     correctSpelling = correct(word.lower())
@@ -477,6 +478,7 @@ def queryWikiaSearch(queries):
 def queryWikiaArticles(articleIDs, queries, searchRefinement):
     answer = ''
     answerScore = 0
+    images = []
 
     for articleID in articleIDs:
         print 'Article ID: '+ str(articleID[0])
@@ -491,7 +493,7 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         resultData = json.load(results)
 
         # Select the top scoring sentences from the article and compare with pre-existing top answer
-        answerWithScore = refineWikiaArticleContent(articleID[1], resultData, queries, searchRefinement)
+        answerWithScore, images = refineWikiaArticleContent(articleID[1], resultData, queries, searchRefinement)
 
         if answerWithScore[1] > answerScore:
             answerScore = answerWithScore[1]
@@ -519,7 +521,8 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
             except IndexError:
                 continue
 
-    return answer
+    return answer,images
+
 
 def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinement):
     ## top two sentences
@@ -527,9 +530,26 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
     secondSentenceScore = 0
     firstSentence = ''
     secondSentence = ''
+    images = []
 
     ## loop through sections
     for section in articleData['sections']:
+        ## loop through images
+        for image in section['images']:
+            if not 'src' in image:
+                continue
+            for query in queries:
+                if 'caption' in image:
+                    if query in image['caption']:
+                        src = image['src'].split("/revision/")[0]
+                        image_element ={
+                            "title": image['caption'],
+                            "image_url": url_for('static', filename='"'+ src +'"', _external=True)
+                        }
+                        images.append(image_element)
+                        break
+
+
         ## loop through content
         for content in section['content']:
             ## fetch text and loop through sentences
@@ -580,9 +600,9 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
         if len(firstSentence) + len(secondSentence) > 1000 or secondSentenceScore < firstSentenceScore:
             secondSentence = ''
             secondSentenceScore == 0
-        return [' '.join([firstSentence, secondSentence]), firstSentenceScore + secondSentenceScore]
+        return [' '.join([firstSentence, secondSentence]), firstSentenceScore + secondSentenceScore],images
     else:
-        return ['', 0]
+        return ['', 0],images
 
 def handle_help(user_id):
     intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"

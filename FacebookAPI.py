@@ -247,6 +247,26 @@ def send_url(token, user_id, text, title, url):
     if r.status_code != requests.codes.ok:
         print r.text
 
+def send_group_pictures(app, token, user_id,images):
+
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+          params={"access_token": token},
+          data=json.dumps({
+                "recipient": {"id": user_id},
+                "message":{
+                    "attachment":{
+                        "type":"template",
+                        "payload":{
+                            "template_type":"generic",
+                            "elements": images
+                        }
+                    }
+                }
+          }),
+          headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
 def send_intro_screenshots(app, token, user_id):
     chat_speak = {
         "title": 'You can chat with me and ask me anything about Harry Potter world',
