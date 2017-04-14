@@ -194,7 +194,7 @@ def processIncoming(user_id, message):
             # print("Harry THINKS YOU ARE UNCLEAR.")
             images = []
             # response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
-            response = chatterbot.get_response(userInput)
+            response = str(chatterbot.get_response(userInput))
             print 'Catterbot response is ' + str(response)
     except Exception, e:
         print e
