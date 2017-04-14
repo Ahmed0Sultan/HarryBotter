@@ -509,9 +509,17 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         # Select the top scoring sentences from the article and compare with pre-existing top answer
         answerWithScore, images = refineWikiaArticleContent(articleID[1], resultData, queries, searchRefinement)
 
-        if answerWithScore[1] > answerScore:
-            answerScore = answerWithScore[1]
-            answer = answerWithScore[0]
+        sentences = sent_tokenize(
+            resultData['sections'][0]['content'][0]['text'].replace('b.', 'born').replace('Â', ''))
+        # Replace any keyword hinting at Hermione with the proper personal pronoun and if followed by 'is' replace with 'am'
+        # answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
+        #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
+        answer = ' '.join(sentences[0:2])
+
+        ## Uncomment here
+        # if answerWithScore[1] > answerScore:
+        #     answerScore = answerWithScore[1]
+        #     answer = answerWithScore[0]
 
             # If response has to do with Hermione replace 3rd person pronouns with 1st person pronouns
             # for query in queries:
