@@ -7,14 +7,14 @@ import FacebookAPI as FB, NLP
 
 ## Resources for querying API and parsing results
 import re, collections, json, urllib, urllib2, random
-
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 ## Resources for performing POS tagging & lamda expressions
 from nltk import RegexpParser
 from nltk.data import load
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize, sent_tokenize
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
+
 
 import requests
 from flask import Flask, request, render_template
