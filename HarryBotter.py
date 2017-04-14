@@ -515,7 +515,8 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         # answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
         #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
         answer = ' '.join(sentences[0:2])
-
+        answer = answer.replace('Â', '')
+        
         ## Uncomment here
         # if answerWithScore[1] > answerScore:
         #     answerScore = answerWithScore[1]
@@ -534,11 +535,12 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         if not answer:
             try:
                 print 'No Answer'
-                sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('Â', '').replace('b.', 'born'))
+                sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('b.', 'born'))
                 # Replace any keyword hinting at Hermione with the proper personal pronoun and if followed by 'is' replace with 'am'
                 # answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
                 #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
                 answer = ' '.join(sentences[0:2])
+                answer = answer.replace('Â', '')
 
             except IndexError:
                 continue
