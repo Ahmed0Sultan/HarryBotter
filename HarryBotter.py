@@ -525,7 +525,7 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         if not answer:
             try:
                 print 'No Answer'
-                sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('b.', 'born'))
+                sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('b.', 'born').replace('Â', ''))
                 # Replace any keyword hinting at Hermione with the proper personal pronoun and if followed by 'is' replace with 'am'
                 # answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
                 #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
@@ -565,61 +565,61 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
         if counter >5:
             break
 
-            ## loop through content
-            for content in section['content']:
-                ## fetch text and loop through sentences
-                if not 'text' in content:
-                    continue
+        ## loop through content
+        for content in section['content']:
+            ## fetch text and loop through sentences
+            if not 'text' in content:
+                continue
 
-                for sentence in sent_tokenize(content['text'].replace('b.', 'born')):
-                    sentenceScore = 0
+            for sentence in sent_tokenize(content['text'].replace('b.', 'born').replace('Â', '')):
+                sentenceScore = 0
 
-                    print str(sentence)
-                    ## loop through refinements to see if they're in the sentence
-                    for refinement in searchRefinement:
+                print str(sentence)
+                ## loop through refinements to see if they're in the sentence
+                for refinement in searchRefinement:
 
-                        if refinement in sentence:
-                            sentenceScore = sentenceScore + 0.5 + (
-                            sentence.count(refinement) / len(sentence.rsplit(" ")))
+                    if refinement in sentence:
+                        sentenceScore = sentenceScore + 0.5 + (
+                        sentence.count(refinement) / len(sentence.rsplit(" ")))
 
-                        for query in queries:
-
-                            if ' '.join([query, refinement]) in sentence:
-                                sentenceScore = sentenceScore + 0.25
-                            if ' '.join([refinement, query]) in sentence:
-                                sentenceScore = sentenceScore + 0.25
-
-                    ## loop through queries to see if they're in the sentence
                     for query in queries:
 
-                        if query in sentence:
-                            sentenceScore = sentenceScore + 1 + sentence.count(query) / len(sentence.rsplit(" "))
-                            if not query == specificQuery:
-                                sentenceScore = sentenceScore + 0.5
+                        if ' '.join([query, refinement]) in sentence:
+                            sentenceScore = sentenceScore + 0.25
+                        if ' '.join([refinement, query]) in sentence:
+                            sentenceScore = sentenceScore + 0.25
 
-                        for word in query.split(" "):
-                            if word in sentence:
-                                sentenceScore = sentenceScore + 1 / len(queries)
+                ## loop through queries to see if they're in the sentence
+                for query in queries:
 
-                    ## If score in top two re-adjust scores and sentences
-                    if sentenceScore > secondSentenceScore:
-                        if sentenceScore > firstSentenceScore:
-                            secondSentence = firstSentence
-                            secondSentenceScore = firstSentenceScore
-                            firstSentence = sentence
-                            firstSentenceScore = sentenceScore
-                        else:
-                            secondSentence = sentence
-                            secondSentenceScore = sentenceScore
+                    if query in sentence:
+                        sentenceScore = sentenceScore + 1 + sentence.count(query) / len(sentence.rsplit(" "))
+                        if not query == specificQuery:
+                            sentenceScore = sentenceScore + 0.5
 
-        # If an answer was found determine an appropriate response length and return the answer and score
-        if firstSentence:
-            if len(firstSentence) + len(secondSentence) > 1000 or secondSentenceScore < firstSentenceScore:
-                secondSentence = ''
-                secondSentenceScore == 0
-            return [' '.join([firstSentence, secondSentence]), firstSentenceScore + secondSentenceScore],images
-        else:
-            return ['', 0],images
+                    for word in query.split(" "):
+                        if word in sentence:
+                            sentenceScore = sentenceScore + 1 / len(queries)
+
+                ## If score in top two re-adjust scores and sentences
+                if sentenceScore > secondSentenceScore:
+                    if sentenceScore > firstSentenceScore:
+                        secondSentence = firstSentence
+                        secondSentenceScore = firstSentenceScore
+                        firstSentence = sentence
+                        firstSentenceScore = sentenceScore
+                    else:
+                        secondSentence = sentence
+                        secondSentenceScore = sentenceScore
+
+    # If an answer was found determine an appropriate response length and return the answer and score
+    if firstSentence:
+        if len(firstSentence) + len(secondSentence) > 1000 or secondSentenceScore < firstSentenceScore:
+            secondSentence = ''
+            secondSentenceScore == 0
+        return [' '.join([firstSentence, secondSentence]), firstSentenceScore + secondSentenceScore],images
+    else:
+        return ['', 0],images
 
 def handle_help(user_id):
     intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"
