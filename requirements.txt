@@ -1,4 +1,5 @@
 Flask==0.11.1
 nltk
 requests==2.9.1
+chatterbot
 pattern==2.6

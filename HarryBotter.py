@@ -1,6 +1,8 @@
 import os
 import sys, traceback
 reload(sys)
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 sys.setdefaultencoding('utf-8')
 import json
 import FacebookAPI as FB, NLP
@@ -27,6 +29,19 @@ ARTICLES_URI = '/Articles/AsSimpleJson?'
 QUERY_RESULT_LIMIT = 25
 SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
+
+chatbot = ChatBot("Harry Botter",
+                  logic_adapters=[
+                      'chatterbot.logic.BestMatch',
+                      'chatterbot.logic.MathematicalEvaluation',
+                      'chatterbot.logic.TimeLogicAdapter'
+                  ]
+                  )
+chatbot.set_trainer(ChatterBotCorpusTrainer)
+chatbot.train(
+    "chatterbot.corpus.english.greetings",
+    "chatterbot.corpus.english.conversations"
+)
 
 class Intent:
     QUERY = 1
@@ -184,7 +199,8 @@ def processIncoming(user_id, message):
         elif intent == Intent.NONSENSE:
             # print("Harry THINKS YOU ARE UNCLEAR.")
             images = []
-            response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
+            # response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
+            response = chatbot.get_response(userInput)
     except Exception, e:
         print e
         traceback.print_exc()
