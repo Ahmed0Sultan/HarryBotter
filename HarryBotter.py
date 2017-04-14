@@ -29,8 +29,7 @@ QUERY_RESULT_LIMIT = 25
 SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
-chatterbot = ChatBot("Harry Botter",
-                     trainer='chatterbot.trainers.UbuntuCorpusTrainer')
+chatterbot = ChatBot("Harry Botter")
 chatterbot.train()
 # chatterbot.set_trainer(ChatterBotCorpusTrainer)
 # chatterbot.train(
