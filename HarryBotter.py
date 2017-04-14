@@ -1,8 +1,6 @@
 import os
 import sys, traceback
 reload(sys)
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
 sys.setdefaultencoding('utf-8')
 import json
 import FacebookAPI as FB, NLP
@@ -15,7 +13,8 @@ from nltk import RegexpParser
 from nltk.data import load
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize, sent_tokenize
-
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 
 import requests
 from flask import Flask, request, render_template
@@ -31,11 +30,10 @@ SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
 chatterbot = ChatBot("Harry Botter")
-# chatbot.set_trainer(ChatterBotCorpusTrainer)
-# chatbot.train(
-#     "chatterbot.corpus.english.greetings",
-#     "chatterbot.corpus.english.conversations"
-# )
+chatbot.set_trainer(ChatterBotCorpusTrainer)
+chatbot.train(
+    "chatterbot.corpus.english"
+)
 
 class Intent:
     QUERY = 1
