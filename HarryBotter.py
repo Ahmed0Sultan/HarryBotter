@@ -617,9 +617,9 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
             if len(firstSentence) + len(secondSentence) > 1000 or secondSentenceScore < firstSentenceScore:
                 secondSentence = ''
                 secondSentenceScore == 0
-            return [' '.join([firstSentence, secondSentence]), firstSentenceScore + secondSentenceScore]
+            return [' '.join([firstSentence, secondSentence]), firstSentenceScore + secondSentenceScore],images
         else:
-            return ['', 0]
+            return ['', 0],images
 
 def handle_help(user_id):
     intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"
