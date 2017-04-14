@@ -31,6 +31,7 @@ SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
 chatbot = ChatBot("Harry Botter",
+                  storage_adapter='chatterbot.storage.JsonFileStorageAdapter',
                   logic_adapters=[
                       'chatterbot.logic.BestMatch',
                       'chatterbot.logic.MathematicalEvaluation',
@@ -39,7 +40,8 @@ chatbot = ChatBot("Harry Botter",
                   )
 chatbot.set_trainer(ChatterBotCorpusTrainer)
 chatbot.train(
-    "chatterbot.corpus.english.greetings"
+    "chatterbot.corpus.english.greetings",
+    "chatterbot.corpus.english.conversations"
 )
 
 class Intent:
