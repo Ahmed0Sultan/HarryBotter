@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 import sys, traceback
 reload(sys)
@@ -525,7 +526,7 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         if not answer:
             try:
                 print 'No Answer'
-                sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('b.', 'born').replace('\xc3', ''))
+                sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('b.', 'born').replace('Â', ''))
                 # Replace any keyword hinting at Hermione with the proper personal pronoun and if followed by 'is' replace with 'am'
                 # answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
                 #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
@@ -571,7 +572,7 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
             if not 'text' in content:
                 continue
 
-            for sentence in sent_tokenize(content['text'].replace('b.', 'born').replace('\xc3', '')):
+            for sentence in sent_tokenize(content['text'].replace('b.', 'born').replace('Â', '')):
                 sentenceScore = 0
 
                 print str(sentence)
