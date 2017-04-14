@@ -38,11 +38,12 @@ chatbot = ChatBot("Harry Botter",
                       'chatterbot.logic.TimeLogicAdapter'
                   ]
                   )
-chatbot.set_trainer(ChatterBotCorpusTrainer)
-chatbot.train(
-    "chatterbot.corpus.english.greetings",
-    "chatterbot.corpus.english.conversations"
-)
+chatbot.train('chatterbot.corpus.english')
+# chatbot.set_trainer(ChatterBotCorpusTrainer)
+# chatbot.train(
+#     "chatterbot.corpus.english.greetings",
+#     "chatterbot.corpus.english.conversations"
+# )
 
 class Intent:
     QUERY = 1
