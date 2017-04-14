@@ -516,7 +516,7 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
         answer = ' '.join(sentences[0:2])
         answer = answer.replace('Â', '')
-        
+
         ## Uncomment here
         # if answerWithScore[1] > answerScore:
         #     answerScore = answerWithScore[1]
