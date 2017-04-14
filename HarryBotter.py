@@ -39,8 +39,7 @@ chatbot = ChatBot("Harry Botter",
                   )
 chatbot.set_trainer(ChatterBotCorpusTrainer)
 chatbot.train(
-    "chatterbot.corpus.english.greetings",
-    "chatterbot.corpus.english.conversations"
+    "chatterbot.corpus.english.greetings"
 )
 
 class Intent:
