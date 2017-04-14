@@ -30,7 +30,7 @@ QUERY_RESULT_LIMIT = 25
 SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
-chatbot = ChatBot("Harry Botter",
+chatterbot = ChatBot("Harry Botter",
                   storage_adapter='chatterbot.storage.JsonFileStorageAdapter',
                   logic_adapters=[
                       'chatterbot.logic.BestMatch',
@@ -39,7 +39,7 @@ chatbot = ChatBot("Harry Botter",
                   ],
                   trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
                   )
-chatbot.train('chatterbot.corpus.english')
+chatterbot.train('chatterbot.corpus.english')
 # chatbot.set_trainer(ChatterBotCorpusTrainer)
 # chatbot.train(
 #     "chatterbot.corpus.english.greetings",
@@ -203,7 +203,7 @@ def processIncoming(user_id, message):
             # print("Harry THINKS YOU ARE UNCLEAR.")
             images = []
             # response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
-            response = chatbot.get_response(userInput)
+            response = chatterbot.get_response(userInput)
     except Exception, e:
         print e
         traceback.print_exc()
