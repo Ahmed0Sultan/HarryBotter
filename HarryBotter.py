@@ -30,10 +30,10 @@ SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
 chatterbot = ChatBot("Harry Botter")
-chatterbot.set_trainer(ChatterBotCorpusTrainer)
-chatterbot.train(
-    "chatterbot.corpus.english"
-)
+# chatterbot.set_trainer(ChatterBotCorpusTrainer)
+# chatterbot.train(
+#     "chatterbot.corpus.english"
+# )
 
 class Intent:
     QUERY = 1
