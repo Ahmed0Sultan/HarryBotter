@@ -30,16 +30,7 @@ QUERY_RESULT_LIMIT = 25
 SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
-chatterbot = ChatBot("Harry Botter",
-                  storage_adapter='chatterbot.storage.JsonFileStorageAdapter',
-                  logic_adapters=[
-                      'chatterbot.logic.BestMatch',
-                      'chatterbot.logic.MathematicalEvaluation',
-                      'chatterbot.logic.TimeLogicAdapter'
-                  ],
-                  trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
-                  )
-chatterbot.train('chatterbot.corpus.english')
+chatterbot = ChatBot("Harry Botter")
 # chatbot.set_trainer(ChatterBotCorpusTrainer)
 # chatbot.train(
 #     "chatterbot.corpus.english.greetings",
