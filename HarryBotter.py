@@ -16,7 +16,7 @@ from nltk.data import load
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize, sent_tokenize
 
-
+nltk.data.path.append('./nltk_data/')
 import requests
 from flask import Flask, request, render_template
 
@@ -510,7 +510,7 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         answerWithScore, images = refineWikiaArticleContent(articleID[1], resultData, queries, searchRefinement)
 
         sentences = sent_tokenize(
-            resultData['sections'][0]['content'][0]['text'].replace('b.', 'born').replace('Â', ''))
+            resultData['sections'][0]['content'][0]['text'].replace('Â', '').replace('b.', 'born'))
         # Replace any keyword hinting at Hermione with the proper personal pronoun and if followed by 'is' replace with 'am'
         # answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
         #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
@@ -534,7 +534,7 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
         if not answer:
             try:
                 print 'No Answer'
-                sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('b.', 'born').replace('Â', ''))
+                sentences = sent_tokenize(resultData['sections'][0]['content'][0]['text'].replace('Â', '').replace('b.', 'born'))
                 # Replace any keyword hinting at Hermione with the proper personal pronoun and if followed by 'is' replace with 'am'
                 # answer = ' '.join(sentences[0:2]).replace('Harry\'s', 'my').replace('Harry Potter is', 'I am').replace('Harry is', 'I am').replace(
                 #     'Harry James Potter', 'I').replace('Harry Potter', 'I').replace('Harry', 'I')
