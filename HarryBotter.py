@@ -36,7 +36,8 @@ chatbot = ChatBot("Harry Botter",
                       'chatterbot.logic.BestMatch',
                       'chatterbot.logic.MathematicalEvaluation',
                       'chatterbot.logic.TimeLogicAdapter'
-                  ]
+                  ],
+                  trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
                   )
 chatbot.train('chatterbot.corpus.english')
 # chatbot.set_trainer(ChatterBotCorpusTrainer)
