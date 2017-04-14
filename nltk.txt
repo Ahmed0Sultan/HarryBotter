@@ -2,4 +2,6 @@ wordnet
 pros_cons
 reuters
 punkt
+stopwords
+vader_lexicon
 averaged_perceptron_tagger
