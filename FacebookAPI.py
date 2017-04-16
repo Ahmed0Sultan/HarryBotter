@@ -247,6 +247,143 @@ def send_url(token, user_id, text, title, url):
     if r.status_code != requests.codes.ok:
         print r.text
 
+
+def send_quick_replies_characters(token, user_id,intro):
+    quickRepliesOptions = [
+        {"content_type": "text",
+         "title": "Harry Potter",
+         "payload": 'character-harry-potter'
+         },
+        {"content_type": "text",
+         "title": "Ron Weasley",
+         "payload": 'character-ron-weasley'
+         },
+         {"content_type": "text",
+         "title": "Hermione Granger",
+         "payload": 'character-hermione-granger'
+         },
+        {"content_type": "text",
+         "title": "Albus Dumbledore",
+         "payload": 'character-albus-dumbledore'
+         }
+    ]
+    data = json.dumps({
+        "recipient": {"id": user_id},
+        "message": {
+            "text": intro,
+            "quick_replies": quickRepliesOptions
+        }
+    })
+    data = data.encode('utf-8')
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=data,
+                      headers={'Content-type': 'application/json'})
+
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def send_quick_replies_spells(token, user_id,intro):
+    quickRepliesOptions = [
+        {"content_type": "text",
+         "title": "Aguamenti",
+         "payload": 'spell-aguamenti'
+         },
+        {"content_type": "text",
+         "title": "Expecto Patronum",
+         "payload": 'spell-expecto-patronum'
+         },
+         {"content_type": "text",
+         "title": "Avada Kedavra",
+         "payload": 'spell-avada-kedavra'
+         },
+        {"content_type": "text",
+         "title": "Alohomora",
+         "payload": 'spell-alohomora'
+         }
+    ]
+    data = json.dumps({
+        "recipient": {"id": user_id},
+        "message": {
+            "text": intro,
+            "quick_replies": quickRepliesOptions
+        }
+    })
+    data = data.encode('utf-8')
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=data,
+                      headers={'Content-type': 'application/json'})
+
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def send_quick_replies_places(token, user_id,intro):
+    quickRepliesOptions = [
+        {"content_type": "text",
+         "title": "Diagon Alley",
+         "payload": 'place-diagon-alley'
+         },
+        {"content_type": "text",
+         "title": "Godric's Hollow",
+         "payload": 'place-godric-hollow'
+         },
+         {"content_type": "text",
+         "title": "Hogsmeade",
+         "payload": 'place-hogsmeade'
+         },
+        {"content_type": "text",
+         "title": "Hogwarts Express",
+         "payload": 'place-hogwarts-express'
+         }
+    ]
+    data = json.dumps({
+        "recipient": {"id": user_id},
+        "message": {
+            "text": intro,
+            "quick_replies": quickRepliesOptions
+        }
+    })
+    data = data.encode('utf-8')
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=data,
+                      headers={'Content-type': 'application/json'})
+
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def send_quick_replies_help(token, user_id,intro):
+    quickRepliesOptions = [
+        {"content_type": "text",
+         "title": "Characters",
+         "payload": 'Harry_Botter_Characters'
+         },
+        {"content_type": "text",
+         "title": "Spells",
+         "payload": 'Harry_Botter_Spells'
+         },
+         {"content_type": "text",
+         "title": "Places",
+         "payload": 'Harry_Botter_Places'
+         }
+    ]
+    data = json.dumps({
+        "recipient": {"id": user_id},
+        "message": {
+            "text": intro,
+            "quick_replies": quickRepliesOptions
+        }
+    })
+    data = data.encode('utf-8')
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=data,
+                      headers={'Content-type': 'application/json'})
+
+    if r.status_code != requests.codes.ok:
+        print r.text
+
 def send_group_pictures(app, token, user_id,images):
 
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",

@@ -72,7 +72,7 @@ def isGreetings(inp_str):
 
 def isThanking(inp_str):
     string = inp_str.lower().split(" ")
-    thanks = ['thanks', 'thank']
+    thanks = ['thanks', 'thank','good','great','awesome','fantastic','terrific','fabulous']
     for word in thanks:
         if word in string:
             return True

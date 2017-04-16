@@ -115,6 +115,33 @@ def webhook():
                     elif message_payload == "Harry_Botter_Places":
                         handle_places(sender_id)
 
+                    elif message_payload == "character-harry-potter":
+                        sendFromQuickReply(sender_id,'Harry Potter')
+                    elif message_payload == "character-ron-weasley":
+                        sendFromQuickReply(sender_id,'Ron Weasley')
+                    elif message_payload == "character-hermione-granger":
+                        sendFromQuickReply(sender_id,'hermione granger')
+                    elif message_payload == "character-albus-dumbledore":
+                        sendFromQuickReply(sender_id,'albus dumbledore')
+
+                    elif message_payload == "spell-aguamenti":
+                        sendFromQuickReply(sender_id,'aguamenti')
+                    elif message_payload == "spell-expecto-patronum":
+                        sendFromQuickReply(sender_id,'expecto patronum')
+                    elif message_payload == "spell-avada-kedavra":
+                        sendFromQuickReply(sender_id,'avada-kedavra')
+                    elif message_payload == "spell-alohomora":
+                        sendFromQuickReply(sender_id,'alohomora')
+                    
+                    elif message_payload == "place-diagon-alley":
+                        sendFromQuickReply(sender_id,'diagon alley')
+                    elif message_payload == "place-godric-hollow":
+                        sendFromQuickReply(sender_id,'godric\'s hollow')
+                    elif message_payload == "place-hogsmeade":
+                        sendFromQuickReply(sender_id,'hogsmeade')
+                    elif message_payload == "place-hogwarts-express":
+                        sendFromQuickReply(sender_id,'hogwarts express')
+
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
@@ -140,7 +167,7 @@ def webhook():
                         FB.send_message(token, sender_id, response)
                         if images:
                             print 'Images here ' + str(images)
-                            FB.send_message(token, sender_id, 'Here is some pictures ;)')
+                            FB.send_message(token, sender_id, 'Here are some pictures ;)')
                             FB.send_group_pictures(app,token,sender_id,images)
 
                 return "ok"
@@ -149,6 +176,14 @@ def webhook():
 
     return "ok", 200
 
+def sendFromQuickReply(sender_id,message):
+    response, images = processIncoming(sender_id, message)
+    FB.show_typing(token, sender_id, 'typing_off')
+    FB.send_message(token, sender_id, response)
+    if images:
+        print 'Images here ' + str(images)
+        FB.send_message(token, sender_id, 'Here are some pictures ;)')
+        FB.send_group_pictures(app, token, sender_id, images)
 
 def processIncoming(user_id, message):
     try:
@@ -207,8 +242,10 @@ def processIncoming(user_id, message):
         elif intent == Intent.NONSENSE:
             # print("Harry THINKS YOU ARE UNCLEAR.")
             images = []
-            response, images = deviseNonsense(tagged_input)
-            # response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
+            try:
+                response, images = deviseNonsense(tagged_input)
+            except Exception, e:
+                response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
             # response = str(chatterbot.get_response(str(userInput)))
             print 'Catterbot response is ' + str(response)
     except Exception, e:
@@ -728,12 +765,14 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
     for section in articleData['sections']:
         ## loop through images
         for image in section['images']:
+            title = '...'
             if not 'src' in image:
                 continue
             src = image['src'].split("/revision/")[0]
             print src
+            title = image['caption']
             image_element ={
-                "title": image['caption'],
+                "title": title,
                 "image_url": src
             }
             images.append(image_element)
@@ -806,17 +845,17 @@ def handle_help(user_id):
 
 def handle_characters(user_id):
     intro = "You can ask me about any character simply by asking me :D !!\nJust like that \"Who's Harry Potter?\"\n\"Who's pet was Fang?\""
-    FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
+    FB.send_quick_replies_characters(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
 def handle_spells(user_id):
     intro = "You can ask me about any spell simply by asking me :D !!\nJust like that \"What is Wingardium Leviosa?\"\n\"What is Expecto Patronum?\""
-    FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
+    FB.send_quick_replies_spells(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
 def handle_places(user_id):
     intro = "You can ask me about any place simply by asking me :D !!\nJust like that \"What is Diagon Alley?\"\n\"What is Godric's Hollow?\""
-    FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
+    FB.send_quick_replies_places(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
 
