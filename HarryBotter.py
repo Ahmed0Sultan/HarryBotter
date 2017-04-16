@@ -102,7 +102,7 @@ def webhook():
                     print 'Message Payload is '+ str(message_payload)
                     if message_payload == "Harry_Botter_Help":
                         handle_help(sender_id)
-                        FB.send_quick_replies_help(token, user_id, '...')
+                        FB.send_quick_replies_help(token, sender_id, '...')
                     elif message_payload == "Harry_Botter_Get_Started":
                         handle_first_time_user(sender_id,user)
 
@@ -152,7 +152,7 @@ def webhook():
                     response, images = processIncoming(sender_id, message)
                     if response == 'help':
                         FB.show_typing(token, sender_id, 'typing_off')
-                        FB.send_quick_replies_help(token, user_id,'...')
+                        FB.send_quick_replies_help(token, sender_id,'...')
                         handle_help(sender_id)
                     elif response == 'characters':
                         FB.show_typing(token, sender_id, 'typing_off')
