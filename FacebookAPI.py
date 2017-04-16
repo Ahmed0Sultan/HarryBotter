@@ -348,21 +348,32 @@ def send_trending_news(token, user_id, posts):
 
 def set_menu():
     r = requests.post("https://graph.facebook.com/v2.6/me/thread_settings",
-                    params={"access_token": 'EAADhYj0lr14BAGP2HCx2mcYcxQbtQG7iXfaGpOieFsGlgJEYv0Y74bdIYtQ3UcnK1kktfUCDInciDniwTOm1c6l2Fq2GEBsm0Lu4syz5HUc41MGepASZBuXw1caZBkZBGRX5kIZCT7q5QOkiPVnZC3n8iBcqVMCBGnZCiSgscQogZDZD'},
+                    params={"access_token": 'EAAEPOb8cxn0BAIy98wL67t09MPbt3ZCCbdLhujNfmSSSgRThkNFa4Ts2Gfc36DpWs2m7Pbp3ZAhAypkST9O2ksxRZBiGYxiW1JZA5XvyFm5VD2mtlX2KtBNXquka1rNxACZBgaSfPso1HTiewJT3zAnDiNpPxRJZASbBJn6jglYgZDZD'},
                     data=json.dumps({
                         "setting_type" : "call_to_actions",
                         "thread_state" : "existing_thread",
                         "call_to_actions":[
                             {
-                                "type":"postback",
-                                "title":"What can you do?",
-                                "payload":"OPTIMIST_HELP"
+                                "type": "postback",
+                                "title": "Help",
+                                "payload": "Harry_Botter_Help"
                             },
                             {
-                                "type":"web_url",
-                                "title":"View Facebook Page",
-                                "url": "https://www.facebook.com/optimistPrimeBot/"
-                            }
+                                "type": "postback",
+                                "title": "Characters",
+                                "payload": "Harry_Botter_Characters"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Spells",
+                                "payload": "Harry_Botter_Spells"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Places",
+                                "payload": "Harry_Botter_Places"
+                            },
+
                         ]
                     }),
                     headers={'Content-type': 'application/json'})

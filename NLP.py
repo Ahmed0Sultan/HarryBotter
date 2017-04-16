@@ -83,7 +83,9 @@ def isGoodbye(inp_str):
     byes = ['bye', 'see you','goodbye','bye bye']
 
     for word in byes:
-        if word == string:
+        if word in string:
+            return True
+        elif word == string:
             return True
     return False
 

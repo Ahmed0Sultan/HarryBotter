@@ -50,7 +50,7 @@ grammar = r"""
 	PP: {<IN><NN|NNS|NNP|NNPS|CD>}
 """
 parser = RegexpParser(grammar)
-
+FB.set_menu()
 ## Pre-defined responses to statements and undecipherable user questions
 GREETING = 'I\'m Harry Botter pleasure to meet you.'
 RESPONSE_TO_NONSENSE = ['I\'m sorry but that is simply not a question!',"*scratch my head* :(",
@@ -111,6 +111,9 @@ def webhook():
 
                     elif message_payload == "Harry_Botter_Spells":
                         handle_spells(sender_id)
+
+                    elif message_payload == "Harry_Botter_Places":
+                        handle_places(sender_id)
 
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
