@@ -167,6 +167,9 @@ def processIncoming(user_id, message):
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
 
+        if NLP.BAD_WORDS(userInput):
+            return 'Well I\'m not supposed to answer to that :/',[]
+
         if NLP.isAskingBotInformation(userInput):
             return NLP.handleBotInfo(userInput),[]
 
@@ -279,7 +282,7 @@ def deviseAnswer(taggedInput):
                  len(word[0]) > 3 and (word[1].startswith('N') or word[1].startswith('J') or word[1].startswith('V'))]:
         correctSpelling = spellCheck(word[0])
         if not correctSpelling == word[0]:
-            return SPELLING_ERROR % (correctSpelling, word[0])
+            return SPELLING_ERROR % (correctSpelling, word[0]),[]
 
     # Default Answer
     answer = NO_INFORMATION_AVAILABLE

@@ -43,7 +43,7 @@ def isGreetings(inp_str):
     string = inp_str.lower().split(" ")
     if len(string) > 3:
         return False
-    greetings = ['hi','hey','hello', 'hola','greetings', 'good morning', 'good afternoon', 'good evening']
+    greetings = ['hi','hey','hello', 'hola','greetings', 'good morning','morning', 'good afternoon','afternoon', 'good evening']
     for word in greetings:
         if word in string[:3]:
             return True
@@ -287,7 +287,7 @@ def getNewsQuery(sentence):
         return m[0].group(2).string.replace('.','')
 
 def handleBotInfo(sentence):
-    name = ["Botter ... Harry Botter B-)", "The most powerful Bot! ;)", "You knew already *tsk tsk*"]
+    name = ["Botter ... Harry Botter B-)", "The most powerful Wizard-Bot! ;)", "You knew already *tsk tsk*"]
     creator = ["It's a mystery :O", "You are among the few who I tell: All I know about my creator is the initials AS :D", "It remains a mystery to me even :(", "It was erased from my memory from the start :("]
 
     m = search('what *+ your name', sentence)
@@ -306,7 +306,7 @@ def handleBotInfo(sentence):
     if len(m) > 0:
         return oneOf(creator)
 
-    m = search('who *+ made|are|created|create|wrote|gave_birth|built *+ you', sentence)
+    m = search('who made|are|created|create|wrote|gave_birth|built you', sentence)
     if len(m) > 0:
         return oneOf(creator)
 
