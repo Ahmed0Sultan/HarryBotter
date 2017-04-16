@@ -152,8 +152,8 @@ def webhook():
                     response, images = processIncoming(sender_id, message)
                     if response == 'help':
                         FB.show_typing(token, sender_id, 'typing_off')
-                        FB.send_quick_replies_help(token, sender_id,'...')
                         handle_help(sender_id)
+                        FB.send_quick_replies_help(token, sender_id, '...')
                     elif response == 'characters':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_characters(sender_id)
@@ -163,6 +163,8 @@ def webhook():
                     elif response == 'places':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_places(sender_id)
+                    elif response == 'How can I help you?':
+                        FB.send_quick_replies_help(token, user_id, 'How can I help you?')
                     else:
                         FB.show_typing(token, sender_id, 'typing_off')
                         FB.send_message(token, sender_id, response)
@@ -224,8 +226,7 @@ def processIncoming(user_id, message):
             return 'Okay',[]
         if NLP.isGreetings(userInput):
             greeting = "%s %s :D" % (NLP.sayHiTimeZone(user), user['first_name'])
-            # FB.send_message(token, user_id, greeting)
-            FB.send_quick_replies_help(token,user_id,greeting)
+            FB.send_message(token, user_id, greeting)
             return "How can I help you?",[]
 
         elif NLP.isGoodbye(userInput):
