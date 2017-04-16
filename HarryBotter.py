@@ -132,7 +132,7 @@ def webhook():
                         sendFromQuickReply(sender_id,'avada-kedavra')
                     elif message_payload == "spell-alohomora":
                         sendFromQuickReply(sender_id,'alohomora')
-                    
+
                     elif message_payload == "place-diagon-alley":
                         sendFromQuickReply(sender_id,'diagon alley')
                     elif message_payload == "place-godric-hollow":
@@ -223,7 +223,8 @@ def processIncoming(user_id, message):
             return 'Okay',[]
         if NLP.isGreetings(userInput):
             greeting = "%s %s :D" % (NLP.sayHiTimeZone(user), user['first_name'])
-            FB.send_message(token, user_id, greeting)
+            # FB.send_message(token, user_id, greeting)
+            FB.send_quick_replies_help(token,user_id,greeting)
             return "How can I help you?",[]
 
         elif NLP.isGoodbye(userInput):
