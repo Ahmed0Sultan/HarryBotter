@@ -167,8 +167,8 @@ def processIncoming(user_id, message):
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
 
-        if NLP.BAD_WORDS(userInput):
-            return 'Well I\'m not supposed to answer to that :/',[]
+        if NLP.badWords(userInput):
+            return 'Well I\'m not supposed to reply to that :/',[]
 
         if NLP.isAskingBotInformation(userInput):
             return NLP.handleBotInfo(userInput),[]
