@@ -80,9 +80,10 @@ def isThanking(inp_str):
 
 def isGoodbye(inp_str):
     string = inp_str.lower().split(" ")
-    byes = ['bye', 'see you','good bye','bye bye']
+    byes = ['bye', 'see you','goodbye','bye bye']
+
     for word in byes:
-        if word in string:
+        if word == string:
             return True
     return False
 
@@ -368,7 +369,7 @@ def handleEasterEggs(sentence):
 
 def handleBotInfo(sentence):
     name = ["Botter ... Harry Botter B-)", "The most powerful Wizard-Bot! ;)", "You knew already *tsk tsk*"]
-    creator = ["It's a mystery :O", "You are among the few who I tell: All I know about my creator is the initials AS :D", "It remains a mystery to me even :(", "It was erased from my memory from the start :("]
+    creator = ["It's a mystery :O", "It remains a mystery to me even :(", "It was erased from my memory from the start :("]
 
     m = search('what *+ your name', sentence)
     if len(m) > 0:
@@ -389,6 +390,10 @@ def handleBotInfo(sentence):
     m = search('who made|created|create|wrote|gave_birth|built you', sentence)
     if len(m) > 0:
         return oneOf(creator)
+
+    m = search('who made|created|create|wrote|gave_birth|built you for real', sentence)
+    if len(m) > 0:
+        return "You are among the few who I tell: All I know about my creator is the initials AS :D"
     m = search('who are you', sentence)
     if len(m) > 0:
         return oneOf(name)
