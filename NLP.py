@@ -317,18 +317,18 @@ def isFunny(sentence):
     if m:
         return True
 
-    m = re.search('\b(h|Ha)+\b', sentence,re.I)
+    m = re.search('\b((h|H)a)+\b', sentence,re.I)
     if m:
         return True
 
-    m = re.search('\b(h|Ha+)+\b', sentence,re.I)
+    m = re.search('\b((h|H)a+)+\b', sentence,re.I)
     if m:
         return True
 
-    m = re.search('.+ f|Funny', sentence,re.I)
+    m = re.search('.+ (f|F)unny', sentence,re.I)
     if m:
         return True
-    m = re.search('I|i .+ like .*', sentence,re.I)
+    m = re.search('(I|i) .+ like .*', sentence,re.I)
     if m:
         return True
     return False
