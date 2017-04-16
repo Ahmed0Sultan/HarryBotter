@@ -9,23 +9,6 @@ import FacebookAPI as FB, NLP
 ## Resources for querying API and parsing results
 import re, collections, json, urllib, urllib2, random
 
-from chatterbot.trainers import ChatterBotCorpusTrainer
-from chatterbot import ChatBot
-chatterbot = ChatBot("Harry Botter",
-                  storage_adapter='chatterbot.storage.JsonFileStorageAdapter',
-                  logic_adapters=[
-                      'chatterbot.logic.BestMatch',
-                      'chatterbot.logic.MathematicalEvaluation',
-                      'chatterbot.logic.TimeLogicAdapter'
-                  ],
-                  trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
-                  )
-# chatterbot.set_trainer(ChatterBotCorpusTrainer)
-
-chatterbot.train(
-    "chatterbot.corpus.english"
-)
-
 from nltk import RegexpParser
 from nltk.data import load
 from nltk.tag import pos_tag
@@ -208,8 +191,8 @@ def processIncoming(user_id, message):
         elif intent == Intent.NONSENSE:
             # print("Harry THINKS YOU ARE UNCLEAR.")
             images = []
-            # response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
-            response = str(chatterbot.get_response(str(userInput)))
+            response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
+            # response = str(chatterbot.get_response(str(userInput)))
             print 'Catterbot response is ' + str(response)
     except Exception, e:
         print e
