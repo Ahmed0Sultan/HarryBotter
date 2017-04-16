@@ -374,9 +374,9 @@ def deviseAnswer(taggedInput):
     # for keyword in additionalSearchKeywords:
     #     if 'your' in keyword or 'you' in keyword:
     #         addHarryQuery = True
-    #
-    # queries = [query.replace('your', '').replace('you', '') for query in queries]
-    # additionalSearchKeywords = [keyword.replace('your', '').replace('you', '') for keyword in additionalSearchKeywords]
+
+    queries = [query.replace('your', '').replace('you', '') for query in queries]
+    additionalSearchKeywords = [keyword.replace('your', '').replace('you', '') for keyword in additionalSearchKeywords]
 
     # if addHarryQuery:
     #     queries.append('Harry Potter')
