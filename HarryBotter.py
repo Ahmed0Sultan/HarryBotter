@@ -164,7 +164,7 @@ def webhook():
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_places(sender_id)
                     elif response == 'How can I help you?':
-                        FB.send_quick_replies_help(token, user_id, 'How can I help you?')
+                        FB.send_quick_replies_help(token, sender_id, 'How can I help you?')
                     else:
                         FB.show_typing(token, sender_id, 'typing_off')
                         FB.send_message(token, sender_id, response)
