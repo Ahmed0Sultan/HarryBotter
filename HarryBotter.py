@@ -8,15 +8,29 @@ import FacebookAPI as FB, NLP
 
 ## Resources for querying API and parsing results
 import re, collections, json, urllib, urllib2, random
-# from chatterbot import ChatBot
-# from chatterbot.trainers import ChatterBotCorpusTrainer
-## Resources for performing POS tagging & lamda expressions
+
+from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot import ChatBot
+chatterbot = ChatBot("Harry Botter",
+                  storage_adapter='chatterbot.storage.JsonFileStorageAdapter',
+                  logic_adapters=[
+                      'chatterbot.logic.BestMatch',
+                      'chatterbot.logic.MathematicalEvaluation',
+                      'chatterbot.logic.TimeLogicAdapter'
+                  ],
+                  trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
+                  )
+# chatterbot.set_trainer(ChatterBotCorpusTrainer)
+
+chatterbot.train(
+    "chatterbot.corpus.english"
+)
+
 from nltk import RegexpParser
 from nltk.data import load
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize, sent_tokenize
 
-nltk.data.path.append('./nltk_data/')
 import requests
 from flask import Flask, request, render_template
 
@@ -180,6 +194,8 @@ def processIncoming(user_id, message):
 
         elif NLP.isGoodbye(userInput):
             return NLP.sayByeTimeZone(user),[]
+        elif NLP.isThanking(userInput):
+            return NLP.oneOf(NLP.thanks_replies),[]
 
         ## Perform POS-tagging on user input
         tagged_input = pos_tag(word_tokenize(userInput))
@@ -192,8 +208,8 @@ def processIncoming(user_id, message):
         elif intent == Intent.NONSENSE:
             # print("Harry THINKS YOU ARE UNCLEAR.")
             images = []
-            response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
-            # response = str(chatterbot.get_response(userInput))
+            # response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
+            response = str(chatterbot.get_response(str(userInput)))
             print 'Catterbot response is ' + str(response)
     except Exception, e:
         print e

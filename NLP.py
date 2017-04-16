@@ -8,6 +8,7 @@ from pattern.search import search
 no_response = ["*scratch my head* :(", "How do I respond to that... :O", "I don't know you can ask Hermione... :/", "I can be not-so-smart from time to time... :(", "Err... you know I'm not the real Harry Potter, right? :O"]
 error = ["Sorry I've got a little bit sick. BRB in 2 min :(", "Oops... 404 My Witty Mind Not Found :O", "Oops... My brain went MIA in the cloud, BRB in 2 :(", "Hmm... How should I respond to that... :O"]
 looking_replies = ["Sure, give me a few seconds... B-)", "Scanning the world... :D", "Zoom zoom zoom..."]
+thanks_replies = ["You are welcome ;)","Not at all","Don't mention it :D","No problem :D"," :D ","My pleasure ;)"]
 # END random response sets
 
 
@@ -45,6 +46,14 @@ def isGreetings(inp_str):
     greetings = ['hi','hey','hello', 'hola','greetings', 'good morning', 'good afternoon', 'good evening']
     for word in greetings:
         if word in string[:3]:
+            return True
+    return False
+
+def isThanking(inp_str):
+    string = inp_str.lower().split(" ")
+    thanks = ['thanks', 'thank']
+    for word in byes:
+        if word in string:
             return True
     return False
 
