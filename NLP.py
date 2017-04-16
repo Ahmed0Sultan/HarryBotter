@@ -294,21 +294,24 @@ def answerWithOkay(sentence):
     return False
 
 def isFunny(sentence):
-    reply_funny = ['Glad you like it too :D',':D :D']
+    reply_funny = ['Glad you like it :D',':D :D']
 
-    m = search('h+',sentence)
+    m = re.search('h+',sentence)
     if len(m) > 0:
         return True
 
-    m = search('(ha)+', sentence)
+    m = re.search('(ha)+', sentence)
     if len(m) > 0:
         return True
 
-    m = search('(ha+)+', sentence)
+    m = re.search('(ha+)+', sentence)
     if len(m) > 0:
         return True
 
-    m = search('.* funny .*', sentence)
+    m = re.search('.+ funny', sentence)
+    if len(m) > 0:
+        return True
+    m = re.search('I .+ like .*', sentence)
     if len(m) > 0:
         return True
     return False
