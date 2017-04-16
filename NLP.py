@@ -297,22 +297,22 @@ def isFunny(sentence):
     reply_funny = ['Glad you like it :D',':D :D']
 
     m = re.search('h+',sentence)
-    if len(m) > 0:
+    if m:
         return True
 
     m = re.search('(ha)+', sentence)
-    if len(m) > 0:
+    if m:
         return True
 
     m = re.search('(ha+)+', sentence)
-    if len(m) > 0:
+    if m:
         return True
 
     m = re.search('.+ funny', sentence)
-    if len(m) > 0:
+    if m:
         return True
     m = re.search('I .+ like .*', sentence)
-    if len(m) > 0:
+    if m:
         return True
     return False
 
