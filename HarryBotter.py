@@ -50,7 +50,7 @@ grammar = r"""
 	PP: {<IN><NN|NNS|NNP|NNPS|CD>}
 """
 parser = RegexpParser(grammar)
-FB.set_menu()
+# FB.set_menu()
 ## Pre-defined responses to statements and undecipherable user questions
 GREETING = 'I\'m Harry Botter pleasure to meet you.'
 RESPONSE_TO_NONSENSE = ['I\'m sorry but that is simply not a question!',"*scratch my head* :(",
@@ -207,7 +207,8 @@ def processIncoming(user_id, message):
         elif intent == Intent.NONSENSE:
             # print("Harry THINKS YOU ARE UNCLEAR.")
             images = []
-            response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
+            response, images = deviseNonsense(tagged_input)
+            # response = "%s" % (RESPONSE_TO_NONSENSE[random.randint(0, len(RESPONSE_TO_NONSENSE) - 1)])
             # response = str(chatterbot.get_response(str(userInput)))
             print 'Catterbot response is ' + str(response)
     except Exception, e:
@@ -288,6 +289,156 @@ def deviseCharacter(queries):
 
 
     return answer
+
+def deviseNonsense(taggedInput):
+    images = []
+    # Before querying the wiki -- perform spell check!
+    for word in [word for word in taggedInput if
+                 len(word[0]) > 3 and (word[1].startswith('N') or word[1].startswith('J') or word[1].startswith('V'))]:
+        correctSpelling = spellCheck(word[0])
+        if not correctSpelling == word[0]:
+            return SPELLING_ERROR % (correctSpelling, word[0]),[]
+
+    # Default Answer
+    answer = NO_INFORMATION_AVAILABLE
+
+    result = parser.parse(taggedInput)
+    print("Regexp Parser Result for input %s : " % taggedInput),
+    print(result)
+
+    # Determine the query to enter into the wikia search and add any additional
+    # search terms now so that when article refinement is performed the most accurate reply is returned
+    queries = []
+    additionalSearchKeywords = []
+
+    ## GENERAL STRATEGY:
+    ## Look through tagged input then fetch whole sentence fragments through subtrees.
+    ## 1. If starts with Auxillary Verb then take the first NP as the query
+    ## and everything to the right becomes additional search keywords.
+    ## 2. If starts with WH-NP then take rightmost NP and everything in between becomes
+    ## additional search keywords
+    ## 3. If ends with WH-NP then take first NP and everything in between becomes
+    ## additional search keywords
+
+    queryPhraseType = 3
+
+    ## Helper POS Tag Information to define the question phrase type
+    firstWordTag = taggedInput[0][1]
+    lastToken = taggedInput[len(taggedInput) - 1][0]
+    lastWordTag = taggedInput[len(taggedInput) - 1][1]
+    secondLastWordTag = taggedInput[len(taggedInput) - 2][1]
+
+    if firstWordTag.startswith('WP') or firstWordTag.startswith('WRB'):
+        queryPhraseType = 2
+    elif lastWordTag.startswith('WP') or lastWordTag.startswith('WP'):
+        queryPhraseType = 3
+    elif secondLastWordTag.startswith('WP') or secondLastWordTag.startswith('WP'):
+        queryPhraseType = 3
+    elif (firstWordTag.startswith('VBZ') or firstWordTag.startswith('VBP')) or firstWordTag.startswith('MD'):
+        queryPhraseType = 1
+
+    i = 0
+    for subtree in result.subtrees():
+
+        # Skip the first subtree (which is the entire tree)
+        if i == 0:
+            i = i + 1
+            continue
+
+        # Skip the first NP found if question starts with WH-NP or auxiliary VP
+        if (queryPhraseType == 2 or queryPhraseType == 1) and i == 1:
+            i = i + 1
+            continue
+
+        # Add NP to list of queries
+        if subtree.label() == 'NP':
+            queries.append(' '.join([(a[0]).encode('utf-8') for a in subtree.leaves()]))
+
+        # Add VP and PPs to additional search keywords
+        else:
+            additionalSearchKeywords.append(' '.join([(a[0]).encode('utf-8') for a in subtree.leaves()]))
+
+        i = i + 1
+
+    ## Perform additional refinements to the list of queries and keywords
+
+    # Refinement 1. If question phrase ends in WH-noun remove the last query
+    if (queryPhraseType == 3 and len(queries) > 1) and (
+        lastWordTag.startswith('W') or secondLastWordTag.startswith('W')):
+        queries = queries[0:len(queries) - 1]
+
+    # Refinement 2. Remove posseive affix from keywords if it exists
+    additionalSearchKeywords = [keyword.replace("'s", "") for keyword in additionalSearchKeywords]
+
+    # # Refinement 3. Replace 'you' and 'your' with 'Hermione Granger' in queries and keywords
+    # addHarryQuery = False
+    #
+    # for query in queries:
+    #     if 'your' in query or 'you' in query:
+    #         addHarryQuery = True
+    #
+    # for keyword in additionalSearchKeywords:
+    #     if 'your' in keyword or 'you' in keyword:
+    #         addHarryQuery = True
+
+    queries = [query.replace('your', '').replace('you', '') for query in queries]
+    additionalSearchKeywords = [keyword.replace('your', '').replace('you', '') for keyword in additionalSearchKeywords]
+
+    # if addHarryQuery:
+    #     queries.append('Harry Potter')
+
+    # Refinement 4. Remove query terms from additionalSearchKeywords to avoid duplication
+    for query in queries:
+        additionalSearchKeywords = [keyword.replace(query, "") for keyword in additionalSearchKeywords]
+
+    # Refinement 5. Remove empty strings from queries and additionalSearchKeywords
+    additionalSearchKeywords = [value for value in additionalSearchKeywords if value != ' ' and value != '']
+    queries = [value for value in queries if value != '']
+    additionalSearchKeywords = ['is']
+    print("Wikia Queries : %s " % queries)
+    print("Search Keywords : %s " % additionalSearchKeywords)
+
+    ## If there are queries perform wikia search
+    ## for articles and scan through article text for a relevant response
+    if queries:
+
+        # First query wikia to get possible matching articles
+        articleIDs = queryWikiaSearch(queries)
+
+        ## If the search result returned articleIDs matching the query then scan them
+        ## and then refine the optimal result returned to appear more human
+        if articleIDs:
+            answer ,images = queryWikiaArticles(articleIDs, queries, additionalSearchKeywords)
+
+            # Refinement 1. Append the response to a random response prefix
+            filler = RESPONSE_STARTERS[random.randint(0, len(RESPONSE_STARTERS) - 1)]
+            if filler:
+                if pos_tag(word_tokenize(answer))[0][1] == 'NNP' or word_tokenize(answer)[0] == 'I':
+                    first = answer[0]
+                else:
+                    first = answer[0].lower()
+
+                answer = "%s%s%s" % (filler, first, answer[1:])
+
+            # Refinement 2. Remove Parentheses in answer
+            tempAnswer = ''
+            removeText = 0
+            removeSpace = False
+            for i in answer:
+                if removeSpace:
+                    removeSpace = False
+                elif i == '(':
+                    removeText = removeText + 1
+                elif removeText == 0:
+                    tempAnswer += i
+                elif i == ')':
+                    removeText = removeText - 1
+                    removeSpace = True
+
+            answer = tempAnswer
+
+    # print("Harry's Response: %s" % answer)
+    return answer, images
 
 def deviseAnswer(taggedInput):
     images = []
