@@ -52,7 +52,7 @@ def isGreetings(inp_str):
 def isThanking(inp_str):
     string = inp_str.lower().split(" ")
     thanks = ['thanks', 'thank']
-    for word in byes:
+    for word in thanks:
         if word in string:
             return True
     return False
