@@ -131,7 +131,7 @@ def webhook():
                         handle_spells(sender_id)
                     elif response == 'places':
                         FB.show_typing(token, sender_id, 'typing_off')
-                        handle_help(sender_id)
+                        handle_places(sender_id)
                     else:
                         FB.show_typing(token, sender_id, 'typing_off')
                         FB.send_message(token, sender_id, response)
@@ -277,6 +277,7 @@ def deviseCharacter(queries):
     return answer
 
 def deviseAnswer(taggedInput):
+    images = []
     # Before querying the wiki -- perform spell check!
     for word in [word for word in taggedInput if
                  len(word[0]) > 3 and (word[1].startswith('N') or word[1].startswith('J') or word[1].startswith('V'))]:
@@ -646,6 +647,11 @@ def handle_characters(user_id):
 
 def handle_spells(user_id):
     intro = "You can ask me about any spell simply by asking me :D !!\nJust like that \"What is Wingardium Leviosa?\"\n\"What is Expecto Patronum?\""
+    FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
+    # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
+
+def handle_places(user_id):
+    intro = "You can ask me about any place simply by asking me :D !!\nJust like that \"What is Wingardium Leviosa?\"\n\"What is Expecto Patronum?\""
     FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
