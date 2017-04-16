@@ -296,22 +296,22 @@ def answerWithOkay(sentence):
 def isFunny(sentence):
     reply_funny = ['Glad you like it :D',':D :D']
 
-    m = re.search('h+',sentence)
+    m = re.search('(h|H)+',sentence,re.I)
     if m:
         return True
 
-    m = re.search('(ha)+', sentence)
+    m = re.search('(h|Ha)+', sentence,re.I)
     if m:
         return True
 
-    m = re.search('(ha+)+', sentence)
+    m = re.search('(h|Ha+)+', sentence,re.I)
     if m:
         return True
 
-    m = re.search('.+ funny', sentence)
+    m = re.search('.+ f|Funny', sentence,re.I)
     if m:
         return True
-    m = re.search('I .+ like .*', sentence)
+    m = re.search('I|i .+ like .*', sentence,re.I)
     if m:
         return True
     return False

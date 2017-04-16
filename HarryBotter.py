@@ -174,7 +174,7 @@ def processIncoming(user_id, message):
             return NLP.handleBotInfo(userInput),[]
 
         if NLP.isFunny(userInput):
-            return NLP.oneOf(['Glad you like it too :D',':D :D']),[]
+            return NLP.oneOf(['Glad you like it :D',':D :D']),[]
 
         if NLP.answerWithOkay(userInput):
             return 'Okay',[]
