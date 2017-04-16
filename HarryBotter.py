@@ -651,7 +651,7 @@ def handle_spells(user_id):
     # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
 def handle_places(user_id):
-    intro = "You can ask me about any place simply by asking me :D !!\nJust like that \"What is Wingardium Leviosa?\"\n\"What is Expecto Patronum?\""
+    intro = "You can ask me about any place simply by asking me :D !!\nJust like that \"What is Diagon Alley?\"\n\"What is Godric's Hollow?\""
     FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
