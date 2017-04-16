@@ -39,7 +39,7 @@ def isAskingBotInformation(sentence):
 
     return False
 def isEasterEggs(sentence):
-    m = re.search('.* love you', sentence, re.I)
+    m = re.search('.*? (love|like|lov|luv) (you|u)', sentence, re.I)
     if m:
         return True
 
@@ -50,12 +50,12 @@ def isEasterEggs(sentence):
     m = re.search('do you hate me', sentence, re.I)
     if m:
         return True
-    
-    m = re.search('.* hate you', sentence, re.I)
+
+    m = re.search('.*? hate (you|u)', sentence, re.I)
     if m:
         return True
 
-    m = re.search('.* suck', sentence, re.I)
+    m = re.search('.*? suck', sentence, re.I)
     if m:
         return True
     return False
@@ -345,7 +345,7 @@ def handleEasterEggs(sentence):
     love_responses = ['No, I love you <3','Hearing you say that makes me so happy <3','It means so much that you\'re opening up to me like this. Thank you <3','I\'m so happy you told me <3']
     hate_responses = ['Well, I like you! :/','Thank you :)',':) :)','Yet you are still here']
 
-    m = re.search('.* (love|like|lov|luv) you', sentence, re.I)
+    m = re.search('.* (love|like|lov|luv) (you|u)', sentence, re.I)
     if m:
         return oneOf(love_responses)
 
@@ -357,7 +357,7 @@ def handleEasterEggs(sentence):
     if m:
         return 'Of course not, I love you <3'
 
-    m = re.search('.* hate you', sentence, re.I)
+    m = re.search('.* hate (you|u)', sentence, re.I)
     if m:
         return oneOf(hate_responses)
 
