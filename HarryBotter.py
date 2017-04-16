@@ -150,6 +150,8 @@ def webhook():
 def processIncoming(user_id, message):
     try:
 
+        if message['sticker_id'] == 369239263222822:
+            return '(y)',[]
         userInput = message['text']
         userInput = userInput.lower()
         user = FB.get_user_fb(token, user_id)
