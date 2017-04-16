@@ -285,6 +285,33 @@ def getNewsQuery(sentence):
     m = search('{NP+} about|on|regarding { *+ }', sentence)
     if len(m) > 0:
         return m[0].group(2).string.replace('.','')
+def answerWithOkay(sentence):
+    reply = 'Okay'
+
+    m = search('Yes|yes|No|no',sentence)
+    if len(m) > 0:
+        return True
+    return False
+
+def isFunny(sentence):
+    reply_funny = ['Glad you like it too :D',':D :D']
+
+    m = search('h+',sentence)
+    if len(m) > 0:
+        return True
+
+    m = search('(ha)+', sentence)
+    if len(m) > 0:
+        return True
+
+    m = search('(ha+)+', sentence)
+    if len(m) > 0:
+        return True
+
+    m = search('.* funny .*', sentence)
+    if len(m) > 0:
+        return True
+    return False
 
 def handleBotInfo(sentence):
     name = ["Botter ... Harry Botter B-)", "The most powerful Wizard-Bot! ;)", "You knew already *tsk tsk*"]

@@ -172,7 +172,12 @@ def processIncoming(user_id, message):
 
         if NLP.isAskingBotInformation(userInput):
             return NLP.handleBotInfo(userInput),[]
+        
+        if NLP.isFunny(userInput):
+            return NLP.oneOf(['Glad you like it too :D',':D :D']),[]
 
+        if NLP.answerWithOkay(userInput):
+            return 'Okay',[]
         if NLP.isGreetings(userInput):
             greeting = "%s %s :D" % (NLP.sayHiTimeZone(user), user['first_name'])
             FB.send_message(token, user_id, greeting)
