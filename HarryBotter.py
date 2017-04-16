@@ -173,6 +173,9 @@ def processIncoming(user_id, message):
         if NLP.isAskingBotInformation(userInput):
             return NLP.handleBotInfo(userInput),[]
 
+        if NLP.isEasterEggs(userInput):
+            return NLP.handleEasterEggs(userInput),[]
+
         if NLP.isFunny(userInput):
             return NLP.oneOf(['Glad you like it :D',':D :D']),[]
 

@@ -38,6 +38,19 @@ def isAskingBotInformation(sentence):
         return True
 
     return False
+def isEasterEggs(sentence):
+    m = re.search('.* love you', sentence, re.I)
+    if m:
+        return True
+
+    m = re.search('.* hate you', sentence, re.I)
+    if m:
+        return True
+
+    m = re.search('.* suck', sentence, re.I)
+    if m:
+        return True
+    return False
 
 def isGreetings(inp_str):
     string = inp_str.lower().split(" ")
@@ -291,20 +304,24 @@ def answerWithOkay(sentence):
     m = search('Yes|yes|No|no',sentence)
     if len(m) > 0:
         return True
+
+    m = re.search(".* shut .* up .*", sentence,re.I)
+    if m:
+        return True
     return False
 
 def isFunny(sentence):
     reply_funny = ['Glad you like it :D',':D :D']
 
-    m = re.search('(h|H)+',sentence,re.I)
+    m = re.search('\b(h|H)+\b',sentence,re.I)
     if m:
         return True
 
-    m = re.search('(h|Ha)+', sentence,re.I)
+    m = re.search('\b(h|Ha)+\b', sentence,re.I)
     if m:
         return True
 
-    m = re.search('(h|Ha+)+', sentence,re.I)
+    m = re.search('\b(h|Ha+)+\b', sentence,re.I)
     if m:
         return True
 
@@ -314,6 +331,23 @@ def isFunny(sentence):
     m = re.search('I|i .+ like .*', sentence,re.I)
     if m:
         return True
+    return False
+
+def handleEasterEggs(sentence):
+    love_responses = ['No, I love you ♥','Hearing you say that makes me so happy ♥','It means so much that you\'re opening up to me like this. Thank you ♥','I\'m so happy you told me']
+    hate_responses = ['Well, I like you! :/','Thank you :)',':) :)','Yet you are still here']
+
+    m = re.search('.* love|like you', sentence, re.I)
+    if m:
+        return oneOf(love_responses)
+
+    m = re.search('.* hate you', sentence, re.I)
+    if m:
+        return oneOf(hate_responses)
+
+    m = re.search('.* suck', sentence, re.I)
+    if m:
+        return oneOf(hate_responses)
     return False
 
 def handleBotInfo(sentence):
