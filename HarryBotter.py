@@ -150,7 +150,7 @@ def webhook():
 def processIncoming(user_id, message):
     try:
 
-        if sticker_id in message:
+        if message.get('sticker_id'):
             return '(y)',[]
         userInput = message['text']
         userInput = userInput.lower()
