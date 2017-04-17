@@ -72,7 +72,7 @@ def isGreetings(inp_str):
 
 def isThanking(inp_str):
     string = inp_str.lower().split(" ")
-    thanks = ['thanks', 'thank','good','great','awesome','fantastic','terrific','fabulous']
+    thanks = ['thanks', 'thank','good','great','awesome','fantastic','terrific','fabulous','nice']
     for word in thanks:
         if word in string:
             return True
@@ -80,12 +80,12 @@ def isThanking(inp_str):
 
 def isGoodbye(inp_str):
     string = inp_str.lower().split(" ")
-    byes = ['bye', 'see you','goodbye','bye bye']
+    byes = ['bye', 'see you','goodbye','bye bye','miss you']
 
     for word in byes:
         if word in string:
             return True
-        elif word == string:
+        elif word in string[:2]:
             return True
     return False
 
@@ -312,7 +312,7 @@ def getNewsQuery(sentence):
 def answerWithOkay(sentence):
     reply = 'Okay'
 
-    m = search('Yes|yes|No|no',sentence)
+    m = search('Yes|yes|No|no|Okay|okay|Ok|ok',sentence)
     if len(m) > 0:
         return True
 
@@ -337,6 +337,9 @@ def isFunny(sentence):
         return True
 
     m = re.search('.+ (f|F)unny', sentence,re.I)
+    if m:
+        return True
+    m = re.search('wow', sentence, re.I)
     if m:
         return True
     m = re.search('(I|i) .+ like .*', sentence,re.I)
