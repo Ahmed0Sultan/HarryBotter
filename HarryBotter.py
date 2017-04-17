@@ -167,6 +167,7 @@ def webhook():
                         FB.send_quick_replies_help(token, sender_id, 'How can I help you?')
                     else:
                         FB.show_typing(token, sender_id, 'typing_off')
+                        print response
                         FB.send_message(token, sender_id, response)
                         if images:
                             print 'Images here ' + str(images)
