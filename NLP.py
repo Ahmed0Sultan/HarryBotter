@@ -78,6 +78,25 @@ def isThanking(inp_str):
             return True
     return False
 
+def isEmoji(inp_str):
+    m = re.match('(\ud83c[\udf00-\udfff]|\ud83d[\udc00-\ude4f\ude80-\udeff]|[\u2600-\u26FF\u2700-\u27BF])+',inp_str)
+    if m:
+        return True
+    m = re.match('(:.)+',inp_str)
+    if m:
+        return True
+    m = re.match('(.-.)+', inp_str)
+    if m:
+        return True
+    m = re.match('(._.)+', inp_str)
+    if m:
+        return True
+    return False
+
+def handleEmoji(inp_str):
+    return inp_str
+
+
 def isGoodbye(inp_str):
     string = inp_str.lower().split(" ")
     byes = ['bye', 'see you','goodbye','bye bye','miss you']
@@ -85,7 +104,7 @@ def isGoodbye(inp_str):
     for word in byes:
         if word in string:
             return True
-        elif word in string[:2]:
+        elif word in string[:3]:
             return True
     return False
 
@@ -336,7 +355,7 @@ def isFunny(sentence):
     if m:
         return True
 
-    m = re.search('.+ (f|F)unny', sentence,re.I)
+    m = re.search('.* (f|F)unny', sentence,re.I)
     if m:
         return True
     m = re.search('wow', sentence, re.I)

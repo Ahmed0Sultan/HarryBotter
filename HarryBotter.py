@@ -222,6 +222,9 @@ def processIncoming(user_id, message):
         if NLP.isFunny(userInput):
             return NLP.oneOf(['Glad you like it :D',':D :D']),[]
 
+        if NLP.isEmoji(userInput):
+            return NLP.handleEmoji(userInput),[]
+
         if NLP.answerWithOkay(userInput):
             return 'Okay',[]
         if NLP.isGreetings(userInput):
@@ -571,7 +574,7 @@ def deviseAnswer(taggedInput):
     #     if 'your' in keyword or 'you' in keyword:
     #         addHarryQuery = True
 
-    queries = [query.replace('your', '').replace('you', '') for query in queries]
+    queries = [query.replace('your', '').replace('you', '').replace('i', '').replace('me', '') for query in queries]
     additionalSearchKeywords = [keyword.replace('your', '').replace('you', '') for keyword in additionalSearchKeywords]
 
     # if addHarryQuery:
