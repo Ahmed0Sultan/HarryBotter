@@ -80,8 +80,7 @@ def isThanking(inp_str):
 
 def isEmoji(inp_str):
     inp = inp_str.encode('raw_unicode_escape','ignore')
-    m = re.match(r'(\\U(.*))+', inp)
-    if m:
+    if inp[0:2] == '\U':
         return True
     m = re.match('(:.)+',inp_str)
     if m:
@@ -95,6 +94,12 @@ def isEmoji(inp_str):
     return False
 
 def handleEmoji(inp_str):
+    inp = inp_str.encode('raw_unicode_escape', 'ignore')
+    if inp[0:2] == '\U':
+        return inp_str
+    m = re.match('(:.)+', inp_str)
+    if m:
+        return inp_str.capitalize()
     return inp_str
 
 
