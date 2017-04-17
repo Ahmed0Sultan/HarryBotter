@@ -96,6 +96,7 @@ def isEmoji(inp_str):
 def handleEmoji(inp_str):
     inp = inp_str.encode('raw_unicode_escape', 'ignore')
     if inp[0:2] == '\U':
+        print inp_str
         return inp_str
     m = re.match('(:.)+', inp_str)
     if m:
