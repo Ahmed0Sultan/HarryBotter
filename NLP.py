@@ -85,7 +85,7 @@ def isEmoji(inp_str):
     m = re.match('(:.)+',inp_str)
     if m:
         return True
-    m = re.match('(.-.)+', inp_str)
+    m = re.match('(.\-.)+', inp_str)
     if m:
         return True
     m = re.match('(._.)+', inp_str)
