@@ -79,10 +79,16 @@ def isThanking(inp_str):
     return False
 
 def isEmoji(inp_str):
-    m = re.match('(\ud83c[\udf00-\udfff]|\ud83d[\udc00-\ude4f\ude80-\udeff]|[\u2600-\u26FF\u2700-\u27BF])+',inp_str)
+    m = re.match(r'(\\U(.*))+', inp_str)
     if m:
         return True
     m = re.match('(:.)+',inp_str)
+    if m:
+        return True
+    m = re.match('(.-.)+', inp_str)
+    if m:
+        return True
+    m = re.match('(._.)+', inp_str)
     if m:
         return True
     return False
