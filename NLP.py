@@ -80,9 +80,9 @@ def isThanking(inp_str):
     return False
 
 def isEmoji(inp_str):
-    inp = inp_str.encode('raw_unicode_escape','ignore')
-    if inp[0:2] == '\U' or '\u':
-        return True
+    # inp = inp_str.encode('raw_unicode_escape','ignore')
+    # if inp[0:2] == '\U' or '\u':
+    #     return True
     m = re.match('(:.)+',inp_str)
     if m:
         return True
