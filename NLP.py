@@ -79,7 +79,8 @@ def isThanking(inp_str):
     return False
 
 def isEmoji(inp_str):
-    m = re.match(r'(\\U(.*))+', inp_str)
+    inp = inp_str.encode('raw_unicode_escape','ignore')
+    m = re.match(r'(\\U(.*))+', inp)
     if m:
         return True
     m = re.match('(:.)+',inp_str)
@@ -104,7 +105,7 @@ def isGoodbye(inp_str):
     for word in byes:
         if word in string:
             return True
-        elif word in string[:3]:
+        elif word == inp_str.lower():
             return True
     return False
 
