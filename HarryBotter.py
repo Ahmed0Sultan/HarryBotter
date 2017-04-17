@@ -167,7 +167,6 @@ def webhook():
                         FB.send_quick_replies_help(token, sender_id, 'How can I help you?')
                     else:
                         FB.show_typing(token, sender_id, 'typing_off')
-                        print response
                         FB.send_message(token, sender_id, response)
                         if images:
                             print 'Images here ' + str(images)
@@ -182,8 +181,9 @@ def webhook():
 
 def sendFromQuickReply(sender_id,message):
     response, images = processIncoming(sender_id, message)
-    FB.show_typing(token, sender_id, 'typing_off')
-    FB.send_message(token, sender_id, response)
+    if response:
+        FB.show_typing(token, sender_id, 'typing_off')
+        FB.send_message(token, sender_id, response)
     if images:
         print 'Images here ' + str(images)
         FB.send_message(token, sender_id, 'Here are some pictures ;)')
@@ -224,7 +224,9 @@ def processIncoming(user_id, message):
             return NLP.oneOf(['Glad you like it :D',':D :D']),[]
 
         if NLP.isEmoji(userInput):
-            return NLP.handleEmoji(userInput),[]
+            FB.show_typing(token, user_id, 'typing_off')
+            FB.send_emoji(token,user_id,NLP.handleEmoji(userInput))
+            return '',[]
 
         if NLP.answerWithOkay(userInput):
             return 'Okay',[]

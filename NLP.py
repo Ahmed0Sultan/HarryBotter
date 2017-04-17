@@ -1,5 +1,6 @@
 import time, string, random, re
 from bad_words import BAD_WORDS
+import FacebookAPI as FB
 from datetime import datetime, timedelta
 from pattern.en import parsetree, singularize
 from pattern.search import search
@@ -80,7 +81,7 @@ def isThanking(inp_str):
 
 def isEmoji(inp_str):
     inp = inp_str.encode('raw_unicode_escape','ignore')
-    if inp[0:2] == '\U':
+    if inp[0:2] == '\U' or '\u':
         return True
     m = re.match('(:.)+',inp_str)
     if m:
@@ -95,8 +96,7 @@ def isEmoji(inp_str):
 
 def handleEmoji(inp_str):
     inp = inp_str.encode('raw_unicode_escape', 'ignore')
-    if inp[0:2] == '\U':
-        print inp_str
+    if inp[0:2] == '\U' or '\u':
         return inp_str
     m = re.match('(:.)+', inp_str)
     if m:
