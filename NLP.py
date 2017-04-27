@@ -342,7 +342,7 @@ def getNewsQuery(sentence):
 def answerWithOkay(sentence):
     reply = 'Okay'
 
-    m = search('Yes|yes|No|no|Okay|okay|Ok|ok',sentence)
+    m = search('Yes|yes|No|no|Okay|okay|Ok|ok|stop|Stop|shut up|Shut up',sentence)
     if len(m) > 0:
         return True
 
