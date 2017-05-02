@@ -591,7 +591,7 @@ def deviseAnswer(taggedInput):
     # Refinement 5. Remove empty strings from queries and additionalSearchKeywords
     additionalSearchKeywords = [value for value in additionalSearchKeywords if value != ' ' and value != '']
     queries = [value for value in queries if value != '']
-
+    print 'Devise Answer'
     print("Wikia Queries : %s " % queries)
     print("Search Keywords : %s " % additionalSearchKeywords)
 
