@@ -1,4 +1,4 @@
-import time, string, random, re,regex
+import time, string, random, re
 from bad_words import BAD_WORDS
 import FacebookAPI as FB
 from datetime import datetime, timedelta
@@ -357,36 +357,36 @@ def getNewsQuery(sentence):
         return m[0].group(2).string.replace('.','')
 def answerWithOkay(sentence):
     reply = 'Okay'
-    m = search('Yes|yes|No|no|Okay|okay|Ok|ok|stop|aha|Aha|ah|Ah|Stop|shut up|Shut up', sentence)
+    m = search(r'Yes|yes|No|no|Okay|okay|Ok|ok|stop|aha|Aha|ah|Ah|Stop|shut up|Shut up', sentence)
     if len(m) > 0:
         return True
 
-    m = re.search(".* shut .* up .*", sentence, re.I)
+    m = re.search(r".* shut .* up .*", sentence, re.I)
     if m:
         return True
     return False
 
 def isFunny(sentence):
     reply_funny = ['Glad you like it :D',':D :D']
-    m = regex.search('\b(h|H)+\b', sentence, re.I)
+    m = re.search(r'\b(h|H)+\b', sentence, re.I)
     if m:
         return True
 
-    m = regex.search('\b((h|H)a)+\b', sentence, re.I)
+    m = re.search(r'\b((h|H)a)+\b', sentence, re.I)
     if m:
         return True
 
-    m = regex.search('\b((h|H)a+)+\b', sentence, re.I)
+    m = re.search(r'\b((h|H)a+)+\b', sentence, re.I)
     if m:
         return True
 
-    m = regex.search('.* (f|F)unny', sentence, re.I)
+    m = re.search(r'.* (f|F)unny', sentence, re.I)
     if m:
         return True
-    m = regex.search('wow', sentence, re.I)
+    m = re.search(r'wow', sentence, re.I)
     if m:
         return True
-    m = regex.search('(I|i) .+ like .*', sentence, re.I)
+    m = re.search(r'(I|i) .+ like .*', sentence, re.I)
     if m:
         return True
     return False
