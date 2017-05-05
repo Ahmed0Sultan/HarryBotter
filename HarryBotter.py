@@ -239,6 +239,8 @@ def processIncoming(user_id, message):
             return NLP.sayByeTimeZone(user),[]
         elif NLP.isThanking(userInput):
             return NLP.oneOf(NLP.thanks_replies),[]
+        elif NLP.isPraising(userInput):
+            return NLP.oneOf(NLP.praise_replies),[]
 
         ## Perform POS-tagging on user input
         tagged_input = pos_tag(word_tokenize(userInput))

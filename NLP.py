@@ -10,6 +10,7 @@ no_response = ["*scratch my head* :(", "How do I respond to that... :O", "I don'
 error = ["Sorry I've got a little bit sick. BRB in 2 min :(", "Oops... 404 My Witty Mind Not Found :O", "Oops... My brain went MIA in the cloud, BRB in 2 :(", "Hmm... How should I respond to that... :O"]
 looking_replies = ["Sure, give me a few seconds... B-)", "Scanning the world... :D", "Zoom zoom zoom..."]
 thanks_replies = ["You are welcome ;)","Not at all","Don't mention it :D","No problem :D"," :D ","My pleasure ;)"]
+praise_replies = ["Well Thank You :D <3","I appreciate that <3","Thanks :D","Thank You <3"]
 # END random response sets
 
 
@@ -80,7 +81,15 @@ def isGreetings(inp_str):
 
 def isThanking(inp_str):
     string = inp_str.lower().split(" ")
-    thanks = ['thanks', 'thank','good','great','awesome','fantastic','terrific','fabulous','nice']
+    thanks = ['thanks', 'thank']
+    for word in thanks:
+        if word in string:
+            return True
+    return False
+
+def isPraising(inp_str):
+    string = inp_str.lower().split(" ")
+    thanks = ['good','great','awesome','fantastic','terrific','fabulous','nice']
     for word in thanks:
         if word in string:
             return True
@@ -360,6 +369,9 @@ def answerWithOkay(sentence):
 
 def isFunny(sentence):
     reply_funny = ['Glad you like it :D',':D :D']
+
+    if sentence == 'haha':
+        return True
 
     m = re.search('\b(h|H)+\b',sentence,re.I)
     if m:
