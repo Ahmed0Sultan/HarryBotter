@@ -199,7 +199,7 @@ def processIncoming(user_id, message):
         user = FB.get_user_fb(token, user_id)
         response =''
         ## TEMP: to see & verify POS tagging
-        # print("User Input : %s" % userInput)
+        print("User Input : %s" % userInput)
 
         response = ''
         if userInput.lower() == 'help':
