@@ -358,7 +358,7 @@ def getNewsQuery(sentence):
 def answerWithOkay(sentence):
     reply = 'Okay'
     m = re.search(r'Yes|yes|No|no|Okay|okay|Ok|ok|stop|aha|Aha|ah|Ah|Stop|shut up|Shut up', sentence,re.I)
-    if len(m) > 0:
+    if m:
         return True
 
     m = re.search(r"shut.*up", sentence, re.I)
