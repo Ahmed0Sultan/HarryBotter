@@ -1,4 +1,4 @@
-import time, string, random, re
+import time, string, random, re,regex
 from bad_words import BAD_WORDS
 import FacebookAPI as FB
 from datetime import datetime, timedelta
@@ -368,25 +368,25 @@ def answerWithOkay(sentence):
 
 def isFunny(sentence):
     reply_funny = ['Glad you like it :D',':D :D']
-    m = re.search('\b(h|H)+\b', sentence, re.I)
+    m = regex.search('\b(h|H)+\b', sentence, re.I)
     if m:
         return True
 
-    m = re.search('\b((h|H)a)+\b', sentence, re.I)
+    m = regex.search('\b((h|H)a)+\b', sentence, re.I)
     if m:
         return True
 
-    m = re.search('\b((h|H)a+)+\b', sentence, re.I)
+    m = regex.search('\b((h|H)a+)+\b', sentence, re.I)
     if m:
         return True
 
-    m = re.search('.* (f|F)unny', sentence, re.I)
+    m = regex.search('.* (f|F)unny', sentence, re.I)
     if m:
         return True
-    m = re.search('wow', sentence, re.I)
+    m = regex.search('wow', sentence, re.I)
     if m:
         return True
-    m = re.search('(I|i) .+ like .*', sentence, re.I)
+    m = regex.search('(I|i) .+ like .*', sentence, re.I)
     if m:
         return True
     return False
