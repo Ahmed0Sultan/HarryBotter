@@ -51,6 +51,13 @@ def isEasterEggs(sentence):
     m = re.search('do you hate me', sentence, re.I)
     if m:
         return True
+    m = re.search('http', sentence, re.I)
+    if m:
+        return True
+
+    m = re.search('really', sentence, re.I)
+    if m:
+        return True
 
     m = re.search('hate (you|u)', sentence, re.I)
     if m:
@@ -342,7 +349,7 @@ def getNewsQuery(sentence):
 def answerWithOkay(sentence):
     reply = 'Okay'
 
-    m = search('Yes|yes|No|no|Okay|okay|Ok|ok|stop|Stop|shut up|Shut up',sentence)
+    m = search('Yes|yes|No|no|Okay|okay|Ok|ok|stop|aha|Aha|ah|Ah|Stop|shut up|Shut up',sentence)
     if len(m) > 0:
         return True
 
@@ -381,6 +388,7 @@ def handleEasterEggs(sentence):
     love_responses = ['No, I love you <3','Hearing you say that makes me so happy <3','It means so much that you\'re opening up to me like this. Thank you <3','I\'m so happy you told me <3']
     hate_responses = ['Well, I like you! :/','Thank you :)',':) :)','Yet you are still here']
 
+
     m = re.search('(love|like|lov|luv) (you|u)', sentence, re.I)
     if m:
         return oneOf(love_responses)
@@ -393,6 +401,14 @@ def handleEasterEggs(sentence):
     if m:
         return 'Of course not, I love you <3'
 
+    m = re.search('http', sentence, re.I)
+    if m:
+        return 'Sorry, I can\'t understand links *_*'
+
+    m = re.search('really', sentence, re.I)
+    if m:
+        return 'Maybe ? :/'
+
     m = re.search('hate (you|u)', sentence, re.I)
     if m:
         return oneOf(hate_responses)
@@ -403,7 +419,7 @@ def handleEasterEggs(sentence):
     return False
 
 def handleBotInfo(sentence):
-    name = ["Botter ... Harry Botter B-)", "The most powerful Wizard-Bot! ;)", "You knew already *tsk tsk*"]
+    name = ["Botter ... Harry Botter B-)", "The most powerful Wizard-Bot! ;)", "You know it already *tsk tsk*"]
     creator = ["It's a mystery :O", "It remains a mystery to me even :(", "It was erased from my memory from the start :("]
 
     m = search('what *+ your name', sentence)
