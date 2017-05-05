@@ -550,7 +550,9 @@ def deviseAnswer(taggedInput):
             continue
 
         # Add NP to list of queries
-        if subtree.label() == 'NP' or subtree.label() == 'VBN':
+        if subtree.label() == 'NP':
+            queries.append(' '.join([(a[0]).encode('utf-8') for a in subtree.leaves()]))
+        elif subtree.label() == 'VBN':
             queries.append(' '.join([(a[0]).encode('utf-8') for a in subtree.leaves()]))
 
         # Add VP and PPs to additional search keywords
