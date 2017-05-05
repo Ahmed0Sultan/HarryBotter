@@ -642,7 +642,7 @@ def deviseAnswer(taggedInput):
     return answer, images
 
 def spellCheck(word):
-    correctSpelling = correct(word.lower())
+    correctSpelling = correct(word.upper())
     if correctSpelling:
         return correctSpelling
     return
