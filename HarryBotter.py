@@ -243,6 +243,7 @@ def processIncoming(user_id, message):
             return NLP.oneOf(NLP.praise_replies),[]
 
         ## Perform POS-tagging on user input
+        userInput = userInput.upper()
         tagged_input = pos_tag(word_tokenize(userInput))
         print("POS-Tagged User Input : %s " % tagged_input)
         intent = obtainUserIntent(tagged_input)
@@ -552,8 +553,7 @@ def deviseAnswer(taggedInput):
         # Add NP to list of queries
         if subtree.label() == 'NP':
             queries.append(' '.join([(a[0]).encode('utf-8') for a in subtree.leaves()]))
-        elif subtree.label() == 'VBN':
-            queries.append(' '.join([(a[0]).encode('utf-8') for a in subtree.leaves()]))
+
 
         # Add VP and PPs to additional search keywords
         else:
