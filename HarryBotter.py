@@ -1501,6 +1501,7 @@ def SortingResult(db,user_id):
         if house == Dominant_House:
             user.house = House_dict[house]
             db.session.commit()
+    sortHatResult(user_id)
 
 
 def send_message(recipient_id, message_text):

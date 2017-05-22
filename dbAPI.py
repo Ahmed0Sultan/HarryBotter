@@ -7,8 +7,11 @@ def addHouses(db):
     house3 = HB.House('Gryffindor')
     house4 = HB.House('Slytherin')
     db.session.add(house1)
+    db.session.commit()
     db.session.add(house2)
+    db.session.commit()
     db.session.add(house3)
+    db.session.commit()
     db.session.add(house4)
     db.session.commit()
 
