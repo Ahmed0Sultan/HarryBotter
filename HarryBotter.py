@@ -39,7 +39,6 @@ ARTICLE_QUERY_TEMPLATE = {'id': ''}
 # chatterbot.train(
 #     "chatterbot.corpus.english"
 # )
-
 class House(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
@@ -129,7 +128,7 @@ SPELLING_ERROR = 'It\'s %s, not %s!'
 NO_INFORMATION_AVAILABLE = 'Even \"Hogwarts: A History\" couldn\'t answer that question. Perhaps try a different question.'
 RESPONSE_STARTERS = ['', 'Well, ' 'You see, ', 'I know that ', 'I believe that ', 'It is said that ',
                      'To my knowledge, ']
-
+dbAPI.addHouses()
 @app.route('/privacy', methods=['GET'])
 def privacy():
     return render_template('privacy.html')
@@ -1123,16 +1122,28 @@ def sortHatResult(user_id):
     house = user.get_house()
     print 'house is '+ str(user.house)
     if house == 'Hufflepuff':
+        house = House.query.filter_by(name='Hufflepuff').first()
+        house.update_members()
+        db.session.commit()
         sendHouseResult(user_id,'Congratulations!! You have become a Hufflepuff member','You might belong in Hufflepuff,Where they are just and loyal,Those patient Hufflepuffs are true,And unafraid of toil','https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Ravenclaw':
+        house = House.query.filter_by(name='Ravenclaw').first()
+        house.update_members()
+        db.session.commit()
         sendHouseResult(user_id, 'Congratulations!! You have become a Ravenclaw member',
                         'Or yet in wise old Ravenclaw,If you\'ve a ready mind,Where those of wit and learning,Will always find their kind.',
                         'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Gryffindor':
+        house = House.query.filter_by(name='Gryffindor').first()
+        house.update_members()
+        db.session.commit()
         sendHouseResult(user_id, 'Congratulations!! You have become a Gryffindor member',
                         'You might belong in Gryffindor,Where dwell the brave at heart,Their daring, nerve, and chivalrySet Gryffindors apart',
                         'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Slytherin':
+        house = House.query.filter_by(name='Slytherin').first()
+        house.update_members()
+        db.session.commit()
         sendHouseResult(user_id, 'Congratulations!! You have become a Slytherin member',
                         'Or perhaps in Slytherin,You\'ll make your real friends,Those cunning folk use any means,To achieve their ends.',
                         'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85')
