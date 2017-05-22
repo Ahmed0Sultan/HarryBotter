@@ -1011,7 +1011,7 @@ def send_q1(user_id):
         }
     }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params={"access_token": token},
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
                       data=json.dumps(data),
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
@@ -1056,7 +1056,7 @@ def send_q2(user_id):
         }
     }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params={"access_token": token},
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
                       data=json.dumps(data),
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
@@ -1112,7 +1112,7 @@ def send_q3(user_id):
         }
     }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params={"access_token": token},
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
                       data=json.dumps(data),
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
@@ -1171,7 +1171,7 @@ def send_q4(user_id):
         }
     }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params={"access_token": token},
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
                       data=json.dumps(data),
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
@@ -1222,7 +1222,7 @@ def send_q5(user_id):
         }
     }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params={"access_token": token},
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
                       data=json.dumps(data),
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
