@@ -72,7 +72,7 @@ class User(db.Model):
     def get_house(self):
         return self.house
 
-all_users = User.query.all()
+# all_users = User.query.all()
 
 class Intent:
     QUERY = 1
