@@ -195,7 +195,7 @@ def webhook():
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_help(sender_id)
                         FB.send_quick_replies_help(token, sender_id, '...')
-                    elif response == 'sorthattest':
+                    elif response == 'sultan':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handleSortingHat(db,sender_id)
                     elif response == 'characters':
