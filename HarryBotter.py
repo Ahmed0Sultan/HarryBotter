@@ -185,130 +185,6 @@ def webhook():
                     elif message_payload == "place-hogwarts-express":
                         sendFromQuickReply(sender_id,'hogwarts express')
 
-                    elif message_payload == "Q1_H":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q1 = 'H'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q1_G":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q1 = 'G'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q1_R":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q1 = 'R'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q1_S":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q1 = 'S'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-
-                    elif message_payload == "Q2_H":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q2 = 'H'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q2_G":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q2 = 'G'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q2_R":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q2 = 'R'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q2_S":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q2 = 'S'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-
-                    elif message_payload == "Q3_H":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q3 = 'H'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q3_G":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q3 = 'G'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q3_R":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q3 = 'R'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q3_S":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q3 = 'S'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-
-                    elif message_payload == "Q4_H":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q4 = 'H'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q4_G":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q4 = 'G'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q4_R":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q4 = 'R'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-                    elif message_payload == "Q4_S":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q4 = 'S'
-                            db.session.commit()
-                            handleSortingHat(db, sender_id)
-
-                    elif message_payload == "Q5_H":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q5 = 'H'
-                            db.session.commit()
-                            SortingResult(db, sender_id)
-                    elif message_payload == "Q5_G":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q5 = 'G'
-                            db.session.commit()
-                            SortingResult(db, sender_id)
-                    elif message_payload == "Q5_R":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q5 = 'R'
-                            db.session.commit()
-                            SortingResult(db, sender_id)
-                    elif message_payload == "Q5_S":
-                        user = User.query.filter_by(user_id=sender_id).first()
-                        if user:
-                            user.q5 = 'S'
-                            db.session.commit()
-                            SortingResult(db, sender_id)
 
 
 
@@ -317,6 +193,134 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
+
+                    if messaging_event["quick_reply"]['payload']:
+                        message_payload = messaging_event["quick_reply"]['payload']
+                        if message_payload == "Q1_H":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q1 = 'H'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q1_G":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q1 = 'G'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q1_R":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q1 = 'R'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q1_S":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q1 = 'S'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+
+                        elif message_payload == "Q2_H":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q2 = 'H'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q2_G":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q2 = 'G'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q2_R":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q2 = 'R'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q2_S":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q2 = 'S'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+
+                        elif message_payload == "Q3_H":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q3 = 'H'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q3_G":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q3 = 'G'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q3_R":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q3 = 'R'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q3_S":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q3 = 'S'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+
+                        elif message_payload == "Q4_H":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q4 = 'H'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q4_G":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q4 = 'G'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q4_R":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q4 = 'R'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+                        elif message_payload == "Q4_S":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q4 = 'S'
+                                db.session.commit()
+                                handleSortingHat(db, sender_id)
+
+                        elif message_payload == "Q5_H":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q5 = 'H'
+                                db.session.commit()
+                                SortingResult(db, sender_id)
+                        elif message_payload == "Q5_G":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q5 = 'G'
+                                db.session.commit()
+                                SortingResult(db, sender_id)
+                        elif message_payload == "Q5_R":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q5 = 'R'
+                                db.session.commit()
+                                SortingResult(db, sender_id)
+                        elif message_payload == "Q5_S":
+                            user = User.query.filter_by(user_id=sender_id).first()
+                            if user:
+                                user.q5 = 'S'
+                                db.session.commit()
+                                SortingResult(db, sender_id)
+
                     user = FB.get_user_fb(token, sender_id)
                     FB.show_typing(token, sender_id)
                     response, images = processIncoming(sender_id, message)
