@@ -940,33 +940,33 @@ def handleSortingHat(db,user_id):
     if not user:
         print 'User Added'
         if user.get_q1() == None:
-            send_q1()
+            send_q1(user_id)
         elif user.get_q2() == None:
-            send_q2()
+            send_q2(user_id)
         elif user.get_q3() == None:
-            send_q3()
+            send_q3(user_id)
         elif user.get_q4() == None:
-            send_q4()
+            send_q4(user_id)
         elif user.get_q5() == None:
-            send_q5()
+            send_q5(user_id)
         elif user.get_house() == None:
             send_test()
     else:
         if user.get_q1() == None:
-            send_q1()
+            send_q1(user_id)
         elif user.get_q2() == None:
-            send_q2()
+            send_q2(user_id)
         elif user.get_q3() == None:
-            send_q3()
+            send_q3(user_id)
         elif user.get_q4() == None:
-            send_q4()
+            send_q4(user_id)
         elif user.get_q5() == None:
-            send_q5()
+            send_q5(user_id)
         elif user.get_house() == None:
             send_test()
         print 'User Exists'
 
-def send_q1():
+def send_q1(user_id):
     Q1 = [ {"What would you least like to be called?":
                  [ {"Ignorant" : "Q1_R"},
                    {"Cowardly" : "Q1_G"},
@@ -1027,7 +1027,7 @@ def send_q1():
         print r.text
 
 
-def send_q2():
+def send_q2(user_id):
     Q2 = [ { "Which instrument is most pleasing to your ear?":
                   [ {"Piano": "Q2_R"},
                     {"Violin": "Q2_S"},
@@ -1086,7 +1086,7 @@ def send_q2():
     if r.status_code != requests.codes.ok:
         print r.text
 
-def send_q3():
+def send_q3(user_id):
     Q3 = [ {"A troll breaks into the Headmaster's study. Order the following items in the order you would save them":
                   [ {"Cure > Book> Records": "Q3_G"},
                     {"Cure > Records > Book": "Q3_H"},
@@ -1151,7 +1151,7 @@ def send_q3():
     if r.status_code != requests.codes.ok:
         print r.text
 
-def send_q4():
+def send_q4(user_id):
     Q4 = [ {"If you could have a superpower, which would you choose?":
                   [ {"Read Minds": "Q4_R" },
                     {"Invisibility": "Q4_G" },
@@ -1219,7 +1219,7 @@ def send_q4():
     if r.status_code != requests.codes.ok:
         print r.text
 
-def send_q5():
+def send_q5(user_id):
     Q5 = [ {"You and your friends need to cross a bridge guarded by a river troll. He insists that one of you fight him before you can cross. What do you do?":
                  [ {"Confuse the troll": "Q5_R" },
                    {"Have all 3 of you fight (without informing the troll)": "Q5_S" },
