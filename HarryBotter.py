@@ -40,6 +40,7 @@ ARTICLE_QUERY_TEMPLATE = {'id': ''}
 #     "chatterbot.corpus.english"
 # )
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.String(80), unique=True)
@@ -195,9 +196,8 @@ def webhook():
                     if response == 'help':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_help(sender_id)
-                        handleSortingHat(db, sender_id)
                         FB.send_quick_replies_help(token, sender_id, '...')
-                    elif response == 'sultan':
+                    elif response == 'sorthattest':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handleSortingHat(db,sender_id)
                     elif response == 'characters':
@@ -934,10 +934,348 @@ def handle_first_time_user(sender_id,user):
     FB.send_quick_replies_help(token, sender_id, 'Next time just tell me \"Help\" to view this again :D')
 
 def handleSortingHat(db,user_id):
-    if not dbAPI.user_exists(db,user_id):
+    user = dbAPI.user_exists(db,user_id)
+    if not user:
         print 'User Added'
+        if user.get_q1() == None:
+            send_q1()
+        elif user.get_q2() == None:
+            send_q2()
+        elif user.get_q3() == None:
+            send_q3()
+        elif user.get_q4() == None:
+            send_q4()
+        elif user.get_q5() == None:
+            send_q5()
+        elif user.get_house() == None:
+            send_test()
     else:
+        if user.get_q1() == None:
+            send_q1()
+        elif user.get_q2() == None:
+            send_q2()
+        elif user.get_q3() == None:
+            send_q3()
+        elif user.get_q4() == None:
+            send_q4()
+        elif user.get_q5() == None:
+            send_q5()
+        elif user.get_house() == None:
+            send_test()
         print 'User Exists'
+
+def send_q1():
+    Q1 = [ {"What would you least like to be called?":
+                 [ {"Ignorant" : "Q1_R"},
+                   {"Cowardly" : "Q1_G"},
+                   {"Selfish": "Q1_H"},
+                   {"Ordinary": "Q1_S"}
+                 ]
+            },
+            {"What title do you want after you're dead?":
+                 [ {"The Good": "Q1_H"},
+                   {"The Great": "Q1_S"},
+                   {"The Wise": "Q1_R"},
+                   {"The Bold": "Q1_G"}
+                 ]
+            },
+            { "Brew a potion for one quality, which is it?":
+                 [ {"Love": "Q1_H"},
+                   {"Glory": "Q1_G"},
+                   {"Wisdom": "Q1_R"},
+                   {"Power": "Q1_S"}
+                 ]
+            }
+          ]
+    question = NLP.oneOf(Q1)
+    title = question.keys()[0]
+    answers = question.get(title)
+    buttons =[]
+    for answer in answers:
+        key = answer.keys()[0]
+        value = answer.get(title)
+        button = {
+            "type": "postback",
+            "title": key,
+            "payload": value
+        }
+        buttons.append(button)
+
+        data = {"recipient": {"id": user_id},
+                "message": {
+                    "attachment": {
+                        "type": "template",
+                        "payload": {
+                            "template_type": "generic",
+                            "elements": [{
+                                "title": 'Question 1/5',
+                                "subtitle": title,
+                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
+                                "buttons": buttons
+                            }]
+                        }
+                    }
+                }
+                }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+
+def send_q2():
+    Q2 = [ { "Which instrument is most pleasing to your ear?":
+                  [ {"Piano": "Q2_R"},
+                    {"Violin": "Q2_S"},
+                    {"Trumpet": "Q2_H"},
+                    {"Drums": "Q2_G" }
+                  ]
+            },
+            { "You enter a magical garden. What do you look at first":
+                  [ {"Luminous Pool with something in its depths": "Q2_S"},
+                    {"Statue with a twinkling eye": "Q2_R" },
+                    {"A silver tree with golden apples": "Q2_G" },
+                    {"Talking Toadstools": "Q2_H" }] },
+
+            { "What smell is most appealing to you?":
+                  [ {"Home": "Q2_H"},
+                    {"The sea": "Q2_S" },
+                    {"Fresh Parchment": "Q2_R"},
+                    {"A log fire": "Q2_G" }
+                  ]
+            }
+            ]
+    question = NLP.oneOf(Q2)
+    title = question.keys()[0]
+    answers = question.get(title)
+    buttons = []
+    for answer in answers:
+        key = answer.keys()[0]
+        value = answer.get(title)
+        button = {
+            "type": "postback",
+            "title": key,
+            "payload": value
+        }
+        buttons.append(button)
+
+        data = {"recipient": {"id": user_id},
+                "message": {
+                    "attachment": {
+                        "type": "template",
+                        "payload": {
+                            "template_type": "generic",
+                            "elements": [{
+                                "title": 'Question 2/5',
+                                "subtitle": title,
+                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
+                                "buttons": buttons
+                            }]
+                        }
+                    }
+                }
+                }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def send_q3():
+    Q3 = [ {"A troll breaks into the Headmaster's study. Order the following items in the order you would save them":
+                  [ {"Cure > Book> Records": "Q3_G"},
+                    {"Cure > Records > Book": "Q3_H"},
+                    {"Book > Cure > Records": "Q3_R"},
+                    {"Book > Records > Cure": "Q3_S"},
+                    {"Records > Cure > Book": "Q3_H"},
+                    {"Records > Book > Cure": "Q3_S"}
+                  ]
+             },
+            {"What would you rather be?":
+                  [ {"Trusted": "Q3_H"},
+                    {"Liked": "Q3_H" },
+                    {"Praised": "Q3_G" },
+                    {"Feared": "Q3_R" },
+                    {"Envied": "Q3_S" },
+                    {"Imitated": "Q3_S" }
+                  ]
+            },
+            {"Which of the following do you have the most trouble dealing with?":
+                  [ {"Hunger": "Q3_H"},
+                    {"Cold": "Q3_S"},
+                    {"Being Ignored": "Q3_S"},
+                    {"Boredom": "Q3_G"},
+                    {"Loneliness": "Q3_H"}
+                  ]
+            }
+           ]
+    question = NLP.oneOf(Q3)
+    title = question.keys()[0]
+    answers = question.get(title)
+    buttons = []
+    for answer in answers:
+        key = answer.keys()[0]
+        value = answer.get(title)
+        button = {
+            "type": "postback",
+            "title": key,
+            "payload": value
+        }
+        buttons.append(button)
+
+        data = {"recipient": {"id": user_id},
+                "message": {
+                    "attachment": {
+                        "type": "template",
+                        "payload": {
+                            "template_type": "generic",
+                            "elements": [{
+                                "title": 'Question 3/5',
+                                "subtitle": title,
+                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
+                                "buttons": buttons
+                            }]
+                        }
+                    }
+                }
+                }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def send_q4():
+    Q4 = [ {"If you could have a superpower, which would you choose?":
+                  [ {"Read Minds": "Q4_R" },
+                    {"Invisibility": "Q4_G" },
+                    {"Change the past": "Q4_S" },
+                    {"Change your appearance": "Q4_S" },
+                    {"Talk to animals": "Q4_H"},
+                    {"Superstrength": "Q4_H" }
+                  ]
+            },
+            {"Which of the following would you most like to study?":
+                  [ {"Centaurs": "Q4_R" },
+                    {"Merpeople": "Q4_S" },
+                    {"Ghosts": "Q4_G" },
+                    {"Werewolves": "Q4_H" },
+                    {"Vampires": "Q4_S" },
+                    {"Goblins": "Q4_S" },
+                    {"Trolls": "Q4_H" }
+                  ]
+            },
+            {"Which subject at Hogwarts would you be most interested in studying?":
+                  [ {"STUDY ALL THE THINGS!": "Q4_R" },
+                    {"Apparition": "Q4_S" },
+                    {"Hexes/Jinxes": "Q4_S" },
+                    {"Secrets about the castle": "Q4_G" },
+                    {"Transfiguration": "Q4_R" },
+                    {"Broom Flying": "Q4_G" },
+                    {"Care of Magical Creatures": "Q4_H" }
+                  ]
+            },
+          ]
+    question = NLP.oneOf(Q4)
+    title = question.keys()[0]
+    answers = question.get(title)
+    buttons = []
+    for answer in answers:
+        key = answer.keys()[0]
+        value = answer.get(title)
+        button = {
+            "type": "postback",
+            "title": key,
+            "payload": value
+        }
+        buttons.append(button)
+
+        data = {"recipient": {"id": user_id},
+                "message": {
+                    "attachment": {
+                        "type": "template",
+                        "payload": {
+                            "template_type": "generic",
+                            "elements": [{
+                                "title": 'Question 4/5',
+                                "subtitle": title,
+                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
+                                "buttons": buttons
+                            }]
+                        }
+                    }
+                }
+                }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def send_q5():
+    Q5 = [ {"You and your friends need to cross a bridge guarded by a river troll. He insists that one of you fight him before you can cross. What do you do?":
+                 [ {"Confuse the troll": "Q5_R" },
+                   {"Have all 3 of you fight (without informing the troll)": "Q5_S" },
+                   {"Volunteer to fight": "Q5_G" },
+                   {"Draw lots to see who will fight": "Q5_H" }
+                 ]
+             },
+            {"Which path do you take?":
+                 [ {"Twisting leafy path through the woods": "Q5_G" },
+                   {"A dark, lantern-lit alley": "Q5_S" },
+                   {"A wide, sunny, grassy path": "Q5_H" },
+                   {"A cobblestone street lined with ancient buildings": "Q5_R" }
+                 ]
+            },
+            {"A Muggle approaches you and says you're a wizard. How do you react?":
+                 [ {"Ask them why they think so": "Q5_R" },
+                   {"Agree and offer a sample of a jinx": "Q5_S" },
+                   {"Agree and walk away, bluffing": "Q5_G" },
+                   {"Express your concern and offer to call a mental hospital": "Q5_H" }
+                 ]
+            }
+            ]
+    question = NLP.oneOf(Q5)
+    title = question.keys()[0]
+    answers = question.get(title)
+    buttons = []
+    for answer in answers:
+        key = answer.keys()[0]
+        value = answer.get(title)
+        button = {
+            "type": "postback",
+            "title": key,
+            "payload": value
+        }
+        buttons.append(button)
+
+        data = {"recipient": {"id": user_id},
+                "message": {
+                    "attachment": {
+                        "type": "template",
+                        "payload": {
+                            "template_type": "generic",
+                            "elements": [{
+                                "title": 'Question 5/5',
+                                "subtitle": title,
+                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
+                                "buttons": buttons
+                            }]
+                        }
+                    }
+                }
+                }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
 
 def send_message(recipient_id, message_text):
 
