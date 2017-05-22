@@ -17,7 +17,7 @@ from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize, sent_tokenize
 
 import requests
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
