@@ -6,6 +6,7 @@ sys.setdefaultencoding('utf-8')
 import json
 import dbAPI
 import FacebookAPI as FB, NLP
+from datetime import datetime
 
 ## Resources for querying API and parsing results
 import re, collections, json, urllib, urllib2, random
