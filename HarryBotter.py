@@ -1080,9 +1080,10 @@ def handleSortingHat(db,user_id):
             send_q4(user_id)
         elif user.get_q5() == None:
             send_q5(user_id)
-
     else:
         if user.get_q1() == None:
+            FB.send_picture(token, user_id, 'http://geekgirlcon.com/wp-content/uploads/2015/07/tumblr_lo74ldL68x1ql0adio1_500.gif')
+            FB.send_message(token, user_id, 'Hmm, difficult. VERY difficult. I wonder where to put you?')
             send_q1(user_id)
         elif user.get_q2() == None:
             send_q2(user_id)
@@ -1092,8 +1093,59 @@ def handleSortingHat(db,user_id):
             send_q4(user_id)
         elif user.get_q5() == None:
             send_q5(user_id)
+        else:
+            sortHatResult(user_id)
 
         print 'User Exists'
+def sortHatResult(user_id):
+    user = dbAPI.user_exists(db, user_id)
+    house = user.get_house()
+    if house == 'Hufflepuff':
+        sendHouseResult(user_id,'Congratulations!! You have become a Hufflepuff member','You might belong in Hufflepuff,Where they are just and loyal,Those patient Hufflepuffs are true,And unafraid of toil','https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85')
+    elif house == 'Ravenclaw':
+        sendHouseResult(user_id, 'Congratulations!! You have become a Ravenclaw member',
+                        'Or yet in wise old Ravenclaw,If you\'ve a ready mind,Where those of wit and learning,Will always find their kind.',
+                        'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85')
+    elif house == 'Gryffindor':
+        sendHouseResult(user_id, 'Congratulations!! You have become a Gryffindor member',
+                        'You might belong in Gryffindor,Where dwell the brave at heart,Their daring, nerve, and chivalrySet Gryffindors apart',
+                        'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85')
+    elif house == 'Slytherin':
+        sendHouseResult(user_id, 'Congratulations!! You have become a Slytherin member',
+                        'Or perhaps in Slytherin,You\'ll make your real friends,Those cunning folk use any means,To achieve their ends.',
+                        'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85')
+
+def sendHouseResult(user_id,title,subtitle,url):
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                      data=json.dumps({
+                          "recipient": {"id": user_id},
+                          "message": {
+                              "attachment": {
+                                  "type": "template",
+                                  "payload": {
+                                      "template_type": "generic",
+                                      "sharable": True,
+                                      "elements": [{
+                                          "title": title,
+                                          "subtitle": subtitle,
+                                          "image_url": url,
+                                          "buttons":[
+                                                {
+                                                    "type": "postback",
+                                                    "title": "View House",
+                                                    "payload": "Test"
+                                                }
+                                            ]
+    }
+                                      ]
+                                  }
+                              }
+                          }
+                      }),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
 
 def send_q1(user_id):
     Q1 = [ {"What would you least like to be called?":
