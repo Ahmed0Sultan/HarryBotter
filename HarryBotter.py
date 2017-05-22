@@ -185,6 +185,133 @@ def webhook():
                     elif message_payload == "place-hogwarts-express":
                         sendFromQuickReply(sender_id,'hogwarts express')
 
+                    elif message_payload == "Q1_H":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q1 = 'H'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q1_G":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q1 = 'G'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q1_R":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q1 = 'R'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q1_S":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q1 = 'S'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+
+                    elif message_payload == "Q2_H":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q2 = 'H'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q2_G":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q2 = 'G'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q2_R":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q2 = 'R'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q2_S":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q2 = 'S'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+
+                    elif message_payload == "Q3_H":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q3 = 'H'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q3_G":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q3 = 'G'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q3_R":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q3 = 'R'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q3_S":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q3 = 'S'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+
+                    elif message_payload == "Q4_H":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q4 = 'H'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q4_G":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q4 = 'G'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q4_R":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q4 = 'R'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+                    elif message_payload == "Q4_S":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q4 = 'S'
+                            db.session.commit()
+                            handleSortingHat(db, sender_id)
+
+                    elif message_payload == "Q5_H":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q5 = 'H'
+                            db.session.commit()
+                            SortingResult(db, sender_id)
+                    elif message_payload == "Q5_G":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q5 = 'G'
+                            db.session.commit()
+                            SortingResult(db, sender_id)
+                    elif message_payload == "Q5_R":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q5 = 'R'
+                            db.session.commit()
+                            SortingResult(db, sender_id)
+                    elif message_payload == "Q5_S":
+                        user = User.query.filter_by(user_id=sender_id).first()
+                        if user:
+                            user.q5 = 'S'
+                            db.session.commit()
+                            SortingResult(db, sender_id)
+
+
+
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
@@ -949,8 +1076,7 @@ def handleSortingHat(db,user_id):
             send_q4(user_id)
         elif user.get_q5() == None:
             send_q5(user_id)
-        elif user.get_house() == None:
-            send_test()
+
     else:
         if user.get_q1() == None:
             send_q1(user_id)
@@ -962,8 +1088,7 @@ def handleSortingHat(db,user_id):
             send_q4(user_id)
         elif user.get_q5() == None:
             send_q5(user_id)
-        elif user.get_house() == None:
-            send_test()
+
         print 'User Exists'
 
 def send_q1(user_id):
@@ -1227,6 +1352,66 @@ def send_q5(user_id):
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
         print r.text
+
+def SortingResult(db,user_id):
+    G = 0
+    S = 0
+    R = 0
+    H = 0
+    user = dbAPI.user_exists(db, user_id)
+    q1 = user.get_q1()
+    if q1 == 'G':
+        G +=1
+    elif q1 == 'S':
+        S +=1
+    elif q1 == 'R':
+        R +=1
+    elif q1 == 'H':
+        H +=1
+    q2 = user.get_q2()
+    if q2 == 'G':
+        G +=1
+    elif q2 == 'S':
+        S +=1
+    elif q2 == 'R':
+        R +=1
+    elif q2 == 'H':
+        H +=1
+    q3 = user.get_q3()
+    if q3 == 'G':
+        G +=1
+    elif q3 == 'S':
+        S +=1
+    elif q3 == 'R':
+        R +=1
+    elif q3 == 'H':
+        H +=1
+    q4 = user.get_q4()
+    if q4 == 'G':
+        G +=1
+    elif q4 == 'S':
+        S +=1
+    elif q4 == 'R':
+        R +=1
+    elif q4 == 'H':
+        H +=1
+    q5 = user.get_q5()
+    if q5 == 'G':
+        G +=1
+    elif q5 == 'S':
+        S +=1
+    elif q5 == 'R':
+        R +=1
+    elif q5 == 'H':
+        H +=1
+
+    AllHouses = [H, R, G, S]
+    House_dict = {H: "Hufflepuff", R: "Ravenclaw", G: "Gryffindor", S: "Slytherin"}
+    Dominant_House = max(AllHouses)
+    for house in House_dict:
+        if house == Dominant_House:
+            user.house = House_dict[house]
+
 
 def send_message(recipient_id, message_text):
 
