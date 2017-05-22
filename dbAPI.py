@@ -1,7 +1,7 @@
 from datetime import datetime
 import HarryBotter as HB
 
-def addHouses():
+def addHouses(db):
     house1 = HB.House('Hufflepuff')
     house2 = HB.House('Ravenclaw')
     house3 = HB.House('Gryffindor')
