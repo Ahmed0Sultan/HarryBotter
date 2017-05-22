@@ -995,7 +995,7 @@ def send_q1(user_id):
     buttons =[]
     for answer in answers:
         key = answer.keys()[0]
-        value = answer.get(title)
+        value = answer.values()[0]
         button = {
             "content_type": "text",
             "title": key,
@@ -1040,7 +1040,7 @@ def send_q2(user_id):
     buttons = []
     for answer in answers:
         key = answer.keys()[0]
-        value = answer.get(title)
+        value = answer.values()[0]
         button = {
             "content_type": "text",
             "title": key,
@@ -1096,7 +1096,7 @@ def send_q3(user_id):
     buttons = []
     for answer in answers:
         key = answer.keys()[0]
-        value = answer.get(title)
+        value = answer.values()[0]
         button = {
             "content_type": "text",
             "title": key,
@@ -1155,7 +1155,7 @@ def send_q4(user_id):
     buttons = []
     for answer in answers:
         key = answer.keys()[0]
-        value = answer.get(title)
+        value = answer.values()[0]
         button = {
             "content_type": "text",
             "title": key,
@@ -1206,7 +1206,7 @@ def send_q5(user_id):
     buttons = []
     for answer in answers:
         key = answer.keys()[0]
-        value = answer.get(title)
+        value = answer.values()[0]
         button = {
             "content_type": "text",
             "title": key,
