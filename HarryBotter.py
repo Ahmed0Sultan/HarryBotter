@@ -4,6 +4,7 @@ import sys, traceback
 reload(sys)
 sys.setdefaultencoding('utf-8')
 import json
+import dbAPI
 import FacebookAPI as FB, NLP
 
 ## Resources for querying API and parsing results
@@ -30,11 +31,15 @@ QUERY_RESULT_LIMIT = 25
 SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
+all_users = User.query.all()
+
 # chatterbot = ChatBot("Harry Botter")
 # chatterbot.set_trainer(ChatterBotCorpusTrainer)
 # chatterbot.train(
 #     "chatterbot.corpus.english"
 # )
+
+
 
 class Intent:
     QUERY = 1
@@ -157,6 +162,9 @@ def webhook():
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_help(sender_id)
                         FB.send_quick_replies_help(token, sender_id, '...')
+                    elif response == 'sorthattest':
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handleSortingHat(db,all_users,sender_id)
                     elif response == 'characters':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_characters(sender_id)
@@ -890,6 +898,11 @@ def handle_first_time_user(sender_id,user):
     # FB.send_message(token, user_id, "")
     FB.send_quick_replies_help(token, sender_id, 'Next time just tell me \"Help\" to view this again :D')
 
+def handleSortingHat(db,users,user_id):
+    if not dbAPI.user_exists(db,users,user_id):
+        print 'User Added'
+    else:
+        print 'User Exists'
 
 def send_message(recipient_id, message_text):
 
