@@ -2,8 +2,8 @@ from datetime import datetime
 import HarryBotter as HB
 
 # Has to use user_id since user might not exist
-def user_exists(db,users, user_id):
-    user = users.find_one({'user_id': user_id})
+def user_exists(db,user_id):
+    user = User.query.filter_by(user_id=user_id).first()
     if user is None:
         print user_id
         user = HB.User(user_id)

@@ -197,7 +197,7 @@ def webhook():
                         FB.send_quick_replies_help(token, sender_id, '...')
                     elif response == 'sorthattest':
                         FB.show_typing(token, sender_id, 'typing_off')
-                        handleSortingHat(db,all_users,sender_id)
+                        handleSortingHat(db,sender_id)
                     elif response == 'characters':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_characters(sender_id)
@@ -931,8 +931,8 @@ def handle_first_time_user(sender_id,user):
     # FB.send_message(token, user_id, "")
     FB.send_quick_replies_help(token, sender_id, 'Next time just tell me \"Help\" to view this again :D')
 
-def handleSortingHat(db,users,user_id):
-    if not dbAPI.user_exists(db,users,user_id):
+def handleSortingHat(db,user_id):
+    if not dbAPI.user_exists(db,user_id):
         print 'User Added'
     else:
         print 'User Exists'
