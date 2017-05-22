@@ -2,7 +2,7 @@ from datetime import datetime
 import HarryBotter as HB
 
 # Has to use user_id since user might not exist
-def user_exists(users, user_id):
+def user_exists(db,users, user_id):
     user = users.find_one({'user_id': user_id})
     if user is None:
         print user_id
