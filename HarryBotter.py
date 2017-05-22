@@ -211,6 +211,13 @@ def processIncoming(user_id, message):
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
 
+        if NLP.isGreetings(userInput):
+            greeting = "%s %s :D" % (NLP.sayHiTimeZone(user), user['first_name'])
+            FB.send_message(token, user_id, greeting)
+            return "How can I help you?",[]
+        elif NLP.isGoodbye(userInput):
+            return NLP.sayByeTimeZone(user),[]
+
         if NLP.badWords(userInput):
             return 'Well I\'m not supposed to reply to that :/',[]
 
@@ -230,13 +237,6 @@ def processIncoming(user_id, message):
 
         if NLP.answerWithOkay(userInput):
             return 'Okay',[]
-        if NLP.isGreetings(userInput):
-            greeting = "%s %s :D" % (NLP.sayHiTimeZone(user), user['first_name'])
-            FB.send_message(token, user_id, greeting)
-            return "How can I help you?",[]
-
-        elif NLP.isGoodbye(userInput):
-            return NLP.sayByeTimeZone(user),[]
         elif NLP.isThanking(userInput):
             return NLP.oneOf(NLP.thanks_replies),[]
         elif NLP.isPraising(userInput):
