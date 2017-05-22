@@ -1003,13 +1003,13 @@ def send_q1(user_id):
         }
         buttons.append(button)
 
-    data = json.dumps({
+    data = {
         "recipient": {"id": user_id},
         "message": {
             "text": title,
             "quick_replies": buttons
         }
-    })
+    }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
@@ -1048,13 +1048,13 @@ def send_q2(user_id):
         }
         buttons.append(button)
 
-    data = json.dumps({
+    data = {
         "recipient": {"id": user_id},
         "message": {
             "text": title,
             "quick_replies": buttons
         }
-    })
+    }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
@@ -1104,13 +1104,13 @@ def send_q3(user_id):
         }
         buttons.append(button)
 
-    data = json.dumps({
+    data = {
         "recipient": {"id": user_id},
         "message": {
             "text": title,
             "quick_replies": buttons
         }
-    })
+    }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
@@ -1163,13 +1163,13 @@ def send_q4(user_id):
         }
         buttons.append(button)
 
-    data = json.dumps({
+    data = {
         "recipient": {"id": user_id},
         "message": {
             "text": title,
             "quick_replies": buttons
         }
-    })
+    }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
@@ -1214,13 +1214,13 @@ def send_q5(user_id):
         }
         buttons.append(button)
 
-    data = json.dumps({
+    data = {
         "recipient": {"id": user_id},
         "message": {
             "text": title,
             "quick_replies": buttons
         }
-    })
+    }
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
