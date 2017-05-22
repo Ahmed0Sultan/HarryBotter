@@ -1168,7 +1168,9 @@ def sendHouseResult(user_id,title,subtitle,url):
                                                     "type": "postback",
                                                     "title": "View House",
                                                     "payload": "Test"
-                                                }
+                                                },{
+                                                  "type": "element_share"
+                                              }
                                             ]
     }
                                       ]
