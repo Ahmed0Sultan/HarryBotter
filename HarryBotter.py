@@ -1100,7 +1100,7 @@ def handleSortingHat(db,user_id):
 def sortHatResult(user_id):
     user = dbAPI.user_exists(db, user_id)
     house = user.get_house()
-    print 'house is '+ str(house)
+    print 'house is '+ str(user.house)
     if house == 'Hufflepuff':
         sendHouseResult(user_id,'Congratulations!! You have become a Hufflepuff member','You might belong in Hufflepuff,Where they are just and loyal,Those patient Hufflepuffs are true,And unafraid of toil','https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Ravenclaw':
