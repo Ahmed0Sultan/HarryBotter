@@ -40,6 +40,22 @@ ARTICLE_QUERY_TEMPLATE = {'id': ''}
 #     "chatterbot.corpus.english"
 # )
 
+class House(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    members_num = db.Column(db.Integer)
+    points = db.Column(db.Integer)
+
+    def __init__(self, name):
+        self.name = name
+        self.points = 0
+        self.members_num =0
+
+    def update_score(self,points):
+        self.points += points
+
+    def update_members(self):
+        self.members_num += 1
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -50,11 +66,16 @@ class User(db.Model):
     q3 = db.Column(db.String(80))
     q4 = db.Column(db.String(80))
     q5 = db.Column(db.String(80))
+    points = db.Column(db.Integer)
     created_at = db.Column(db.DateTime)
 
     def __init__(self, user_id):
         self.user_id = user_id
+        self.points = 0
         self.created_at = datetime.utcnow()
+
+    def update_score(self,points):
+        self.points += points
 
     def get_q1(self):
         return self.q1
@@ -1468,6 +1489,7 @@ def SortingResult(db,user_id):
     for house in House_dict:
         if house == Dominant_House:
             user.house = House_dict[house]
+            db.session.commit()
 
 
 def send_message(recipient_id, message_text):
