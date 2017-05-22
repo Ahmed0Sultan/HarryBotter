@@ -1094,6 +1094,7 @@ def handleSortingHat(db,user_id):
         elif user.get_q5() == None:
             send_q5(user_id)
         else:
+            print 'Hahahahahahaha'
             sortHatResult(user_id)
 
         print 'User Exists'
