@@ -194,8 +194,8 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
 
-                    if messaging_event["quick_reply"]['payload']:
-                        message_payload = messaging_event["quick_reply"]['payload']
+                    if message['quick_reply']['payload']:
+                        message_payload = message['quick_reply']['payload']
                         if message_payload == "Q1_H":
                             user = User.query.filter_by(user_id=sender_id).first()
                             if user:
