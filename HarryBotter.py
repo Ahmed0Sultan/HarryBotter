@@ -320,35 +320,35 @@ def webhook():
                                 user.q5 = 'S'
                                 db.session.commit()
                                 SortingResult(db, sender_id)
-
-                    user = FB.get_user_fb(token, sender_id)
-                    FB.show_typing(token, sender_id)
-                    response, images = processIncoming(sender_id, message)
-                    if response == 'help':
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handle_help(sender_id)
-                        FB.send_quick_replies_help(token, sender_id, '...')
-                    elif response == 'sorthattest':
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handleSortingHat(db, sender_id)
-                    elif response == 'characters':
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handle_characters(sender_id)
-                    elif response == 'spells':
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handle_spells(sender_id)
-                    elif response == 'places':
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handle_places(sender_id)
-                    elif response == 'How can I help you?':
-                        FB.send_quick_replies_help(token, sender_id, 'How can I help you?')
                     else:
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        FB.send_message(token, sender_id, response)
-                        if images:
-                            print 'Images here ' + str(images)
-                            FB.send_message(token, sender_id, 'Here are some pictures ;)')
-                            FB.send_group_pictures(app,token,sender_id,images)
+                        user = FB.get_user_fb(token, sender_id)
+                        FB.show_typing(token, sender_id)
+                        response, images = processIncoming(sender_id, message)
+                        if response == 'help':
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handle_help(sender_id)
+                            FB.send_quick_replies_help(token, sender_id, '...')
+                        elif response == 'sorthattest':
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleSortingHat(db, sender_id)
+                        elif response == 'characters':
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handle_characters(sender_id)
+                        elif response == 'spells':
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handle_spells(sender_id)
+                        elif response == 'places':
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handle_places(sender_id)
+                        elif response == 'How can I help you?':
+                            FB.send_quick_replies_help(token, sender_id, 'How can I help you?')
+                        else:
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            FB.send_message(token, sender_id, response)
+                            if images:
+                                print 'Images here ' + str(images)
+                                FB.send_message(token, sender_id, 'Here are some pictures ;)')
+                                FB.send_group_pictures(app,token,sender_id,images)
 
                 return "ok"
 
