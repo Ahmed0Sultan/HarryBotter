@@ -997,28 +997,19 @@ def send_q1(user_id):
         key = answer.keys()[0]
         value = answer.get(title)
         button = {
-            "type": "postback",
+            "content_type": "text",
             "title": key,
             "payload": value
         }
         buttons.append(button)
 
-        data = {"recipient": {"id": user_id},
-                "message": {
-                    "attachment": {
-                        "type": "template",
-                        "payload": {
-                            "template_type": "generic",
-                            "elements": [{
-                                "title": 'Question 1/5',
-                                "subtitle": title,
-                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
-                                "buttons": buttons
-                            }]
-                        }
-                    }
-                }
-                }
+        data = json.dumps({
+            "recipient": {"id": user_id},
+            "message": {
+                "text": title,
+                "quick_replies": buttons
+            }
+        })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
@@ -1035,12 +1026,6 @@ def send_q2(user_id):
                     {"Drums": "Q2_G" }
                   ]
             },
-            { "You enter a magical garden. What do you look at first":
-                  [ {"Luminous Pool with something in its depths": "Q2_S"},
-                    {"Statue with a twinkling eye": "Q2_R" },
-                    {"A silver tree with golden apples": "Q2_G" },
-                    {"Talking Toadstools": "Q2_H" }] },
-
             { "What smell is most appealing to you?":
                   [ {"Home": "Q2_H"},
                     {"The sea": "Q2_S" },
@@ -1057,28 +1042,19 @@ def send_q2(user_id):
         key = answer.keys()[0]
         value = answer.get(title)
         button = {
-            "type": "postback",
+            "content_type": "text",
             "title": key,
             "payload": value
         }
         buttons.append(button)
 
-        data = {"recipient": {"id": user_id},
-                "message": {
-                    "attachment": {
-                        "type": "template",
-                        "payload": {
-                            "template_type": "generic",
-                            "elements": [{
-                                "title": 'Question 2/5',
-                                "subtitle": title,
-                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
-                                "buttons": buttons
-                            }]
-                        }
-                    }
-                }
-                }
+    data = json.dumps({
+        "recipient": {"id": user_id},
+        "message": {
+            "text": title,
+            "quick_replies": buttons
+        }
+    })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
@@ -1088,12 +1064,12 @@ def send_q2(user_id):
 
 def send_q3(user_id):
     Q3 = [ {"A troll breaks into the Headmaster's study. Order the following items in the order you would save them":
-                  [ {"Cure > Book> Records": "Q3_G"},
-                    {"Cure > Records > Book": "Q3_H"},
-                    {"Book > Cure > Records": "Q3_R"},
-                    {"Book > Records > Cure": "Q3_S"},
-                    {"Records > Cure > Book": "Q3_H"},
-                    {"Records > Book > Cure": "Q3_S"}
+                  [ {"Cure >Book > Records": "Q3_G"},
+                    {"Cure >Records > Book": "Q3_H"},
+                    {"Book >Cure > Records": "Q3_R"},
+                    {"Book >Records > Cure": "Q3_S"},
+                    {"Records >Cure > Book": "Q3_H"},
+                    {"Records >Book > Cure": "Q3_S"}
                   ]
              },
             {"What would you rather be?":
@@ -1122,28 +1098,19 @@ def send_q3(user_id):
         key = answer.keys()[0]
         value = answer.get(title)
         button = {
-            "type": "postback",
+            "content_type": "text",
             "title": key,
             "payload": value
         }
         buttons.append(button)
 
-        data = {"recipient": {"id": user_id},
-                "message": {
-                    "attachment": {
-                        "type": "template",
-                        "payload": {
-                            "template_type": "generic",
-                            "elements": [{
-                                "title": 'Question 3/5',
-                                "subtitle": title,
-                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
-                                "buttons": buttons
-                            }]
-                        }
-                    }
-                }
-                }
+    data = json.dumps({
+        "recipient": {"id": user_id},
+        "message": {
+            "text": title,
+            "quick_replies": buttons
+        }
+    })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
@@ -1175,10 +1142,10 @@ def send_q4(user_id):
                   [ {"STUDY ALL THE THINGS!": "Q4_R" },
                     {"Apparition": "Q4_S" },
                     {"Hexes/Jinxes": "Q4_S" },
-                    {"Secrets about the castle": "Q4_G" },
+                    {"Secrets about castle": "Q4_G" },
                     {"Transfiguration": "Q4_R" },
                     {"Broom Flying": "Q4_G" },
-                    {"Care of Magical Creatures": "Q4_H" }
+                    {"Magical Creatures": "Q4_H" }
                   ]
             },
           ]
@@ -1190,28 +1157,19 @@ def send_q4(user_id):
         key = answer.keys()[0]
         value = answer.get(title)
         button = {
-            "type": "postback",
+            "content_type": "text",
             "title": key,
             "payload": value
         }
         buttons.append(button)
 
-        data = {"recipient": {"id": user_id},
-                "message": {
-                    "attachment": {
-                        "type": "template",
-                        "payload": {
-                            "template_type": "generic",
-                            "elements": [{
-                                "title": 'Question 4/5',
-                                "subtitle": title,
-                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
-                                "buttons": buttons
-                            }]
-                        }
-                    }
-                }
-                }
+    data = json.dumps({
+        "recipient": {"id": user_id},
+        "message": {
+            "text": title,
+            "quick_replies": buttons
+        }
+    })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
@@ -1222,23 +1180,23 @@ def send_q4(user_id):
 def send_q5(user_id):
     Q5 = [ {"You and your friends need to cross a bridge guarded by a river troll. He insists that one of you fight him before you can cross. What do you do?":
                  [ {"Confuse the troll": "Q5_R" },
-                   {"Have all 3 of you fight (without informing the troll)": "Q5_S" },
+                   {"Have all 3 to fight": "Q5_S" },
                    {"Volunteer to fight": "Q5_G" },
-                   {"Draw lots to see who will fight": "Q5_H" }
+                   {"Draw lots to see who fights": "Q5_H" }
                  ]
              },
             {"Which path do you take?":
-                 [ {"Twisting leafy path through the woods": "Q5_G" },
-                   {"A dark, lantern-lit alley": "Q5_S" },
-                   {"A wide, sunny, grassy path": "Q5_H" },
+                 [ {"Leafy path in woods": "Q5_G" },
+                   {"A dark, little alley": "Q5_S" },
+                   {"A sunny, grassy path": "Q5_H" },
                    {"A cobblestone street lined with ancient buildings": "Q5_R" }
                  ]
             },
             {"A Muggle approaches you and says you're a wizard. How do you react?":
-                 [ {"Ask them why they think so": "Q5_R" },
+                 [ {"Ask why they think so": "Q5_R" },
                    {"Agree and offer a sample of a jinx": "Q5_S" },
                    {"Agree and walk away, bluffing": "Q5_G" },
-                   {"Express your concern and offer to call a mental hospital": "Q5_H" }
+                   {"Offer to call hospital": "Q5_H" }
                  ]
             }
             ]
@@ -1250,28 +1208,19 @@ def send_q5(user_id):
         key = answer.keys()[0]
         value = answer.get(title)
         button = {
-            "type": "postback",
+            "content_type": "text",
             "title": key,
             "payload": value
         }
         buttons.append(button)
 
-        data = {"recipient": {"id": user_id},
-                "message": {
-                    "attachment": {
-                        "type": "template",
-                        "payload": {
-                            "template_type": "generic",
-                            "elements": [{
-                                "title": 'Question 5/5',
-                                "subtitle": title,
-                                "image_url": url_for('static', filename="assets/img/hat.jpg", _external=True),
-                                "buttons": buttons
-                            }]
-                        }
-                    }
-                }
-                }
+    data = json.dumps({
+        "recipient": {"id": user_id},
+        "message": {
+            "text": title,
+            "quick_replies": buttons
+        }
+    })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
