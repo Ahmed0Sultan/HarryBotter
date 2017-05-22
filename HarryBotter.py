@@ -39,6 +39,38 @@ all_users = User.query.all()
 #     "chatterbot.corpus.english"
 # )
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.String(80), unique=True)
+    house = db.Column(db.String(120))
+    q1 = db.Column(db.String(80))
+    q2 = db.Column(db.String(80))
+    q3 = db.Column(db.String(80))
+    q4 = db.Column(db.String(80))
+    q5 = db.Column(db.String(80))
+    created_at = db.Column(db.DateTime)
+
+    def __init__(self, user_id):
+        self.user_id = user_id
+        self.created_at = datetime.utcnow()
+
+    def get_q1(self):
+        return self.q1
+
+    def get_q2(self):
+        return self.q2
+
+    def get_q3(self):
+        return self.q3
+
+    def get_q4(self):
+        return self.q4
+
+    def get_q5(self):
+        return self.q5
+
+    def get_house(self):
+        return self.house
 
 
 class Intent:
@@ -164,7 +196,7 @@ def webhook():
                         FB.send_quick_replies_help(token, sender_id, '...')
                     elif response == 'sorthattest':
                         FB.show_typing(token, sender_id, 'typing_off')
-                        handleSortingHat(db,all_users,sender_id)
+                        handleSortingHat(all_users,sender_id)
                     elif response == 'characters':
                         FB.show_typing(token, sender_id, 'typing_off')
                         handle_characters(sender_id)
@@ -898,8 +930,8 @@ def handle_first_time_user(sender_id,user):
     # FB.send_message(token, user_id, "")
     FB.send_quick_replies_help(token, sender_id, 'Next time just tell me \"Help\" to view this again :D')
 
-def handleSortingHat(db,users,user_id):
-    if not dbAPI.user_exists(db,users,user_id):
+def handleSortingHat(users,user_id):
+    if not dbAPI.user_exists(users,user_id):
         print 'User Added'
     else:
         print 'User Exists'
