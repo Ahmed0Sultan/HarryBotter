@@ -1003,13 +1003,13 @@ def send_q1(user_id):
         }
         buttons.append(button)
 
-        data = json.dumps({
-            "recipient": {"id": user_id},
-            "message": {
-                "text": title,
-                "quick_replies": buttons
-            }
-        })
+    data = json.dumps({
+        "recipient": {"id": user_id},
+        "message": {
+            "text": title,
+            "quick_replies": buttons
+        }
+    })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps(data),
