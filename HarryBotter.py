@@ -16,9 +16,12 @@ from nltk.tokenize import word_tokenize, sent_tokenize
 
 import requests
 from flask import Flask, request, render_template
+from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 token = os.environ["PAGE_ACCESS_TOKEN"]
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+db = SQLAlchemy(app)
 
 WIKIA_API_URL = 'http://www.harrypotter.wikia.com/api/v1'
 SEARCH_URI = '/Search/List/?'
