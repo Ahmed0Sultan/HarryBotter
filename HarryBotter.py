@@ -113,7 +113,7 @@ grammar = r"""
 	PP: {<IN><NN|NNS|NNP|NNPS|CD>}
 """
 parser = RegexpParser(grammar)
-FB.set_menu()
+# FB.set_menu()
 ## Pre-defined responses to statements and undecipherable user questions
 GREETING = 'I\'m Harry Botter pleasure to meet you.'
 RESPONSE_TO_NONSENSE = ['I\'m sorry but that is simply not a question!',"*scratch my head* :(",
@@ -1155,27 +1155,20 @@ def sortHatResult(user_id):
     print 'house is '+ str(user.house)
     if house == 'Hufflepuff':
         house = House.query.filter_by(name='Hufflepuff').first()
-        house.update_members()
-        db.session.commit()
+
         sendHouseResult(user_id,'Congratulations!! You have been sorted into Hufflepuff','You might belong in Hufflepuff,Where they are just and loyal,Those patient Hufflepuffs are true,And unafraid of toil','https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Ravenclaw':
         house = House.query.filter_by(name='Ravenclaw').first()
-        house.update_members()
-        db.session.commit()
         sendHouseResult(user_id, 'Congratulations!! You have been sorted into Ravenclaw',
                         'Or yet in wise old Ravenclaw,If you\'ve a ready mind,Where those of wit and learning,Will always find their kind.',
                         'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Gryffindor':
         house = House.query.filter_by(name='Gryffindor').first()
-        house.update_members()
-        db.session.commit()
         sendHouseResult(user_id, 'Congratulations!! You have been sorted into Gryffindor',
                         'You might belong in Gryffindor,Where dwell the brave at heart,Their daring, nerve, and chivalrySet Gryffindors apart',
                         'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Slytherin':
         house = House.query.filter_by(name='Slytherin').first()
-        house.update_members()
-        db.session.commit()
         sendHouseResult(user_id, 'Congratulations!! You have been sorted into Slytherin',
                         'Or perhaps in Slytherin,You\'ll make your real friends,Those cunning folk use any means,To achieve their ends.',
                         'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85')
@@ -1195,11 +1188,12 @@ def sendHouseResult(user_id,title,subtitle,url):
                                           "title": title,
                                           "subtitle": subtitle,
                                           "image_url": url,
+                                          "image_aspect_ratio": 'square',
                                           "buttons":[
                                                 {
                                                     "type": "postback",
                                                     "title": "View House",
-                                                    "payload": "VIEW_HOUSE"
+                                                    "payload": "Harry_Botter_House"
                                                 },{
                                                   "type": "element_share"
                                               }
@@ -1269,20 +1263,27 @@ def handleViewHouse(db,user_id):
                                             {
                                                 "title": house_name,
                                                 "image_url": house_url,
-                                                "subtitle": house_traits
+                                                "subtitle": house_traits,
+                                                "image_aspect_ratio": 'square'
+
                                             },
                                             {
                                                 "title": 'House Founder',
                                                 "image_url": house_founder_url,
-                                                "subtitle": house_founder
+                                                "subtitle": house_founder,
+                                                "image_aspect_ratio": 'square'
                                             },
                                             {
                                                 "title": 'House Members Number',
-                                                "subtitle": house_members_number
+                                                "subtitle": house_members_number,
+                                                "image_url": 'http://www.wetpaint.com/wp-content/uploads/2016/04/harry-potter-cast-then-and-now.jpg',
+                                                "image_aspect_ratio": 'square'
                                             },
                                             {
                                                 "title": 'House Overall Points',
-                                                "subtitle": house_points
+                                                "subtitle": house_points,
+                                                "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
+                                                "image_aspect_ratio": 'square'
                                             }
                                         ],
                                          "buttons": [
@@ -1619,6 +1620,9 @@ def SortingResult(db,user_id):
     Dominant_House = max(AllHouses)
     for house in House_dict:
         if house == Dominant_House:
+            house = House.query.filter_by(name=House_dict[house]).first()
+            house.members_num += 1
+            db.session.commit()
             user.house = House_dict[house]
             db.session.commit()
     sortHatResult(user_id)
