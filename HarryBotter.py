@@ -1188,7 +1188,6 @@ def sendHouseResult(user_id,title,subtitle,url):
                                           "title": title,
                                           "subtitle": subtitle,
                                           "image_url": url,
-                                          "image_aspect_ratio": 'square',
                                           "buttons":[
                                                 {
                                                     "type": "postback",
@@ -1281,13 +1280,6 @@ def handleViewHouse(db,user_id):
                                                 "title": 'House Overall Points',
                                                 "subtitle": house_points,
                                                 "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
-                                            }
-                                        ],
-                                         "buttons": [
-                                            {
-                                                "title": "View More",
-                                                "type": "postback",
-                                                "payload": "payload"
                                             }
                                         ]
                                   }
