@@ -340,6 +340,35 @@ def webhook():
                                 user.q5 = 'S'
                                 db.session.commit()
                                 SortingResult(db, sender_id)
+                        else:
+                            user = FB.get_user_fb(token, sender_id)
+                            FB.show_typing(token, sender_id)
+                            response, images = processIncoming(sender_id, message)
+                            if response == 'help':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handle_help(sender_id)
+                                FB.send_quick_replies_help(token, sender_id, '...')
+                            elif response == 'sorthattest':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleSortingHat(db, sender_id)
+                            elif response == 'characters':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handle_characters(sender_id)
+                            elif response == 'spells':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handle_spells(sender_id)
+                            elif response == 'places':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handle_places(sender_id)
+                            elif response == 'How can I help you?':
+                                FB.send_quick_replies_help(token, sender_id, 'How can I help you?')
+                            else:
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                FB.send_message(token, sender_id, response)
+                                if images:
+                                    print 'Images here ' + str(images)
+                                    FB.send_message(token, sender_id, 'Here are some pictures ;)')
+                                    FB.send_group_pictures(app, token, sender_id, images)
                     else:
                         user = FB.get_user_fb(token, sender_id)
                         FB.show_typing(token, sender_id)
@@ -1125,26 +1154,26 @@ def sortHatResult(user_id):
         house = House.query.filter_by(name='Hufflepuff').first()
         house.update_members()
         db.session.commit()
-        sendHouseResult(user_id,'Congratulations!! You have become a Hufflepuff member','You might belong in Hufflepuff,Where they are just and loyal,Those patient Hufflepuffs are true,And unafraid of toil','https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85')
+        sendHouseResult(user_id,'Congratulations!! You have been sorted into Hufflepuff','You might belong in Hufflepuff,Where they are just and loyal,Those patient Hufflepuffs are true,And unafraid of toil','https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Ravenclaw':
         house = House.query.filter_by(name='Ravenclaw').first()
         house.update_members()
         db.session.commit()
-        sendHouseResult(user_id, 'Congratulations!! You have become a Ravenclaw member',
+        sendHouseResult(user_id, 'Congratulations!! You have been sorted into Ravenclaw',
                         'Or yet in wise old Ravenclaw,If you\'ve a ready mind,Where those of wit and learning,Will always find their kind.',
                         'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Gryffindor':
         house = House.query.filter_by(name='Gryffindor').first()
         house.update_members()
         db.session.commit()
-        sendHouseResult(user_id, 'Congratulations!! You have become a Gryffindor member',
+        sendHouseResult(user_id, 'Congratulations!! You have been sorted into Gryffindor',
                         'You might belong in Gryffindor,Where dwell the brave at heart,Their daring, nerve, and chivalrySet Gryffindors apart',
                         'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Slytherin':
         house = House.query.filter_by(name='Slytherin').first()
         house.update_members()
         db.session.commit()
-        sendHouseResult(user_id, 'Congratulations!! You have become a Slytherin member',
+        sendHouseResult(user_id, 'Congratulations!! You have been sorted into Slytherin',
                         'Or perhaps in Slytherin,You\'ll make your real friends,Those cunning folk use any means,To achieve their ends.',
                         'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85')
 
