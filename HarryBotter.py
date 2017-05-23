@@ -1620,9 +1620,9 @@ def SortingResult(db,user_id):
     Dominant_House = max(AllHouses)
     for house in House_dict:
         if house == Dominant_House:
-            house = House.query.filter_by(name=House_dict[house]).first()
-            num = house.members_num
-            house.members_num = num + 1
+            house_obj = House.query.filter_by(name=House_dict[house]).first()
+            num = house_obj.members_num
+            house_obj.members_num = num + 1
             db.session.commit()
             user.house = House_dict[house]
             db.session.commit()
