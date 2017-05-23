@@ -1264,26 +1264,23 @@ def handleViewHouse(db,user_id):
                                                 "title": house_name,
                                                 "image_url": house_url,
                                                 "subtitle": house_traits,
-                                                "image_aspect_ratio": 'square'
 
                                             },
                                             {
                                                 "title": 'House Founder',
                                                 "image_url": house_founder_url,
                                                 "subtitle": house_founder,
-                                                "image_aspect_ratio": 'square'
                                             },
                                             {
                                                 "title": 'House Members Number',
                                                 "subtitle": house_members_number,
                                                 "image_url": 'http://www.wetpaint.com/wp-content/uploads/2016/04/harry-potter-cast-then-and-now.jpg',
-                                                "image_aspect_ratio": 'square'
+
                                             },
                                             {
                                                 "title": 'House Overall Points',
                                                 "subtitle": house_points,
                                                 "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
-                                                "image_aspect_ratio": 'square'
                                             }
                                         ],
                                          "buttons": [
