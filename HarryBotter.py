@@ -113,7 +113,7 @@ grammar = r"""
 	PP: {<IN><NN|NNS|NNP|NNPS|CD>}
 """
 parser = RegexpParser(grammar)
-# FB.set_menu()
+FB.set_menu()
 ## Pre-defined responses to statements and undecipherable user questions
 GREETING = 'I\'m Harry Botter pleasure to meet you.'
 RESPONSE_TO_NONSENSE = ['I\'m sorry but that is simply not a question!',"*scratch my head* :(",
@@ -128,7 +128,7 @@ SPELLING_ERROR = 'It\'s %s, not %s!'
 NO_INFORMATION_AVAILABLE = 'Even \"Hogwarts: A History\" couldn\'t answer that question. Perhaps try a different question.'
 RESPONSE_STARTERS = ['', 'Well, ' 'You see, ', 'I know that ', 'I believe that ', 'It is said that ',
                      'To my knowledge, ']
-dbAPI.addHouses(db)
+# dbAPI.addHouses(db)
 @app.route('/privacy', methods=['GET'])
 def privacy():
     return render_template('privacy.html')
@@ -171,6 +171,9 @@ def webhook():
 
                     elif message_payload == "Harry_Botter_Characters":
                         handle_characters(sender_id)
+
+                    elif message_payload == "Harry_Botter_House":
+                        handleViewHouse(db, sender_id)
 
                     elif message_payload == "Harry_Botter_Spells":
                         handle_spells(sender_id)
@@ -1196,13 +1199,99 @@ def sendHouseResult(user_id,title,subtitle,url):
                                                 {
                                                     "type": "postback",
                                                     "title": "View House",
-                                                    "payload": "Test"
+                                                    "payload": "VIEW_HOUSE"
                                                 },{
                                                   "type": "element_share"
                                               }
                                             ]
     }
                                       ]
+                                  }
+                              }
+                          }
+                      }),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def handleViewHouse(db,user_id):
+    user = dbAPI.user_exists(db,user_id)
+    house = user.get_house()
+    if not house:
+        handleSortingHat(db,user_id)
+        return 'OK'
+    elif house == 'Hufflepuff':
+        house_obj = House.query.filter_by(name=house).first()
+        house_name = 'House Hufflepuff'
+        house_traits = 'Dedication,Hard Work,Fair play,Patience,Kindness'
+        house_founder = 'Helga Hufflepuff'
+        house_founder_url = 'https://vignette3.wikia.nocookie.net/harrypotter/images/8/8c/PR_007_001-e1313269883743.jpg/revision/latest?cb=20140615154415'
+        house_points= house_obj.points
+        house_members_number = house_obj.members_num
+        house_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
+    elif house == 'Ravenclaw':
+        house_obj = House.query.filter_by(name=house).first()
+        house_name = 'House Ravenclaw'
+        house_traits = 'Intelligence,Wit,Wisdom,Creativity,Originality'
+        house_founder = 'Rowena Ravenclaw'
+        house_founder_url = 'https://vignette1.wikia.nocookie.net/harrypotter/images/4/4a/PR_007_007-e1313269741697.jpg/revision/latest?cb=20140615151812'
+        house_points= house_obj.points
+        house_members_number = house_obj.members_num
+        house_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
+    elif house == 'Gryffindor':
+        house_obj = House.query.filter_by(name=house).first()
+        house_name = 'House Gryffindor'
+        house_traits = 'Bravery,Nerve,Chivalry,Courage,Daring'
+        house_founder = 'Godric Gryffindor'
+        house_founder_url = 'https://vignette2.wikia.nocookie.net/harrypotter/images/3/38/PR_007_003-e1313269822422.jpg/revision/latest?cb=20140615154246'
+        house_points= house_obj.points
+        house_members_number = house_obj.members_num
+        house_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
+    elif house == 'Slytherin':
+        house_obj = House.query.filter_by(name=house).first()
+        house_name = 'House Slytherin'
+        house_traits = 'Resourcefulness,Cunning,Ambition,Determination,Self-Preservation'
+        house_founder = 'Salazar Slytherin'
+        house_founder_url = 'https://vignette3.wikia.nocookie.net/harrypotter/images/2/2b/PR_007_005-e1313269785740.jpg/revision/latest?cb=20140615154545'
+        house_points= house_obj.points
+        house_members_number = house_obj.members_num
+        house_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                      data=json.dumps({
+                          "recipient": {"id": user_id},
+                          "message": {
+                              "attachment": {
+                                  "type": "template",
+                                  "payload": {
+                                        "template_type": "list",
+                                        "elements": [
+                                            {
+                                                "title": house_name,
+                                                "image_url": house_url,
+                                                "subtitle": house_traits
+                                            },
+                                            {
+                                                "title": 'House Founder',
+                                                "image_url": house_founder_url,
+                                                "subtitle": house_founder
+                                            },
+                                            {
+                                                "title": 'House Members Number',
+                                                "subtitle": house_members_number
+                                            },
+                                            {
+                                                "title": 'House Overall Points',
+                                                "subtitle": house_points
+                                            }
+                                        ],
+                                         "buttons": [
+                                            {
+                                                "title": "View More",
+                                                "type": "postback",
+                                                "payload": "payload"
+                                            }
+                                        ]
                                   }
                               }
                           }

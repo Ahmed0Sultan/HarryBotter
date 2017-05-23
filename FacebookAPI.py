@@ -506,25 +506,35 @@ def set_menu():
                         "call_to_actions":[
                             {
                                 "type": "postback",
+                                "title": "View House",
+                                "payload": "Harry_Botter_House"
+                            },
+                            {
+                                "type": "nested",
+                                "title": "Wiki",
+                                "call_to_actions":[
+                                    {
+                                        "type": "postback",
+                                        "title": "Characters",
+                                        "payload": "Harry_Botter_Characters"
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "Spells",
+                                        "payload": "Harry_Botter_Spells"
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "title": "Places",
+                                        "payload": "Harry_Botter_Places"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "postback",
                                 "title": "Help",
                                 "payload": "Harry_Botter_Help"
                             },
-                            {
-                                "type": "postback",
-                                "title": "Characters",
-                                "payload": "Harry_Botter_Characters"
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Spells",
-                                "payload": "Harry_Botter_Spells"
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Places",
-                                "payload": "Harry_Botter_Places"
-                            },
-
                         ]
                     }),
                     headers={'Content-type': 'application/json'})
