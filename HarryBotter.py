@@ -129,6 +129,7 @@ NO_INFORMATION_AVAILABLE = 'Even \"Hogwarts: A History\" couldn\'t answer that q
 RESPONSE_STARTERS = ['', 'Well, ' 'You see, ', 'I know that ', 'I believe that ', 'It is said that ',
                      'To my knowledge, ']
 dbAPI.addHouses(db)
+
 @app.route('/privacy', methods=['GET'])
 def privacy():
     return render_template('privacy.html')
