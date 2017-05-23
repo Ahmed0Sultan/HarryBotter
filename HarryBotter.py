@@ -128,7 +128,7 @@ SPELLING_ERROR = 'It\'s %s, not %s!'
 NO_INFORMATION_AVAILABLE = 'Even \"Hogwarts: A History\" couldn\'t answer that question. Perhaps try a different question.'
 RESPONSE_STARTERS = ['', 'Well, ' 'You see, ', 'I know that ', 'I believe that ', 'It is said that ',
                      'To my knowledge, ']
-# dbAPI.addHouses(db)
+dbAPI.addHouses(db)
 @app.route('/privacy', methods=['GET'])
 def privacy():
     return render_template('privacy.html')
