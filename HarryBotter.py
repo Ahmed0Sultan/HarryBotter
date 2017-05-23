@@ -1612,7 +1612,9 @@ def SortingResult(db,user_id):
         if house == Dominant_House:
             house_obj = House.query.filter_by(name=House_dict[house]).first()
             num = house_obj.members_num
+            print 'Numbeeeeeer is ' + str(num)
             house_obj.members_num = num + 1
+            print 'Numbeeeeeer again is ' + str(house_obj.members_num)
             db.session.commit()
             user.house = House_dict[house]
             db.session.commit()
