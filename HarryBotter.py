@@ -1211,6 +1211,9 @@ def sendHouseResult(user_id,title,subtitle,url):
 def handleViewHouse(db,user_id):
     user = dbAPI.user_exists(db,user_id)
     house = user.get_house()
+    test = User.query.all()
+    for t in test:
+        print str(t.user_id) + str(t.house)
     if not house:
         handleSortingHat(db,user_id)
         return 'OK'
