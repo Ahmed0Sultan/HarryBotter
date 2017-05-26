@@ -32,6 +32,10 @@ QUERY_RESULT_LIMIT = 25
 SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
+QBank = [{'What is the spell that Harry used to defeat Voldemort in their final encounter?': [{'Expelliarmus':'CorrectAns'},{'Accio':'WrongAns'},{'Crucio':'WrongAns'},{'Diffindo':'WrongAns'}]},
+{'Which of these spells is not an unforgivable curse?':[{'Lumos':'CorrectAns'},{'Imperio':'WrongAns'},{'Crucio':'WrongAns'},{'Avada Kedavra':'WrongAns'}]},
+{'What is the punishment for using an unforgivable curse?':[{'A life sentence in Askaban':'WrongAns'},{'Detention':'WrongAns'},{'No punishment':'WrongAns'},{'Execution':'WrongAns'}]},
+{'What is the spell that unlocks a locked door?':[{'Levicorpus':'WrongAns'},{'Expulso':'WrongAns'},{'Alohamora':'CorrectAns'},{'Incendio':'WrongAns'}]}]
 
 
 # chatterbot = ChatBot("Harry Botter")
@@ -175,6 +179,12 @@ def webhook():
 
                     elif message_payload == "Harry_Botter_House":
                         handleViewHouse(db, sender_id)
+
+                    elif message_payload == "WrongAns":
+                        send_message(sender_id,'Wrong Answer')
+
+                    elif message_payload == "CorrectAns":
+                        send_message(sender_id, 'Correct Answer')
 
                     elif message_payload == "Harry_Botter_Spells":
                         handle_spells(sender_id)
@@ -384,6 +394,9 @@ def webhook():
                         elif response == 'sorthattest':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleSortingHat(db, sender_id)
+                        elif response == 'temptest':
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleTempTest(db, sender_id)
                         elif response == 'characters':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handle_characters(sender_id)
@@ -440,6 +453,8 @@ def processIncoming(user_id, message):
             return 'spells',[]
         elif userInput.lower() == 'sorthattest':
             return 'sorthattest',[]
+        elif userInput.lower() == 'sorthattest':
+            return 'temptest',[]
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
 
@@ -1211,6 +1226,7 @@ def sendHouseResult(user_id,title,subtitle,url):
 def handleViewHouse(db,user_id):
     user = dbAPI.user_exists(db,user_id)
     house = user.get_house()
+
     houses = User.query.all()
     if not house:
         handleSortingHat(db,user_id)
@@ -1637,6 +1653,35 @@ def SortingResult(db,user_id):
             user.house = House_dict[house]
             db.session.commit()
     sortHatResult(user_id)
+
+def handleTempTest(db,user_id):
+    question = NLP.oneOf(QBank)
+    title = question.keys()[0]
+    answers = question.get(title)
+    buttons = []
+    for answer in answers:
+        key = answer.keys()[0]
+        value = answer.values()[0]
+        button = {
+            "content_type": "text",
+            "title": key,
+            "payload": value
+        }
+        buttons.append(button)
+
+    data = {
+        "recipient": {"id": user_id},
+        "message": {
+            "text": title,
+            "quick_replies": buttons
+        }
+    }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
 
 
 def send_message(recipient_id, message_text):
