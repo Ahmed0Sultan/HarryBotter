@@ -1211,9 +1211,7 @@ def sendHouseResult(user_id,title,subtitle,url):
 def handleViewHouse(db,user_id):
     user = dbAPI.user_exists(db,user_id)
     house = user.get_house()
-    test = User.query.all()
-    for t in test:
-        print str(t.user_id) + str(t.house)
+    houses = User.query.all()
     if not house:
         handleSortingHat(db,user_id)
         return 'OK'
@@ -1224,7 +1222,11 @@ def handleViewHouse(db,user_id):
         house_founder = 'Helga Hufflepuff'
         house_founder_url = 'https://vignette3.wikia.nocookie.net/harrypotter/images/8/8c/PR_007_001-e1313269883743.jpg/revision/latest?cb=20140615154415'
         house_points= house_obj.points
-        house_members_number = house_obj.members_num
+        num = 0
+        for house_n in houses:
+            if house_n.house == 'Hufflepuff':
+                num += 1
+        house_members_number = num
         house_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
     elif house == 'Ravenclaw':
         house_obj = House.query.filter_by(name=house).first()
@@ -1233,6 +1235,11 @@ def handleViewHouse(db,user_id):
         house_founder = 'Rowena Ravenclaw'
         house_founder_url = 'https://vignette1.wikia.nocookie.net/harrypotter/images/4/4a/PR_007_007-e1313269741697.jpg/revision/latest?cb=20140615151812'
         house_points= house_obj.points
+        num = 0
+        for house_n in houses:
+            if house_n.house == 'Ravenclaw':
+                num += 1
+        house_members_number = num
         house_members_number = house_obj.members_num
         house_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
     elif house == 'Gryffindor':
@@ -1242,7 +1249,11 @@ def handleViewHouse(db,user_id):
         house_founder = 'Godric Gryffindor'
         house_founder_url = 'https://vignette2.wikia.nocookie.net/harrypotter/images/3/38/PR_007_003-e1313269822422.jpg/revision/latest?cb=20140615154246'
         house_points= house_obj.points
-        house_members_number = house_obj.members_num
+        num = 0
+        for house_n in houses:
+            if house_n.house == 'Gryffindor':
+                num += 1
+        house_members_number = num
         house_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
     elif house == 'Slytherin':
         house_obj = House.query.filter_by(name=house).first()
@@ -1251,7 +1262,11 @@ def handleViewHouse(db,user_id):
         house_founder = 'Salazar Slytherin'
         house_founder_url = 'https://vignette3.wikia.nocookie.net/harrypotter/images/2/2b/PR_007_005-e1313269785740.jpg/revision/latest?cb=20140615154545'
         house_points= house_obj.points
-        house_members_number = house_obj.members_num
+        num = 0
+        for house_n in houses:
+            if house_n.house == 'Gryffindor':
+                num += 1
+        house_members_number = num
         house_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
