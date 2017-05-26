@@ -1244,7 +1244,7 @@ def handleViewHouse(db,user_id):
         num = 0
         points = 0
         for house_n in houses:
-            if house_n.house == 'Gryffindor':
+            if house_n.house == 'Hufflepuff':
                 num += 1
                 points += house_n.points
 
@@ -1260,7 +1260,7 @@ def handleViewHouse(db,user_id):
         num = 0
         points = 0
         for house_n in houses:
-            if house_n.house == 'Gryffindor':
+            if house_n.house == 'Ravenclaw':
                 num += 1
                 points += house_n.points
 
@@ -1293,7 +1293,7 @@ def handleViewHouse(db,user_id):
         num = 0
         points = 0
         for house_n in houses:
-            if house_n.house == 'Gryffindor':
+            if house_n.house == 'Slytherin':
                 num += 1
                 points += house_n.points
 
