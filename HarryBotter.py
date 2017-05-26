@@ -456,7 +456,7 @@ def processIncoming(user_id, message):
             return 'spells',[]
         elif userInput.lower() == 'sorthattest':
             return 'sorthattest',[]
-        elif userInput.lower() == 'sorthattest':
+        elif userInput.lower() == 'temptest':
             return 'temptest',[]
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
