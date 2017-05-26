@@ -1765,8 +1765,7 @@ def handleProfile(db,user_id):
                                                       "title": "View House",
                                                       "type": "postback",
                                                       "payload": "Harry_Botter_House" ,
-                                                      "messenger_extensions": true,
-                                                      "webview_height_ratio": "tall",
+                                                      
                                                   }
                                               ]
                                           },
