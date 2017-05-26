@@ -1690,12 +1690,15 @@ def handleTempTest(db,user_id):
 def handleCorrectAnswer(db,user_id):
     user = dbAPI.user_exists(db, user_id)
     house = user.house
+    house_obj = House.query.filter_by(name=house).first()
     send_message(user_id,'Correct Answer!!')
     send_message(user_id, '10 Point to '+ str(house))
     print 'Points isssss ' + str(user.points)
     points = user.points
     points += 10
-    user.points = points
+    user.update_score(points)
+    house_obj.update_score(points)
+    # user.points = points
     db.session.commit()
 
 def send_message(recipient_id, message_text):
