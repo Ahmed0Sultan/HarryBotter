@@ -369,6 +369,9 @@ def webhook():
                             elif response == 'temptest':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleTempTest(db, sender_id)
+                            elif response == 'profiletest':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleProfile(db, sender_id)
                             elif response == 'characters':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handle_characters(sender_id)
@@ -401,6 +404,9 @@ def webhook():
                         elif response == 'temptest':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleTempTest(db, sender_id)
+                        elif response == 'profiletest':
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleProfile(db, sender_id)
                         elif response == 'characters':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handle_characters(sender_id)
@@ -459,6 +465,8 @@ def processIncoming(user_id, message):
             return 'sorthattest',[]
         elif userInput.lower() == 'temptest':
             return 'temptest',[]
+        elif userInput.lower() == 'profiletest':
+            return 'profiletest',[]
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
 
@@ -1716,6 +1724,66 @@ def handleCorrectAnswer(db,user_id):
     house_obj.points = house_points
     db.session.commit()
 
+def handleProfile(db,user_id):
+    user = dbAPI.user_exists(db,user_id)
+    house = user.house
+    points = user.points
+    if house == 'Hufflepuff':
+        house_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
+    elif house == 'Ravenclaw':
+        house_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
+    elif house == 'Gryffindor':
+        house_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
+    elif house == 'Slytherin':
+        house_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
+    FBUser = FB.get_user_fb(token,user_id)
+    profile_pic = FBUser['profile_pic']
+    first_name = FBUser['first_name']
+    last_name = FBUser['last_name']
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                      data=json.dumps({
+                          "recipient": {"id": user_id},
+                          "message": {
+                              "attachment": {
+                                  "type": "template",
+                                  "payload": {
+                                      "template_type": "list",
+                                      "elements": [
+                                          {
+                                              "title": 'Name',
+                                              "image_url": profile_pic,
+                                              "subtitle": str(first_name) + ' '+ str(last_name),
+
+                                          },
+                                          {
+                                              "title": 'House Name',
+                                              "image_url": house_url,
+                                              "subtitle": house,
+                                              "buttons": [
+                                                  {
+                                                      "title": "View House",
+                                                      "type": "postback",
+                                                      "payload": "Harry_Botter_House" ,
+                                                      "messenger_extensions": true,
+                                                      "webview_height_ratio": "tall",
+                                                  }
+                                              ]
+                                          },
+                                          {
+                                              "title": 'Points',
+                                              "subtitle": points,
+                                              "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
+                                          }
+                                      ]
+                                  }
+                              }
+                          }
+                      }),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
 def send_message(recipient_id, message_text):
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
@@ -1738,7 +1806,6 @@ def send_message(recipient_id, message_text):
     if r.status_code != 200:
         log(r.status_code)
         log(r.text)
-
 
 def log(message):  # simple wrapper for logging to stdout on heroku
     # print str(message)
