@@ -354,6 +354,12 @@ def webhook():
                                 user.q5 = 'S'
                                 db.session.commit()
                                 SortingResult(db, sender_id)
+                        elif message_payload == "WrongAns":
+                            send_message(sender_id, 'Wrong Answer')
+
+                        elif message_payload == "CorrectAns":
+                            send_message(sender_id, 'Correct Answer')
+                            
                         else:
                             user = FB.get_user_fb(token, sender_id)
                             FB.show_typing(token, sender_id)
