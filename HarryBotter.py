@@ -402,6 +402,7 @@ def webhook():
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleSortingHat(db, sender_id)
                         elif response == 'temptest':
+                            
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleTempTest(db, sender_id)
                         elif response == 'profiletest':
