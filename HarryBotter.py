@@ -365,6 +365,9 @@ def webhook():
                             elif response == 'sorthattest':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleSortingHat(db, sender_id)
+                            elif response == 'temptest':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleTempTest(db, sender_id)
                             elif response == 'characters':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handle_characters(sender_id)
