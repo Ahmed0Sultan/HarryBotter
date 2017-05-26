@@ -1694,11 +1694,14 @@ def handleCorrectAnswer(db,user_id):
     send_message(user_id,'Correct Answer!!')
     send_message(user_id, '10 Point to '+ str(house))
     print 'Points isssss ' + str(user.points)
-    points = user.points
-    points += 10
-    user.update_score(points)
-    house_obj.update_score(points)
-    # user.points = points
+    user_points = user.points
+    house_points = house_obj.points
+    user_points += 10
+    house_points += 10
+    # user.update_score(points)
+    # house_obj.update_score(points)
+    user.points = user_points
+    house_obj.points = house_points
     db.session.commit()
 
 def send_message(recipient_id, message_text):
