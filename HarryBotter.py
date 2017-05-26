@@ -34,7 +34,7 @@ ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
 QBank = [{'What is the spell that Harry used to defeat Voldemort in their final encounter?': [{'Expelliarmus':'CorrectAns'},{'Accio':'WrongAns'},{'Crucio':'WrongAns'},{'Diffindo':'WrongAns'}]},
 {'Which of these spells is not an unforgivable curse?':[{'Lumos':'CorrectAns'},{'Imperio':'WrongAns'},{'Crucio':'WrongAns'},{'Avada Kedavra':'WrongAns'}]},
-{'What is the punishment for using an unforgivable curse?':[{'A life sentence in Askaban':'WrongAns'},{'Detention':'WrongAns'},{'No punishment':'WrongAns'},{'Execution':'WrongAns'}]},
+{'What is the punishment for using an unforgivable curse?':[{'A life sentence in Askaban':'CorrectAns'},{'Detention':'WrongAns'},{'No punishment':'WrongAns'},{'Execution':'WrongAns'}]},
 {'What is the spell that unlocks a locked door?':[{'Levicorpus':'WrongAns'},{'Expulso':'WrongAns'},{'Alohamora':'CorrectAns'},{'Incendio':'WrongAns'}]}]
 
 
@@ -180,11 +180,6 @@ def webhook():
                     elif message_payload == "Harry_Botter_House":
                         handleViewHouse(db, sender_id)
 
-                    elif message_payload == "WrongAns":
-                        send_message(sender_id,'Wrong Answer')
-
-                    elif message_payload == "CorrectAns":
-                        send_message(sender_id, 'Correct Answer')
 
                     elif message_payload == "Harry_Botter_Spells":
                         handle_spells(sender_id)
@@ -358,8 +353,8 @@ def webhook():
                             send_message(sender_id, 'Wrong Answer')
 
                         elif message_payload == "CorrectAns":
-                            send_message(sender_id, 'Correct Answer')
-                            
+                            handleCorrectAnswer(db,sender_id)
+
                         else:
                             user = FB.get_user_fb(token, sender_id)
                             FB.show_typing(token, sender_id)
@@ -1692,6 +1687,16 @@ def handleTempTest(db,user_id):
     if r.status_code != requests.codes.ok:
         print r.text
 
+def handleCorrectAnswer(db,user_id):
+    user = dbAPI.user_exists(db, user_id)
+    house = user.house
+    send_message(user_id,'Correct Answer!!')
+    send_message(user_id, '10 Point to '+ str(house))
+    print 'Points isssss ' + str(user.points)
+    points = user.points
+    points += 10
+    user.points = points
+    db.session.commit()
 
 def send_message(recipient_id, message_text):
 
