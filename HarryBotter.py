@@ -2006,9 +2006,6 @@ def handleLeaderBoard(db,user_id):
     FBUser1 = FB.get_user_fb(token, first.user_id)
     FBUser2 = FB.get_user_fb(token, second.user_id)
     FBUser3 = FB.get_user_fb(token, third.user_id)
-    profile_pic = FBUser['profile_pic']
-    first_name = FBUser['first_name']
-    last_name = FBUser['last_name']
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps({
