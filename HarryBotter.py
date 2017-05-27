@@ -2051,7 +2051,8 @@ def handleLeaderBoard(db,user_id):
                                           {
                                               "title": str(FBUser2['first_name']) + ' '+ str(FBUser2['last_name']),
                                               "image_url": FBUser2['profile_pic'],
-                                              "subtitle": 'House : ' + str(second.house)+' | '+'Points : '+ str(second.points)
+                                              # "subtitle": 'House : ' + str(second.house)+'\n'+'Points : '+ str(second.points)
+                                              "subtitle": str(second.house)+'\n'+'Points : '+ str(second.points)
                                           },
                                           {
                                               "title": str(FBUser3['first_name']) + ' '+ str(FBUser3['last_name']),
