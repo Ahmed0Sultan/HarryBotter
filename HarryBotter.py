@@ -164,14 +164,20 @@ def webhook():
             for messaging_event in entry["messaging"]:
                 if messaging_event.get("referral"):
                     message_ref = messaging_event["referral"]["ref"]
-                    print 'Reeeeeeeeeeef is ' + str(message_ref)
+                    reply = message_ref.split(',')
+                    if reply[0] == 'Harry_Botter_Add_Share_Points':
+                        handleShare(db, reply[1])
+                    # print 'Reeeeeeeeeeef is ' + str(message_ref)
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
                     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_payload = messaging_event["postback"]["payload"]
                     if messaging_event["postback"].get("referral"):
                         message_ref = messaging_event["postback"]["referral"]["ref"]
-                        print 'Reeeeeeeeeeef is ' + str(message_ref)
+                        reply = message_ref.split(',')
+                        if reply[0] == 'Harry_Botter_Add_Share_Points':
+                            handleShare(db, reply[1])
+                        # print 'Reeeeeeeeeeef is ' + str(message_ref)
                     user = FB.get_user_fb(token,sender_id)
                     print 'Message Payload is '+ str(message_payload)
                     if message_payload == "Harry_Botter_Help":
@@ -230,7 +236,10 @@ def webhook():
                     message = messaging_event["message"]  # the message's text
                     if messaging_event.get("referral"):
                         message_ref = messaging_event["referral"]["ref"]
-                        print 'Reeeeeeeeeeef is ' + str(message_ref)
+                        reply = message_ref.split(',')
+                        if reply[0]=='Harry_Botter_Add_Share_Points':
+                            handleShare(db,reply[1])
+                        # print 'Reeeeeeeeeeef is ' + str(message_ref)
                     print 'Heeeeeeeeeeeeeeeere '+ str(messaging_event['message'].get('quick_reply'))
                     if messaging_event['message'].get('quick_reply'):
                         message_payload = messaging_event['message']['quick_reply']['payload']
@@ -1965,7 +1974,22 @@ def handleViewHouses(db, user_id):
     if r.status_code != requests.codes.ok:
         print r.text
 
-# def handleShare(db,user_id):
+def handleShare(db,user_id):
+    user = dbAPI.user_exists(db, user_id)
+    house = user.house
+    house_obj = House.query.filter_by(name=house).first()
+    send_message(user_id, 'You have Shared Harry Botter Successfully with a friend.')
+    send_message(user_id, '10 Point to ' + str(house))
+    # print 'Points isssss ' + str(user.points)
+    user_points = user.points
+    house_points = house_obj.points
+    user_points += 10
+    house_points += 10
+    # user.update_score(points)
+    # house_obj.update_score(points)
+    user.points = user_points
+    house_obj.points = house_points
+    db.session.commit()
 
 def send_message(recipient_id, message_text):
 
