@@ -2005,12 +2005,15 @@ def handleLeaderBoard(db,user_id):
         if user.points > fpoints:
             print ' Oneeeee'
             first = user
+            fpoints = first.points
         elif user.points > spoints:
             print 'Twooooooo'
             second = user
+            spoints = second.points
         elif user.points > tpoints:
             print ' Threeeeeeeeee'
             third = user
+            tpoints = third.points
 
     FBUser1 = FB.get_user_fb(token, first.user_id)
     FBUser2 = FB.get_user_fb(token, second.user_id)
