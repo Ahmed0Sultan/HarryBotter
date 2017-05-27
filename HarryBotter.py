@@ -70,8 +70,14 @@ class User(db.Model):
     q4 = db.Column(db.String(80))
     q5 = db.Column(db.String(80))
     points = db.Column(db.Integer)
-    # shared_with = db.Column(db.String(80))
+    # last_seen = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime)
+    # shared_with = db.relationship('User',
+    #                            secondary=followers,
+    #                            primaryjoin=(followers.c.follower_id == id),
+    #                            secondaryjoin=(followers.c.followed_id == id),
+    #                            backref=db.backref('followers', lazy='dynamic'),
+    #                            lazy='dynamic')
 
     def __init__(self, user_id):
         self.user_id = user_id
