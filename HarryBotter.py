@@ -2046,7 +2046,7 @@ def handleLeaderBoard(db,user_id):
                                           {
                                               "title": str(FBUser1['first_name']) + ' '+ str(FBUser1['last_name']),
                                               "image_url": FBUser1['profile_pic'],
-                                              "subtitle": 'House : ' + str(first.house)+'\n'+'Points : '+ str(first.points)
+                                              "subtitle":str(first.house)+'\n'+'Points : '+ str(first.points)
                                           },
                                           {
                                               "title": str(FBUser2['first_name']) + ' '+ str(FBUser2['last_name']),
@@ -2057,7 +2057,7 @@ def handleLeaderBoard(db,user_id):
                                           {
                                               "title": str(FBUser3['first_name']) + ' '+ str(FBUser3['last_name']),
                                               "image_url": FBUser3['profile_pic'],
-                                              "subtitle": 'House : ' + str(third.house)+'\n'+'Points : '+ str(third.points)
+                                              "subtitle":str(third.house)+'\n'+'Points : '+ str(third.points)
                                           }
                                       ]
                                   }
