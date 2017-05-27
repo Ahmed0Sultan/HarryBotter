@@ -1994,28 +1994,35 @@ def handleShare(db,user_id,sender_id):
 
 def handleLeaderBoard(db,user_id):
     users = User.query.all()
-
+    first = 0
     fpoints = 0
-
+    second = 0
     spoints = 0
-
+    third = 0
     tpoints = 0
     for user in users:
         # print str(user.points)
         if user.points > fpoints:
             # print ' Oneeeee'
-            third = second
-            second = first
+            if second != 0:
+                third = second
+                tpoints = third.points
+            if first != 0:
+                second = first
+                spoints = second.points
+
             first = user
             fpoints = first.points
-            spoints = second.points
-            tpoints = third.points
+
+
         elif user.points > spoints:
             # print 'Twooooooo'
-            third = second
+            if second != 0:
+                third = second
+                tpoints = third.points
             second = user
             spoints = second.points
-            tpoints = third.points
+            
         elif user.points > tpoints:
             # print ' Threeeeeeeeee'
             third = user
