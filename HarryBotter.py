@@ -70,6 +70,7 @@ class User(db.Model):
     q4 = db.Column(db.String(80))
     q5 = db.Column(db.String(80))
     points = db.Column(db.Integer)
+    shared_with = db.Column(db.String(80))
     created_at = db.Column(db.DateTime)
 
     def __init__(self, user_id):
@@ -162,12 +163,6 @@ def webhook():
 
         for entry in data["entry"]:
             for messaging_event in entry["messaging"]:
-                if messaging_event.get("referral"):
-                    message_ref = messaging_event["referral"]["ref"]
-                    reply = message_ref.split(',')
-                    if reply[0] == 'Harry_Botter_Add_Share_Points':
-                        handleShare(db, reply[1])
-                    # print 'Reeeeeeeeeeef is ' + str(message_ref)
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
                     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
@@ -176,7 +171,7 @@ def webhook():
                         message_ref = messaging_event["postback"]["referral"]["ref"]
                         reply = message_ref.split(',')
                         if reply[0] == 'Harry_Botter_Add_Share_Points':
-                            handleShare(db, reply[1])
+                            handleShare(db, reply[1],sender_id)
                         # print 'Reeeeeeeeeeef is ' + str(message_ref)
                     user = FB.get_user_fb(token,sender_id)
                     print 'Message Payload is '+ str(message_payload)
@@ -238,7 +233,7 @@ def webhook():
                         message_ref = messaging_event["referral"]["ref"]
                         reply = message_ref.split(',')
                         if reply[0]=='Harry_Botter_Add_Share_Points':
-                            handleShare(db,reply[1])
+                            handleShare(db,reply[1],sender_id)
                         # print 'Reeeeeeeeeeef is ' + str(message_ref)
                     print 'Heeeeeeeeeeeeeeeere '+ str(messaging_event['message'].get('quick_reply'))
                     if messaging_event['message'].get('quick_reply'):
@@ -396,6 +391,9 @@ def webhook():
                             elif response == 'sharetest':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleShare(db, sender_id)
+                            elif response == 'leaderboardtest':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleLeaderBoard(db, sender_id)
                             elif response == 'characters':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handle_characters(sender_id)
@@ -437,6 +435,9 @@ def webhook():
                         elif response == 'sharetest':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleShare(db, sender_id)
+                        elif response == 'leaderboardtest':
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleLeaderBoard(db, sender_id)
                         elif response == 'characters':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handle_characters(sender_id)
@@ -501,6 +502,8 @@ def processIncoming(user_id, message):
             return 'housestest',[]
         elif userInput.lower() == 'sharetest':
             return 'sharetest',[]
+        elif userInput.lower() == 'leaderboardtest':
+            return 'leaderboardtest',[]
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
 
@@ -1165,7 +1168,6 @@ def handle_places(user_id):
     FB.send_quick_replies_places(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
-
 def handle_first_time_user(sender_id,user):
     user_id = sender_id
     token = os.environ["PAGE_ACCESS_TOKEN"]
@@ -1211,6 +1213,7 @@ def handleSortingHat(db,user_id):
             sortHatResult(user_id)
 
         print 'User Exists'
+
 def sortHatResult(user_id):
     user = dbAPI.user_exists(db, user_id)
     house = user.get_house()
@@ -1453,7 +1456,6 @@ def send_q1(user_id):
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
         print r.text
-
 
 def send_q2(user_id):
     Q2 = [ { "Which instrument is most pleasing to your ear?":
@@ -1837,7 +1839,6 @@ def handleProfile(db,user_id):
     if r.status_code != requests.codes.ok:
         print r.text
 
-
 def handleViewHouses(db, user_id):
     user = dbAPI.user_exists(db, user_id)
     houses = User.query.all()
@@ -1974,7 +1975,7 @@ def handleViewHouses(db, user_id):
     if r.status_code != requests.codes.ok:
         print r.text
 
-def handleShare(db,user_id):
+def handleShare(db,user_id,sender_id):
     user = dbAPI.user_exists(db, user_id)
     house = user.house
     house_obj = House.query.filter_by(name=house).first()
@@ -1990,6 +1991,57 @@ def handleShare(db,user_id):
     user.points = user_points
     house_obj.points = house_points
     db.session.commit()
+
+def handleLeaderBoard(db,user_id):
+    users = User.query.all()
+    first = users[0]
+    second = users[0]
+    third = users[0]
+    for user in users:
+        if user.points > first.points:
+            third = second
+            second = first
+            first = user
+
+    FBUser1 = FB.get_user_fb(token, first.user_id)
+    FBUser2 = FB.get_user_fb(token, second.user_id)
+    FBUser3 = FB.get_user_fb(token, third.user_id)
+    profile_pic = FBUser['profile_pic']
+    first_name = FBUser['first_name']
+    last_name = FBUser['last_name']
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=json.dumps({
+                          "recipient": {"id": user_id},
+                          "message": {
+                              "attachment": {
+                                  "type": "template",
+                                  "payload": {
+                                      "template_type": "generic",
+                                      "elements": [
+                                          {
+                                              "title": str(FBUser1['first_name']) + ' '+ str(FBUser1['last_name']),
+                                              "image_url": FBUser1['profile_pic'],
+                                              "subtitle": 'House : ' + str(first.house)+'\n'+'Points : '+ str(first.points)
+                                          },
+                                          {
+                                              "title": str(FBUser2['first_name']) + ' '+ str(FBUser2['last_name']),
+                                              "image_url": FBUser2['profile_pic'],
+                                              "subtitle": 'House : ' + str(second.house)+'\n'+'Points : '+ str(second.points)
+                                          },
+                                          {
+                                              "title": str(FBUser3['first_name']) + ' '+ str(FBUser3['last_name']),
+                                              "image_url": FBUser3['profile_pic'],
+                                              "subtitle": 'House : ' + str(third.house)+'\n'+'Points : '+ str(third.points)
+                                          }
+                                      ]
+                                  }
+                              }
+                          }
+                      }),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
 
 def send_message(recipient_id, message_text):
 
