@@ -1995,17 +1995,23 @@ def handleShare(db,user_id,sender_id):
 def handleLeaderBoard(db,user_id):
     users = User.query.all()
     first = users[0]
+    print str(first)
     second = users[0]
+    print str(second)
     third = users[0]
+    print str(third)
     for user in users:
         if user.points > first.points:
+            print ' Oneeeee'
             third = second
             second = first
             first = user
         elif user.points > second.points:
+            print 'Twooooooo'
             third = second
             second = user
         elif user.points > third.points:
+            print ' Threeeeeeeeee'
             third = user
 
     FBUser1 = FB.get_user_fb(token, first.user_id)
