@@ -1,4 +1,4 @@
-#!flask/bin/python
+
 from migrate.versioning import api
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
