@@ -1795,7 +1795,7 @@ def handleProfile(db,user_id):
 def handleViewHouses(db, user_id):
     user = dbAPI.user_exists(db, user_id)
     houses = User.query.all()
-
+    house = user.get_house()
     num_h = 0
     points_h = 0
     num_r = 0
