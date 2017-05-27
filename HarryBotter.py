@@ -1994,11 +1994,11 @@ def handleShare(db,user_id,sender_id):
 
 def handleLeaderBoard(db,user_id):
     users = User.query.all()
-    first = users[0]
+    first = 0
     print str(first)
-    second = users[0]
+    second = 0
     print str(second)
-    third = users[0]
+    third = 0
     print str(third)
     for user in users:
         print str(user.points)
