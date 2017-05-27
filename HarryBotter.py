@@ -162,10 +162,16 @@ def webhook():
 
         for entry in data["entry"]:
             for messaging_event in entry["messaging"]:
+                if messaging_event["referral"]:
+                    message_ref = messaging_event["referral"]["ref"]
+                    print 'Reeeeeeeeeeef is ' + str(message_ref)
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
                     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_payload = messaging_event["postback"]["payload"]
+                    if messaging_event["postback"]["referral"]:
+                        message_ref = messaging_event["postback"]["referral"]["ref"]
+                        print 'Reeeeeeeeeeef is ' + str(message_ref)
                     user = FB.get_user_fb(token,sender_id)
                     print 'Message Payload is '+ str(message_payload)
                     if message_payload == "Harry_Botter_Help":
@@ -222,6 +228,9 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
+                    if messaging_event["referral"]:
+                        message_ref = messaging_event["referral"]["ref"]
+                        print 'Reeeeeeeeeeef is ' + str(message_ref)
                     print 'Heeeeeeeeeeeeeeeere '+ str(messaging_event['message'].get('quick_reply'))
                     if messaging_event['message'].get('quick_reply'):
                         message_payload = messaging_event['message']['quick_reply']['payload']
@@ -375,6 +384,9 @@ def webhook():
                             elif response == 'housestest':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleViewHouses(db, sender_id)
+                            elif response == 'sharetest':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleShare(db, sender_id)
                             elif response == 'characters':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handle_characters(sender_id)
@@ -413,6 +425,9 @@ def webhook():
                         elif response == 'housestest':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleViewHouses(db, sender_id)
+                        elif response == 'sharetest':
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleShare(db, sender_id)
                         elif response == 'characters':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handle_characters(sender_id)
@@ -475,6 +490,8 @@ def processIncoming(user_id, message):
             return 'profiletest',[]
         elif userInput.lower() == 'housestest':
             return 'housestest',[]
+        elif userInput.lower() == 'sharetest':
+            return 'sharetest',[]
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
 
@@ -1192,24 +1209,24 @@ def sortHatResult(user_id):
     if house == 'Hufflepuff':
         house = House.query.filter_by(name='Hufflepuff').first()
 
-        sendHouseResult(user_id,'Congratulations!! You have been sorted into Hufflepuff','You might belong in Hufflepuff,Where they are just and loyal,Those patient Hufflepuffs are true,And unafraid of toil','https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85')
+        sendHouseResult(user_id,'Yaaay!! I have been sorted into Hufflepuff.','You should try yourself and see which house you will be sorted into','Congratulations!! You have been sorted into Hufflepuff','You might belong in Hufflepuff,Where they are just and loyal,Those patient Hufflepuffs are true,And unafraid of toil','https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Ravenclaw':
         house = House.query.filter_by(name='Ravenclaw').first()
-        sendHouseResult(user_id, 'Congratulations!! You have been sorted into Ravenclaw',
+        sendHouseResult(user_id,'Yaaay!! I have been sorted into Ravenclaw.','You should try yourself and see which house you will be sorted into', 'Congratulations!! You have been sorted into Ravenclaw',
                         'Or yet in wise old Ravenclaw,If you\'ve a ready mind,Where those of wit and learning,Will always find their kind.',
                         'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Gryffindor':
         house = House.query.filter_by(name='Gryffindor').first()
-        sendHouseResult(user_id, 'Congratulations!! You have been sorted into Gryffindor',
+        sendHouseResult(user_id,'Yaaay!! I have been sorted into Gryffindor.','You should try yourself and see which house you will be sorted into', 'Congratulations!! You have been sorted into Gryffindor',
                         'You might belong in Gryffindor,Where dwell the brave at heart,Their daring, nerve, and chivalrySet Gryffindors apart',
                         'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85')
     elif house == 'Slytherin':
         house = House.query.filter_by(name='Slytherin').first()
-        sendHouseResult(user_id, 'Congratulations!! You have been sorted into Slytherin',
+        sendHouseResult(user_id,'Yaaay!! I have been sorted into Slytherin.','You should try yourself and see which house you will be sorted into', 'Congratulations!! You have been sorted into Slytherin',
                         'Or perhaps in Slytherin,You\'ll make your real friends,Those cunning folk use any means,To achieve their ends.',
                         'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85')
 
-def sendHouseResult(user_id,title,subtitle,url):
+def sendHouseResult(user_id,title_share,subtitle_share,title,subtitle,url):
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
                       data=json.dumps({
@@ -1230,7 +1247,27 @@ def sendHouseResult(user_id,title,subtitle,url):
                                                     "title": "View House",
                                                     "payload": "Harry_Botter_House"
                                                 },{
-                                                  "type": "element_share"
+                                                  "type": "element_share",
+                                                  "share_contents": {
+                                                      "attachment": {
+                                                          "type": "template",
+                                                          "payload": {
+                                                              "template_type": "generic",
+                                                              "sharable": True,
+                                                              "elements": [{
+                                                                  "title": title_share,
+                                                                  "subtitle": subtitle_share,
+                                                                  "image_url": url,
+                                                                  "buttons":[
+                                                                        {
+                                                                            "type": "web_url",
+                                                                            "title": "View House",
+                                                                            "url": "https://www.messenger.com/t/harrybottermessenger?ref=Harry_Botter_Add_Share_Points,"+str(user_id)
+                                                                        }
+                                                                    ]
+                            }
+                                                              ]
+                                                  }}}
                                               }
                                             ]
     }
@@ -1927,6 +1964,8 @@ def handleViewHouses(db, user_id):
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
         print r.text
+
+# def handleShare(db,user_id):
 
 def send_message(recipient_id, message_text):
 
