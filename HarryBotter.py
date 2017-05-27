@@ -2001,17 +2001,23 @@ def handleLeaderBoard(db,user_id):
 
     tpoints = 0
     for user in users:
-        print str(user.points)
+        # print str(user.points)
         if user.points > fpoints:
-            print ' Oneeeee'
+            # print ' Oneeeee'
+            third = second
+            second = first
             first = user
             fpoints = first.points
+            spoints = second.points
+            tpoints = third.points
         elif user.points > spoints:
-            print 'Twooooooo'
+            # print 'Twooooooo'
+            third = second
             second = user
             spoints = second.points
+            tpoints = third.points
         elif user.points > tpoints:
-            print ' Threeeeeeeeee'
+            # print ' Threeeeeeeeee'
             third = user
             tpoints = third.points
 
