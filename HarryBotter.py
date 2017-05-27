@@ -162,14 +162,14 @@ def webhook():
 
         for entry in data["entry"]:
             for messaging_event in entry["messaging"]:
-                if messaging_event["referral"]:
+                if messaging_event.get("referral"):
                     message_ref = messaging_event["referral"]["ref"]
                     print 'Reeeeeeeeeeef is ' + str(message_ref)
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
                     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_payload = messaging_event["postback"]["payload"]
-                    if messaging_event["postback"]["referral"]:
+                    if messaging_event["postback"].get("referral"):
                         message_ref = messaging_event["postback"]["referral"]["ref"]
                         print 'Reeeeeeeeeeef is ' + str(message_ref)
                     user = FB.get_user_fb(token,sender_id)
@@ -228,7 +228,7 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
-                    if messaging_event["referral"]:
+                    if messaging_event.get("referral"):
                         message_ref = messaging_event["referral"]["ref"]
                         print 'Reeeeeeeeeeef is ' + str(message_ref)
                     print 'Heeeeeeeeeeeeeeeere '+ str(messaging_event['message'].get('quick_reply'))
