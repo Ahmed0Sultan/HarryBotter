@@ -70,7 +70,7 @@ class User(db.Model):
     q4 = db.Column(db.String(80))
     q5 = db.Column(db.String(80))
     points = db.Column(db.Integer)
-    shared_with = db.Column(db.String(80))
+    # shared_with = db.Column(db.String(80))
     created_at = db.Column(db.DateTime)
 
     def __init__(self, user_id):
