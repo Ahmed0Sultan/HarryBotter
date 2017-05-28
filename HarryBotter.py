@@ -238,16 +238,14 @@ def webhook():
                     elif message_payload == "place-hogwarts-express":
                         sendFromQuickReply(sender_id,'hogwarts express')
 
-
-
-
+                if messaging_event.get("referral"):
+                    message_ref = messaging_event["referral"]["ref"]
+                    reply = message_ref.split(',')
+                    if reply[0] == 'Harry_Botter_Add_Share_Points':
+                        handleShare(db, reply[1], sender_id)
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
-                    user_last_day = dbAPI.user_exists(db, sender_id)
-                    now = datetime.datetime.now()
-                    user_last_day.last_seen == now.day
-                    db.session.commit()
                     handleEveryDayPoints(db,sender_id)
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
@@ -256,7 +254,7 @@ def webhook():
                         reply = message_ref.split(',')
                         if reply[0]=='Harry_Botter_Add_Share_Points':
                             handleShare(db,reply[1],sender_id)
-                        # print 'Reeeeeeeeeeef is ' + str(message_ref)
+                        print 'Reeeeeeeeeeef is ' + str(message_ref)
                     print 'Heeeeeeeeeeeeeeeere '+ str(messaging_event['message'].get('quick_reply'))
                     if messaging_event['message'].get('quick_reply'):
                         message_payload = messaging_event['message']['quick_reply']['payload']
@@ -2093,13 +2091,12 @@ def handleLeaderBoard(db,user_id):
 
 def handleEveryDayPoints(db,user_id):
     user = dbAPI.user_exists(db,user_id)
-    print 'Teeeest'
     if user.house:
-        print 'Goooooooo'
         house = user.house
         house_obj = House.query.filter_by(name=house).first()
         now = datetime.datetime.now()
         if user.last_seen:
+            print 'Last Day is : '+ str(user.last_seen)
             if user.last_seen != now.day:
                 user.last_seen = now.day
                 send_message(user_id, 'You still didn\'t get your everyday 10 Points!!')
