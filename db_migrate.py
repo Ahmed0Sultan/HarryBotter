@@ -1,4 +1,4 @@
-
+#!/usr/bin/env
 import imp
 from migrate.versioning import api
 from HarryBotter import db
