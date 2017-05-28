@@ -1987,7 +1987,7 @@ def handleViewHouses(db, user_id):
 
 def handleShare(db,user_id,sender_id):
     shared = False
-    print ' Wooowzzaaaaaa'
+    # print ' Wooowzzaaaaaa'
     user = dbAPI.user_exists(db, user_id)
     # sender = dbAPI.user_exists(db, user_id)
     user_sharings = Shared_with.query.all()
@@ -2110,6 +2110,17 @@ def handleEveryDayPoints(db,user_id):
                 user.points = user_points
                 house_obj.points = house_points
                 db.session.commit()
+        else:
+            user.last_seen = now.day
+            send_message(user_id, 'You still didn\'t get your everyday 10 Points!!')
+            send_message(user_id, '10 Point to ' + str(house))
+            user_points = user.points
+            house_points = house_obj.points
+            user_points += 10
+            house_points += 10
+            user.points = user_points
+            house_obj.points = house_points
+            db.session.commit()
 
 
 def send_message(recipient_id, message_text):
