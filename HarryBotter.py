@@ -189,7 +189,7 @@ def webhook():
                         reply = message_ref.split(',')
                         if reply[0] == 'Harry_Botter_Add_Share_Points':
                             handleShare(db, reply[1],sender_id)
-                        # print 'Reeeeeeeeeeef is ' + str(message_ref)
+                        print 'Reeeeeeeeeeef is ' + str(message_ref)
                     user = FB.get_user_fb(token,sender_id)
                     print 'Message Payload is '+ str(message_payload)
                     if message_payload == "Harry_Botter_Help":
@@ -1987,6 +1987,7 @@ def handleViewHouses(db, user_id):
 
 def handleShare(db,user_id,sender_id):
     shared = False
+    print ' Wooowzzaaaaaa'
     user = dbAPI.user_exists(db, user_id)
     # sender = dbAPI.user_exists(db, user_id)
     user_sharings = Shared_with.Query.all()
@@ -2092,7 +2093,9 @@ def handleLeaderBoard(db,user_id):
 
 def handleEveryDayPoints(db,user_id):
     user = dbAPI.user_exists(db,user_id)
+    print 'Teeeest'
     if user.house:
+        print 'Goooooooo'
         house = user.house
         house_obj = House.query.filter_by(name=house).first()
         now = datetime.datetime.now()
