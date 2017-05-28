@@ -1990,7 +1990,7 @@ def handleShare(db,user_id,sender_id):
     print ' Wooowzzaaaaaa'
     user = dbAPI.user_exists(db, user_id)
     # sender = dbAPI.user_exists(db, user_id)
-    user_sharings = Shared_with.Query.all()
+    user_sharings = Shared_with.query.all()
     for sharing in user_sharings:
         if sharing.shared_with_id == sender_id:
             print 'Shared With before'
