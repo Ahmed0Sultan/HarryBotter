@@ -1,5 +1,8 @@
 from datetime import datetime
 import HarryBotter as HB
+from pandas.io import sql
+
+
 
 def addHouses(db):
     house1 = HB.House('Hufflepuff')
