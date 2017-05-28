@@ -1,6 +1,6 @@
 from datetime import datetime
 import HarryBotter as HB
-from pandas.io import sql
+
 
 
 
