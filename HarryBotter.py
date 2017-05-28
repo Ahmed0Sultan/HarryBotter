@@ -6,7 +6,7 @@ sys.setdefaultencoding('utf-8')
 import json
 import dbAPI
 import FacebookAPI as FB, NLP
-import datetime
+from datetime import datetime
 
 ## Resources for querying API and parsing results
 import re, collections, json, urllib, urllib2, random
@@ -2096,7 +2096,7 @@ def handleEveryDayPoints(db,user_id):
     if user.house:
         house = user.house
         house_obj = House.query.filter_by(name=house).first()
-        now = datetime.datetime.now()
+        now = datetime.now()
         if user.last_day_seen:
             print 'Last Day is : '+ str(user.last_day_seen)
             if user.last_day_seen != str(now.day):
