@@ -19,11 +19,16 @@ from nltk.tokenize import word_tokenize, sent_tokenize
 import requests
 from flask import Flask, request, render_template,url_for
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.script import Manager
+from flask.ext.migrate import Migrate, MigrateCommand
 
 app = Flask(__name__)
 token = os.environ["PAGE_ACCESS_TOKEN"]
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 WIKIA_API_URL = 'http://www.harrypotter.wikia.com/api/v1'
 SEARCH_URI = '/Search/List/?'
