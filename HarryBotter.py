@@ -85,7 +85,7 @@ class User(db.Model):
     q4 = db.Column(db.String(80))
     q5 = db.Column(db.String(80))
     points = db.Column(db.Integer)
-    last_seen = db.Column(db.DateTime)
+    last_seen = db.Column(db.String(80))
     created_at = db.Column(db.DateTime)
 
 
