@@ -85,7 +85,7 @@ class User(db.Model):
     q4 = db.Column(db.String(80))
     q5 = db.Column(db.String(80))
     points = db.Column(db.Integer)
-    last_seen = db.Column(db.String(80))
+    last_day_seen = db.Column(db.String(80))
     created_at = db.Column(db.DateTime)
 
 
@@ -2097,10 +2097,10 @@ def handleEveryDayPoints(db,user_id):
         house = user.house
         house_obj = House.query.filter_by(name=house).first()
         now = datetime.datetime.now()
-        if user.last_seen:
-            print 'Last Day is : '+ str(user.last_seen)
-            if user.last_seen != now.day:
-                user.last_seen = now.day
+        if user.last_day_seen:
+            print 'Last Day is : '+ str(user.last_day_seen)
+            if user.last_day_seen != now.day:
+                user.last_day_seen = now.day
                 send_message(user_id, 'You still didn\'t get your everyday 10 Points!!')
                 send_message(user_id, '10 Point to ' + str(house))
                 user_points = user.points
@@ -2111,7 +2111,7 @@ def handleEveryDayPoints(db,user_id):
                 house_obj.points = house_points
                 db.session.commit()
         else:
-            user.last_seen = now.day
+            user.last_day_seen = now.day
             send_message(user_id, 'You still didn\'t get your everyday 10 Points!!')
             send_message(user_id, '10 Point to ' + str(house))
             user_points = user.points
