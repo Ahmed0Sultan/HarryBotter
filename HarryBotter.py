@@ -2099,7 +2099,9 @@ def handleEveryDayPoints(db,user_id):
         now = datetime.datetime.now()
         if user.last_day_seen:
             print 'Last Day is : '+ str(user.last_day_seen)
-            if user.last_day_seen != now.day:
+            if user.last_day_seen != str(now.day):
+                print 'Falseeeeee'
+                print ' Now is ' + str(now.day)
                 user.last_day_seen = now.day
                 send_message(user_id, 'You still didn\'t get your everyday 10 Points!!')
                 send_message(user_id, '10 Point to ' + str(house))
