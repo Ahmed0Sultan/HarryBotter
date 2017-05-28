@@ -65,6 +65,16 @@ class House(db.Model):
     def update_members(self):
         self.members_num += 1
 
+class Shared_with(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.String(80))
+    shared_with_id = db.Column(db.String(80))
+
+    def __init__(self, sender_id,shared_with_id):
+        self.sender_id = sender_id
+        self.shared_with_id =shared_with_id
+
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.String(80), unique=True)
@@ -75,14 +85,9 @@ class User(db.Model):
     q4 = db.Column(db.String(80))
     q5 = db.Column(db.String(80))
     points = db.Column(db.Integer)
-    # last_seen = db.Column(db.DateTime)
+    last_seen = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime)
-    # shared_with = db.relationship('User',
-    #                            secondary=followers,
-    #                            primaryjoin=(followers.c.follower_id == id),
-    #                            secondaryjoin=(followers.c.followed_id == id),
-    #                            backref=db.backref('followers', lazy='dynamic'),
-    #                            lazy='dynamic')
+
 
     def __init__(self, user_id):
         self.user_id = user_id
