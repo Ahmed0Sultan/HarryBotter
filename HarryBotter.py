@@ -181,6 +181,7 @@ def webhook():
             for messaging_event in entry["messaging"]:
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
                     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
+                    handleEveryDayPoints(db, sender_id)
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_payload = messaging_event["postback"]["payload"]
                     if messaging_event["postback"].get("referral"):
@@ -243,6 +244,11 @@ def webhook():
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+                    user_last_day = dbAPI.user_exists(db, sender_id)
+                    now = datetime.datetime.now()
+                    user_last_day.last_seen == now.day
+                    db.session.commit()
+                    handleEveryDayPoints(db,sender_id)
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message = messaging_event["message"]  # the message's text
                     if messaging_event.get("referral"):
@@ -955,18 +961,15 @@ def spellCheck(word):
 
 def words(text): return re.findall('[a-zA-Z]+', text)
 
-
 def train(features):
     model = collections.defaultdict(lambda: 1)
     for f in features:
         model[f] += 1
     return model
 
-
 NWORDS = train(words(file('hp-lexicon.txt').read()))
 
 alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
 
 def edits1(word):
     splits = [(word[:i], word[i:]) for i in range(len(word) + 1)]
@@ -976,13 +979,10 @@ def edits1(word):
     inserts = [a + c + b for a, b in splits for c in alphabet]
     return set(deletes + transposes + replaces + inserts)
 
-
 def known_edits2(word):
     return set(e2 for e1 in edits1(word) for e2 in edits1(e1) if e2 in NWORDS)
 
-
 def known(words): return set(w.lower() for w in words if w in NWORDS)
-
 
 def correct(word):
     candidates = known([word]) or known(edits1(word)) or known_edits2(word) or [word]
@@ -1070,7 +1070,6 @@ def queryWikiaArticles(articleIDs, queries, searchRefinement):
                 continue
 
     return answer,images
-
 
 def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinement):
     ## top two sentences
@@ -1993,9 +1992,13 @@ def handleShare(db,user_id,sender_id):
     user_sharings = Shared_with.Query.all()
     for sharing in user_sharings:
         if sharing.shared_with_id == sender_id:
+            print 'Shared With before'
             shared = True
             break
     if shared == False:
+        print 'Not Shared With before'
+        share = Shared_with(user_id,sender_id)
+        db.session.add(share)
         house = user.house
         house_obj = House.query.filter_by(name=house).first()
         send_message(user_id, 'You have Shared Harry Botter Successfully with a friend.')
@@ -2086,6 +2089,26 @@ def handleLeaderBoard(db,user_id):
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
         print r.text
+
+def handleEveryDayPoints(db,user_id):
+    user = dbAPI.user_exists(db,user_id)
+    if user.house:
+        house = user.house
+        house_obj = House.query.filter_by(name=house).first()
+        now = datetime.datetime.now()
+        if user.last_seen:
+            if user.last_seen != now.day:
+                user.last_seen = now.day
+                send_message(user_id, 'You still didn\'t get your everyday 10 Points!!')
+                send_message(user_id, '10 Point to ' + str(house))
+                user_points = user.points
+                house_points = house_obj.points
+                user_points += 10
+                house_points += 10
+                user.points = user_points
+                house_obj.points = house_points
+                db.session.commit()
+
 
 def send_message(recipient_id, message_text):
 
