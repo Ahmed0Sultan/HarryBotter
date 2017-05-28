@@ -195,7 +195,7 @@ def webhook():
                         handle_help(sender_id)
                         FB.send_quick_replies_help(token, sender_id, '...')
                     elif message_payload == "Harry_Botter_Get_Started":
-                        handle_first_time_user(sender_id,user)
+                        handle_first_time_user(db,sender_id,user)
 
                     elif message_payload == "Harry_Botter_Characters":
                         handle_characters(sender_id)
@@ -404,9 +404,7 @@ def webhook():
                             elif response == 'housestest':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleViewHouses(db, sender_id)
-                            elif response == 'sharetest':
-                                FB.show_typing(token, sender_id, 'typing_off')
-                                handleShare(db, sender_id)
+
                             elif response == 'leaderboardtest':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleLeaderBoard(db, sender_id)
@@ -448,9 +446,7 @@ def webhook():
                         elif response == 'housestest':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleViewHouses(db, sender_id)
-                        elif response == 'sharetest':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handleShare(db, sender_id)
+
                         elif response == 'leaderboardtest':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleLeaderBoard(db, sender_id)
@@ -516,8 +512,6 @@ def processIncoming(user_id, message):
             return 'profiletest',[]
         elif userInput.lower() == 'housestest':
             return 'housestest',[]
-        elif userInput.lower() == 'sharetest':
-            return 'sharetest',[]
         elif userInput.lower() == 'leaderboardtest':
             return 'leaderboardtest',[]
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
@@ -1184,7 +1178,8 @@ def handle_places(user_id):
     FB.send_quick_replies_places(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     # FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
-def handle_first_time_user(sender_id,user):
+def handle_first_time_user(db,sender_id,user):
+    user_obj = dbAPI.user_exists(db, sender_id)
     user_id = sender_id
     token = os.environ["PAGE_ACCESS_TOKEN"]
 
