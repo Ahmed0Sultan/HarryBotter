@@ -1992,21 +1992,29 @@ def handleViewHouses(db, user_id):
         print r.text
 
 def handleShare(db,user_id,sender_id):
+    shared = False
     user = dbAPI.user_exists(db, user_id)
-    house = user.house
-    house_obj = House.query.filter_by(name=house).first()
-    send_message(user_id, 'You have Shared Harry Botter Successfully with a friend.')
-    send_message(user_id, '10 Point to ' + str(house))
-    # print 'Points isssss ' + str(user.points)
-    user_points = user.points
-    house_points = house_obj.points
-    user_points += 10
-    house_points += 10
-    # user.update_score(points)
-    # house_obj.update_score(points)
-    user.points = user_points
-    house_obj.points = house_points
-    db.session.commit()
+    # sender = dbAPI.user_exists(db, user_id)
+    user_sharings = Shared_with.Query.all()
+    for sharing in user_sharings:
+        if sharing.shared_with_id == sender_id:
+            shared = True
+            break
+    if shared == False:
+        house = user.house
+        house_obj = House.query.filter_by(name=house).first()
+        send_message(user_id, 'You have Shared Harry Botter Successfully with a friend.')
+        send_message(user_id, '10 Point to ' + str(house))
+        # print 'Points isssss ' + str(user.points)
+        user_points = user.points
+        house_points = house_obj.points
+        user_points += 10
+        house_points += 10
+        # user.update_score(points)
+        # house_obj.update_score(points)
+        user.points = user_points
+        house_obj.points = house_points
+        db.session.commit()
 
 def handleLeaderBoard(db,user_id):
     users = User.query.all()
