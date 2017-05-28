@@ -239,10 +239,12 @@ def webhook():
                         sendFromQuickReply(sender_id,'hogwarts express')
 
                 if messaging_event.get("referral"):
+                    sender_id = messaging_event["sender"]["id"]
                     message_ref = messaging_event["referral"]["ref"]
                     reply = message_ref.split(',')
                     if reply[0] == 'Harry_Botter_Add_Share_Points':
                         handleShare(db, reply[1], sender_id)
+
                 print 'Messaging Event is '+ str(messaging_event)
                 if messaging_event.get("message"):  # someone sent us a message
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
