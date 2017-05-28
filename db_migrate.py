@@ -6,7 +6,7 @@ from HarryBotter import db
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 print 'Helllllllo'
-v = api.db_version(os.environ['DATABASE_URL'], os.path.join(basedir, 'db_repository'))
+v = api.db_version(os.environ['DATABASE_URL'], os.path.join(basedir, 'db_repositoryy'))
 migration = os.path.join(basedir, 'db_repository') + ('/versions/%03d_migration.py' % (v+1))
 tmp_module = imp.new_module('old_model')
 old_model = api.create_model(os.environ['DATABASE_URL'], os.path.join(basedir, 'db_repository'))
