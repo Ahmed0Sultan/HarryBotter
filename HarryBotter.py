@@ -532,6 +532,30 @@ def webhook():
                         elif message_payload == "CorrectAns":
                             handleCorrectAnswer(db,sender_id)
 
+                        elif message_payload == "Harry_Botter_House":
+                            handleViewHouse(db, sender_id)
+
+
+                        elif message_payload == "Harry_Botter_SortHat":
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleSortingHat(db, sender_id)
+
+                        elif message_payload == "Harry_Botter_Trivia_Question":
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleTempTest(db, sender_id)
+
+                        elif message_payload == "Harry_Botter_Profile":
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleProfile(db, sender_id)
+
+                        elif message_payload == "Harry_Botter_Houses":
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleViewHouses(db, sender_id)
+
+                        elif message_payload == "Harry_Botter_LeaderBoard":
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleLeaderBoard(db, sender_id)
+
                         else:
                             user = FB.get_user_fb(token, sender_id)
                             FB.show_typing(token, sender_id)
