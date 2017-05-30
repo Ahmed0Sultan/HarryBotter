@@ -37,10 +37,130 @@ QUERY_RESULT_LIMIT = 25
 SEARCH_QUERY_TEMPLATE = {'query': '', 'limit': QUERY_RESULT_LIMIT}
 ARTICLE_QUERY_TEMPLATE = {'id': ''}
 
-QBank = [{'What is the spell that Harry used to defeat Voldemort in their final encounter?': [{'Expelliarmus':'CorrectAns'},{'Accio':'WrongAns'},{'Crucio':'WrongAns'},{'Diffindo':'WrongAns'}]},
+QBank = [
+{'What is the spell that Harry used to defeat Voldemort in their final encounter?': [{'Expelliarmus':'CorrectAns'},{'Accio':'WrongAns'},{'Crucio':'WrongAns'},{'Diffindo':'WrongAns'}]},
 {'Which of these spells is not an unforgivable curse?':[{'Lumos':'CorrectAns'},{'Imperio':'WrongAns'},{'Crucio':'WrongAns'},{'Avada Kedavra':'WrongAns'}]},
 {'What is the punishment for using an unforgivable curse?':[{'A life sentence in Askaban':'CorrectAns'},{'Detention':'WrongAns'},{'No punishment':'WrongAns'},{'Execution':'WrongAns'}]},
-{'What is the spell that unlocks a locked door?':[{'Levicorpus':'WrongAns'},{'Expulso':'WrongAns'},{'Alohamora':'CorrectAns'},{'Incendio':'WrongAns'}]}]
+{'What is the spell that unlocks a locked door?':[{'Levicorpus':'WrongAns'},{'Expulso':'WrongAns'},{'Alohamora':'CorrectAns'},{'Incendio':'WrongAns'}]},
+{'What is the spell that Hermione uses to fix Harry\'s glasses in the first novel?':[{'Reparo':'CorrectAns'},{'Sectumsempra':'WrongAns'},{'Reducto':'WrongAns'},{'Stupefy':'WrongAns'}]},
+{'What is the effect of the Stupefy spell?':[{'Explosion':'WrongAns'},{'Stinging':'WrongAns'},{'Stunning':'CorrectAns'},{'Transfiguration':'WrongAns'}]},
+{'Which spell does Remus Lupin teach the class to fight off a Boggart?':[{'Riddikulus':'CorrectAns'},{'Scourgify':'WrongAns'},{'Sonorus':'WrongAns'},{'Imperio':'WrongAns'}]},
+{'What is the spell that Harry learns from Snape\'s old Potions textbook?':[{'Portus':'WrongAns'},{'Alakazam':'WrongAns'},{'Sectumsempra':'CorrectAns'},{'Periculum':'WrongAns'}]},
+{'Which spell is effective when fighting off Dementors?':[{'Expecto Patronum':'CorrectAns'},{'Erecto':'WrongAns'},{'Dissendium':'WrongAns'},{'Confundo':'WrongAns'}]},
+{'Which spell causes the victim to become confused and befuddled?':[{'Muffliato':'WrongAns'},{'Lumos':'WrongAns'},{'Ferula':'WrongAns'},{'Confundo':'CorrectAns'}]},
+{'Which spell does Ginny have a reputation for being good at?':[{'The Summoning Charm':'WrongAns'},{'Bat-Bogey Hex':'CorrectAns'},{'Jelly Legs Jinx':'WrongAns'},{'The Killing Curse':'WrongAns'}]},
+{'What spell does Harry use in the first task of the Triwizard Tournament?':[{'The Killing Curse':'WrongAns'},{'Bat Bogey Hex':'WrongAns'},{'The Patronus Charm':'WrongAns'},{'The Summoning Charm':'CorrectAns'}]},
+{'The Patronus Charm is used to defeat what?':[{'Lord Voldemort':'WrongAns'},{'Dementors':'CorrectAns'},{'Boggarts':'WrongAns'},{'Goblins':'WrongAns'}]},
+{'What is the first transfiguration students attempt?':[{'Ravens into goblets':'WrongAns'},{'Matchsticks into needles':'CorrectAns'},{'Quill into ink':'WrongAns'},{'Conjuring water':'WrongAns'}]},
+{'The Aguamenti incantation conjures what?':[{'Gold':'WrongAns'},{'Wine':'WrongAns'},{'Water':'CorrectAns'},{'Fire':'WrongAns'}]},
+{'What spell is Harry Potter the only known survivor of?':[{'Wingardium Leviosa':'WrongAns'},{'Expecto Patronum':'WrongAns'},{'Crucio':'WrongAns'},{'Avada Kedavra':'CorrectAns'}]},
+{'What is the most powerful truth potion?':[{'Veritaserum':'CorrectAns'},{'Amortentia':'WrongAns'},{'Polyjuice':'WrongAns'},{'Elixir of Life':'WrongAns'}]},
+{'The Philosophers Stone allows for the creation of?':[{'Polyjuice Potion':'WrongAns'},{'Skelgrow':'WrongAns'},{'Firewhiskey':'WrongAns'},{'Elixir of Life':'CorrectAns'}]},
+{'Where would you look for a Bezoar?':[{'Draco Malfoy\'s hair':'WrongAns'},{'Foot of a Troll':'WrongAns'},{'Stomach of a Goat':'CorrectAns'},{'Wings of a Hippogriff':'WrongAns'}]},
+{'What spell does Lockhart attempt to curse Harry and Ron with but backfires?':[{'Killing curse':'WrongAns'},{'Memory Charm':'CorrectAns'},{'Stunning Spell':'WrongAns'},{'Bat Bogey Hex':'WrongAns'}]},
+{'Which plant is one of the obstacles guarding the Philosopher\'s Stone?':[{'Devil\'s Snare':'CorrectAns'},{'Mandrake':'WrongAns'},{'Fanged Geranium':'WrongAns'},{'Puffapod':'WrongAns'}]},
+{'Which potion do Harry, Ron and Hermione use to sneak into the Slytherin House common room in The Chamber of Secrets?':[{'Draught of Living Death':'WrongAns'},{'Wolfsbane Potion':'WrongAns'},{'Polyjuice Potion':'CorrectAns'},{'Murtlap Essence':'WrongAns'}]},
+{'Which Potion does Horace Slughorn award to Harry in his sixth year at Hogwarts?':[{'Babbling Beverage':'WrongAns'},{'Felix Felicis':'CorrectAns'},{'Essence of Dittany':'WrongAns'},{'Invisibility Potion':'WrongAns'}]},
+{'What is the effect of Essence of Dittany?':[{'Regrow skin over a wound':'CorrectAns'},{'Extend the taker\'s life':'WrongAns'},{'Relieve anxiety':'WrongAns'},{'Remove acne':'WrongAns'}]},
+{'What is the effect of the spell that Ron attempts to curse Malfoy with in Harry Potter and the Chamber of Secrets?':[{'He vomits slugs':'CorrectAns'},{'He gets knocked out':'WrongAns'},{'He loses his memory':'WrongAns'},{'He vanishes his own bones':'WrongAns'}]},
+{'Which of these cannot be conjured?':[{'Food':'CorrectAns'},{'Flames':'WrongAns'},{'Christmas Decorations':'WrongAns'},{'Shackles':'WrongAns'}]},
+{'In what year to Hogwarts students learn to Apparate?':[{'5th year':'WrongAns'},{'4th year':'WrongAns'},{'3rd year':'WrongAns'},{'6th year':'CorrectAns'}]},
+{'What type of creatures pull the carriages from the Hogwarts Express up to Hogwarts?':[{'Thestrals':'CorrectAns'},{'Dragons':'WrongAns'},{'Unicorns':'WrongAns'},{'Horses':'WrongAns'}]},
+{'What is the effect of consuming Unicorn blood?':[{'Extended life':'CorrectAns'},{'Shrunken head':'WrongAns'},{'Eternal happiness':'WrongAns'},{'No effect':'WrongAns'}]},
+{'When is the trace lifted?':[{'At age 17':'CorrectAns'},{'At age 18':'WrongAns'},{'After graduating from Hogwarts':'WrongAns'},{'After cursing yourself':'WrongAns'}]},
+{'How to Fred and George attempt to trick the Goblet of Fire in to accepting their names?':[{'Ageing Potion':'CorrectAns'},{'Get a friend to submit their names':'WrongAns'},{'Levitate their names into the goblet':'WrongAns'},{'Change their birthdays':'WrongAns'}]},
+{'Why are Mandrakes dangerous?':[{'Scream can kill a human':'CorrectAns'},{'They have sharp teeth':'WrongAns'},{'They shoot poisonous goo':'WrongAns'},{'They release toxic fumes':'WrongAns'}]},
+{'What is the effect of the spell Hagrid casts on Dudley in the first novel?':[{'He grows a tail':'CorrectAns'},{'He dies':'WrongAns'},{'He grows an extra foot':'WrongAns'},{'He grows ears':'WrongAns'}]},
+{'What spell can Witches and Wizards use to produce light?':[{'Lumos':'CorrectAns'},{'Lumio':'WrongAns'},{'Lome':'WrongAns'},{'Expelliarmus':'WrongAns'}]},
+{'How does Dumbledore enforce the age restriction imposed on the Triwizard Tournament?':[{'Age Line around the Goblet':'CorrectAns'},{'Filch guards the Goblet':'WrongAns'},{'Disillusionment Charm to hide the Goblet':'WrongAns'},{'Circle of flames around the Goblet':'WrongAns'}]},
+{'What creature attacks Draco in Hagrid\'s Care of Magical Creatures class?':[{'Hippogriff':'CorrectAns'},{'Acromantula':'WrongAns'},{'Dragon':'WrongAns'},{'Troll':'WrongAns'}]},
+{'Which Hogwarts course is taught by a ghost?':[{'History of Magic':'CorrectAns'},{'Charms':'WrongAns'},{'Transfiguration':'WrongAns'},{'Divination':'WrongAns'}]},
+{'In their fourth year at Hogwarts, what creature did students raise as a project throughout the year?':[{'Blast-Ended Skrewts':'CorrectAns'},{'Nifflers':'WrongAns'},{'Bowtruckles':'WrongAns'},{'Fire crabs':'WrongAns'}]},
+{'What Christmas present does Harry recieve annonymously in his first year at Hogwarts?':[{'Invisibility Cloak':'CorrectAns'},{'Bertie Bott\'s Every Flavour Beans':'WrongAns'},{'Chocolate Frogs':'WrongAns'},{'Elder Wand':'WrongAns'}]},
+{'Which of these is not a core course in the Hogwarts syllabus?':[{'Divination':'CorrectAns'},{'History of Magic':'WrongAns'},{'Herbology':'WrongAns'},{'Charms':'WrongAns'}]},
+{'What is a dangerous side-effect that can happen when Apparating?':[{'Splinching':'CorrectAns'},{'Memory Loss':'WrongAns'},{'Dementia':'WrongAns'},{'Dragon Pox':'WrongAns'}]},
+{'What type of spell is the one that spreads through Dumbledore\'s finger?':[{'Curse':'CorrectAns'},{'Hex':'WrongAns'},{'Jinx':'WrongAns'},{'Charm':'WrongAns'}]},
+{'What creatures guard the Wizard prison, Askaban?':[{'Dementors':'CorrectAns'},{'Dragons':'WrongAns'},{'Bowtruckles':'WrongAns'},{'Giants':'WrongAns'}]},
+{'What is the effect of a Dementor\'s Kiss?':[{'Loss of Soul':'CorrectAns'},{'Death':'WrongAns'},{'Euphoria':'WrongAns'},{'Pain':'WrongAns'}]},
+{'Which Unforgivable Curse(s) does Harry use?':[{'Imperio and Crucio':'CorrectAns'},{'Imperio, Crucio, and Avada Kedavra':'WrongAns'},{'Avada Kedavra':'WrongAns'},{'He never uses an Unforgivable curse':'WrongAns'}]},
+{'How does the Sorting Hat aid Harry in the Chamber of Secrets?':[{'It kills the Basilisk':'WrongAns'},{'It presents him with Gryffindor\'s sword':'CorrectAns'},{'It pokes out the Basilisk\'s eye':'WrongAns'},{'It shouts words of encouragement':'WrongAns'}]},
+{'What do Ron and Hermione find in the Chamber of Secrets that can kill Horcruxes?':[{'Sword of Gryffindor Fangs':'WrongAns'},{'Basilisk Fangs':'CorrectAns'},{'Stinging Nettles':'WrongAns'},{'Blood-Soaked Dagger':'WrongAns'}]},
+{'What deed must one perform to create a Horcrux?':[{'Throw a party':'WrongAns'},{'Give a blood sacrifice':'WrongAns'},{'Love Someone':'WrongAns'},{'Murder Someone':'CorrectAns'}]},
+{'Which of these is not one of Voldemort\'s Horcruxes?':[{'Snape\'s Potions Textbook':'CorrectAns'},{'Tom Riddle\'s Diary':'WrongAns'},{'Gaunt\'s Ring':'WrongAns'},{'Slytherin&apos;s Locket':'WrongAns'}]},
+{'What is the consequence of breaking an unbreakable vow?':[{'You&apos;re Cursed':'WrongAns'},{'You Shrink':'WrongAns'},{'You Die':'CorrectAns'},{'You Disappear':'WrongAns'}]},
+{'What spell does Hermione use to set a flock of birds on Ron?':[{'Avis':'CorrectAns'},{'Avifors':'WrongAns'},{'Avios':'WrongAns'},{'Avifo':'WrongAns'}]},
+{'Which charm, which enforces the Hogsmeade curfew, produces a loud screech when someone steps into it&apos;s radius?':[{'Bubble-Head Charm':'WrongAns'},{'Revealing Charm':'WrongAns'},{'Caterwauling Charm':'CorrectAns'},{'Intruder Charm':'WrongAns'}]},
+{'Which spell does Hermione cast to freeze the pixies in Professor Lockhart&apos;s class?':[{'Impedimenta':'WrongAns'},{'Immobolus':'CorrectAns'},{'Inanimatus Conjurus':'WrongAns'},{'Incarcerous':'WrongAns'}]},
+{'Which spell does Dumbledore use to save Harry when he falls off his broom during a Quidditch match?':[{'Ascendio':'WrongAns'},{'Anteoculatia':'WrongAns'},{'Aresto Momentum':'CorrectAns'},{'Baubillious':'WrongAns'}]},
+{'The curse whose incantation is &quot;Mucus ad Nauseam&quot; has what effect on it&apos;s target?':[{'Enlarged ears':'WrongAns'},{'Lack of airflow to lungs':'WrongAns'},{'A massive headache':'WrongAns'},{'An extremely runny nose':'CorrectAns'}]},
+{'Depulso (Banishing charm) has the opposite effect to which spell?':[{'Crucio':'WrongAns'},{'Accio':'CorrectAns'},{'Defodio':'WrongAns'},{'Confringo':'WrongAns'}]},
+{'Which spell causes the target to swell in physical size?':[{'Entomorphis':'WrongAns'},{'Engorgio':'CorrectAns'},{'Evanesce':'WrongAns'},{'Incarcerous':'WrongAns'}]},
+{'Locomotor Wibbly is known by what other name?':[{'Jelly-Fingers Curse':'WrongAns'},{'Jelly-Brain Jinx':'WrongAns'},{'Jelly-Legs Curse':'CorrectAns'},{'Jelly-Arms Curse':'WrongAns'}]},
+{'What spell does James Potter cast on Severus Snape in his teenage years, that levitates Snape upside-down by his ankles?':[{'Liberacorpus':'WrongAns'},{'Wingardium-Corpus':'WrongAns'},{'Levicorpus':'CorrectAns'},{'Corpus-Leviosa':'WrongAns'}]},
+{'What curse prevents witches and wizards from discussing the location of Grimmault place, when it acts as the headquarters for the Order?':[{'Tongue-Tying Curse':'CorrectAns'},{'Full Body-Bind Curse':'WrongAns'},{'Reductor Curse':'WrongAns'},{'Conjunctivitis Curse':'WrongAns'}]},
+{'Which potion does Harry brew in Slughorn&apos;s class to win a vial of Felix Felicis?':[{'Draught of Dying':'WrongAns'},{'Draught of Living Death':'CorrectAns'},{'Lifeless Draught':'WrongAns'},{'Invigoration Draught':'WrongAns'}]},
+{'Wolfsbane potion eases the symptoms of what?':[{'Rhumanthropy':'WrongAns'},{'Tyronthropy':'WrongAns'},{'Lycanthropy':'CorrectAns'},{'Ayanthropy':'WrongAns'}]},
+{'Which potion did Voldemort use to protect Salazar Slytherin&apos;s locket (a horcrux)?':[{'Dogbane Potion':'WrongAns'},{'Baneberry Poision':'WrongAns'},{'Dragon Poison':'WrongAns'},{'Drink of Despair':'CorrectAns'}]},
+{'At the start of the Quidditch World Cup, which spell does Bagman use to increase the volume of his voice as he announces the game?':[{'Sonorus':'CorrectAns'},{'Amplifie':'WrongAns'},{'Incantum Sonar':'WrongAns'},{'Volum Maxima':'WrongAns'}]},
+{'Which spell, which caused her to grow antlers, was used on Pansy Parkinson during a student rebellion after Fred and George&apos;s departure from Hogwarts?':[{'Aparceium':'WrongAns'},{'Antleroneo':'WrongAns'},{'Antlamoria':'WrongAns'},{'Anteoculatia':'CorrectAns'}]},
+{'Which spell blasts away arachnids?':[{'Arania Expulso':'WrongAns'},{'Arania Exumai':'CorrectAns'},{'Arachnia Expulso':'WrongAns'},{'Arachnia Aspiria':'WrongAns'}]},
+{'Lockhart unsuccessfuly tries to fix Harry&apos;s broken arm after he falls from his broom with which spell?':[{'Brackium Emendo':'CorrectAns'},{'Skele-Gro':'WrongAns'},{'Corpio Mendes':'WrongAns'},{'Skeleta Engorgio':'WrongAns'}]},
+{'Which of these charms is NOT included in Harry&apos;s OWL exam for Charms.':[{'Levitation Charm':'WrongAns'},{'Cheering Charm':'WrongAns'},{'Cushioning Charm':'CorrectAns'},{'Color Change Charm':'WrongAns'}]},
+{'What did Crabbe conjure in the final novel that ultimately resulted in his death?':[{'Firestorm':'WrongAns'},{'Fiendfyre':'CorrectAns'},{'Bewitched Snowballs':'WrongAns'},{'Bluebell flames':'WrongAns'}]},
+{'What charm did medieval witches use to protect themselves during witch burnings?':[{'Flame-Repelling Charm':'WrongAns'},{'Flame-Freezing Charm':'CorrectAns'},{'Flame-Protection Charm':'WrongAns'},{'Fire-Extinguishing Charm':'WrongAns'}]},
+{'Which spell does Hermione use to detect the presence of humans in Grimmauld place?':[{'Homeorevel':'WrongAns'},{'Homenum Expelia':'WrongAns'},{'Homeosape Revel':'WrongAns'},{'Homenum Revelio':'CorrectAns'}]},
+{'The Impervius Charm has what effect?':[{'It makes doors impenetrable':'WrongAns'},{'It makes the target cry':'WrongAns'},{'It repels substance':'CorrectAns'},{'It controls the mind':'WrongAns'}]},
+{'In Harry&apos;s private lessons with Professor Snape, what is he learning to protect himself against?':[{'The Imperio Curse':'WrongAns'},{'Legilimency':'CorrectAns'},{'Voldemort&apos;s Horcrux':'WrongAns'},{'Prior Incantato':'WrongAns'}]},
+{'What is the name of the magical phenomenon that occurs when two wands that share the same core are forced to compete in combat?':[{'Priorita Incantem':'WrongAns'},{'Prioincantema':'WrongAns'},{'Priori Incantatem':'CorrectAns'},{'Prior Incantato':'WrongAns'}]},
+{'What spell is used to make the target release whatever it is holding or binding?':[{'Rennervate':'WrongAns'},{'Relashio':'CorrectAns'},{'Reparifors':'WrongAns'},{'Reducto':'WrongAns'}]},
+{'Rennervate reverses the effects of what?':[{'Being Tired':'WrongAns'},{'Being Disfigured':'WrongAns'},{'Being Burned':'WrongAns'},{'Being Stunned':'CorrectAns'}]},
+{'Rictusempra induces what sensation?':[{'Sleeping':'WrongAns'},{'Laughing':'WrongAns'},{'Smiling':'WrongAns'},{'Tickling':'CorrectAns'}]},
+{'Which hex does Hermione cast on Harry to hide his true identity from the snatchers?':[{'Bedazzling Hex':'WrongAns'},{'Bat-Bogey Hex':'WrongAns'},{'Stinging Hex':'CorrectAns'},{'Hurling Hex':'WrongAns'}]},
+{'Which curse showed the snatchers the location of Harry Potter in the Second Wizarding War?':[{'The Ear-Shrivelling Curse':'WrongAns'},{'The Babbling Curse':'WrongAns'},{'The Taboo Curse':'CorrectAns'},{'The Imperius Curse':'WrongAns'}]},
+{'In Harry&apos;s final transfiguration exam of his third year at Hogwarts, which transforming spell is he required to perform?':[{'Raven to Writing Desk':'WrongAns'},{'Snail to Teapot':'WrongAns'},{'Human to Chicken':'WrongAns'},{'Teapot to Tortoise':'CorrectAns'}]},
+{'Which of these is not a piece of security in Gringotts?':[{'Veritaserum':'CorrectAns'},{'The Gemino Charm':'WrongAns'},{'A Dragon':'WrongAns'},{'The Thief&apos;s Downfall':'WrongAns'}]},
+{'What is the incantation to transform an animal into a water goblet?':[{'Vero Verta':'WrongAns'},{'Vera Verto':'CorrectAns'},{'Piertotum Locomotor':'WrongAns'},{'Vipera Evanesca':'WrongAns'}]},
+{'Which of these love potions is the strongest?':[{'Twilight Moonbeams':'WrongAns'},{'Beguiling Bubbles':'WrongAns'},{'Amortentia':'CorrectAns'},{'Cupid Crystals':'WrongAns'}]},
+{'Which of these creatures was not part of Professor Lupin&apos;s curriculum when he taught Defense Against the Dark Arts at Hogwarts?':[{'Grindylows':'WrongAns'},{'Hinkypunks':'WrongAns'},{'Cornish Pixies':'CorrectAns'},{'Vampires':'WrongAns'}]},
+{'What happens when Bubotuber pus comes in contact with human skin?':[{'Burns your skin':'WrongAns'},{'Sticks to your skin':'WrongAns'},{'A rash forms':'WrongAns'},{'Boils appear':'CorrectAns'}]},
+{'Mimbulus Mimbletonia spews what when touched?':[{'Bubotuber Pus':'WrongAns'},{'Stinksap':'CorrectAns'},{'Draught of Living Death':'WrongAns'},{'Elixir of Life':'WrongAns'}]},
+{'Which of these tree&apos;s wood is not used in the making of wands':[{'Oak':'WrongAns'},{'Yew':'WrongAns'},{'Cherry':'WrongAns'},{'Palm':'CorrectAns'}]},
+{'Which of these dragons was not in the Triwizard Tournament?':[{'Norweigan Ridgeback':'WrongAns'},{'Common Welsh Creen':'WrongAns'},{'Ukranian Ironbelly':'CorrectAns'},{'Hungarian Horntail':'WrongAns'}]},
+{'What do niffler&apos;s sniff out?':[{'Wands':'WrongAns'},{'Lava Rocks':'WrongAns'},{'Dead Wizards':'WrongAns'},{'Shiny Treasure':'CorrectAns'}]},
+{'What piece of jewellery holds the curse that hits Katie Bell when she touches it?':[{'Anklet':'WrongAns'},{'Ring':'WrongAns'},{'Necklace':'CorrectAns'},{'Bracelet':'WrongAns'}]},
+{'How does Umbridge torture her students in detention?':[{'A Blood Quill':'CorrectAns'},{'She Curses Them':'WrongAns'},{'She Hits Them':'WrongAns'},{'Crucio':'WrongAns'}]},
+{'What charm does Hermione use to expand the space available inside her handbag in the Deathly Hallows?':[{'Expanding Space Charm':'WrongAns'},{'Undetectable Extension Charm':'CorrectAns'},{'Increased Area Charm':'WrongAns'},{'Never-Full Charm':'WrongAns'}]},
+{'Which spell does Harry use to fill Dumbledore&apos;s crystal goblet with water in the Horcrux cave?':[{'Aquamenta':'WrongAns'},{'Aguamenti':'CorrectAns'},{'Agua-Conjurus':'WrongAns'},{'Agua Eructo':'WrongAns'}]},
+{'What spell does James Potter use on Severus Snape that prevents Snape from moving towards James?':[{'Protego Horribilis':'WrongAns'},{'Mobiliarbus':'WrongAns'},{'Locomotor Wibbly':'WrongAns'},{'Impedimenta':'CorrectAns'}]},
+{'What is the incantation for the spell that Lockhart unsuccessfuly uses to get rid of the pixies in his classrom?':[{'Peskipsi Postoni':'WrongAns'},{'Peski Pixies Nomi':'WrongAns'},{'Piksi Pestroni':'WrongAns'},{'Peskipiksi Pesternomi':'CorrectAns'}]},
+{'Which charm fills the ears of anyone in the vicinity with a buzzing noise?':[{'Fidelius Charm':'WrongAns'},{'Caterwauling Charm':'WrongAns'},{'Muffliato Charm':'CorrectAns'},{'Homorphus Charm':'WrongAns'}]},
+{'Which spell does Lockhart use unsuccessfully during duelling club to banish the snake that has been set on Harry?':[{'Crucio':'WrongAns'},{'Alarte Ascendare':'CorrectAns'},{'Confringo':'WrongAns'},{'Defodio':'WrongAns'}]},
+{'Which spell does Horace Slughorn use on Marcus Belby to clear his airway while choking on pheasant?':[{'Ascenda Oesophago':'WrongAns'},{'Anteoculatia':'WrongAns'},{'Anapneo':'CorrectAns'},{'Arania Eructo':'WrongAns'}]},
+{'Which spell does Ollivander use to test Fleur&apos;s wand before the Tri-Wizard Tournament?':[{'Muffliato':'WrongAns'},{'Lumos':'WrongAns'},{'Deletrius':'WrongAns'},{'Orchideous':'CorrectAns'}]},
+{'What is the twelfth use of Dragon&apos;s Blood?':[{'Curing Wounds':'WrongAns'},{'Immortality':'WrongAns'},{'Deadly Poison':'WrongAns'},{'Oven Cleaning':'CorrectAns'}]},
+{'According to Luna, Gurdyroot is effective at warding off what?':[{'Crumple-Horned Snorkack':'WrongAns'},{'Gulping Plimpies':'CorrectAns'},{'Wrackspurts':'WrongAns'},{'Dabberblimps':'WrongAns'}]},
+{'What is not an ingredient in Polyjuice potion?':[{'Boomslang Skin':'WrongAns'},{'Lacewing Flies':'WrongAns'},{'Aconite':'CorrectAns'},{'Bicorn Horn':'WrongAns'}]},
+{'What is a characteristic of Amortenia?':[{'Clear and Odourless appearance':'WrongAns'},{'Heart shaped smoke':'WrongAns'},{'Sweet Smell':'WrongAns'},{'Mother of Pearl Sheen':'CorrectAns'}]},
+{'Which is not an ingredient used by Voldemort to create himself a new body?':[{'Bone of the his father':'WrongAns'},{'Heart of his mother':'CorrectAns'},{'Flesh of a servant':'WrongAns'},{'Blood of an enemy':'WrongAns'}]},
+{'What spell did Hermione not cast over the trios tent in the 7th book?':[{'Salvio Hexia':'WrongAns'},{'Protego Totalum':'WrongAns'},{'Repello Muggletum':'WrongAns'},{'Protego Maxima':'CorrectAns'}]},
+{'What was the initial enchantment used by Voldemort to protect his Horcrux in the cave?':[{'Inferi':'WrongAns'},{'Blood Sacrifice':'CorrectAns'},{'Fidelius charm':'WrongAns'},{'Warded':'WrongAns'}]},
+{'What incantation causes duplication of an object?':[{'Polygrate':'WrongAns'},{'Multiplus':'WrongAns'},{'Geminio':'CorrectAns'},{'Duplicato':'WrongAns'}]},
+{'What incantation conjures a fiery rope?':[{'Flagrate':'CorrectAns'},{'Incendiope':'WrongAns'},{'Avis':'WrongAns'},{'Dormiens':'WrongAns'}]},
+{'What is the incantation for the vanishing spell?':[{'Revoir':'WrongAns'},{'Fleum':'WrongAns'},{'Vanishia':'WrongAns'},{'Evanesco':'CorrectAns'}]},
+{'How long does Felix Felicis take to brew?':[{'1 year':'WrongAns'},{'1 month':'WrongAns'},{'6 months':'CorrectAns'},{'4 months':'WrongAns'}]},
+{'How many shades appear out of Voldemort&apos;s wand in Priori Incantatem?':[{'3':'WrongAns'},{'4':'WrongAns'},{'5':'CorrectAns'},{'6':'WrongAns'}]},
+{'What creature did Tom Riddle accuse Hagrid of raising and using to petrify students when the Chamber of Secrets was first opened?':[{'Dragon':'WrongAns'},{'Basilisk':'WrongAns'},{'Acromantula':'CorrectAns'},{'Fire Crab':'WrongAns'}]},
+{'What creature is commonly found in wand-wood trees?':[{'Crumple Horned Snorkack':'WrongAns'},{'Phoenix':'WrongAns'},{'Augury':'WrongAns'},{'Bowtruckle':'CorrectAns'}]},
+{'What horn was present on the wall of Xenophilius&apos;s Lovegood&apos;s house?':[{'Crumple Horned Snorkack':'WrongAns'},{'Erumpent':'CorrectAns'},{'Unicorn':'WrongAns'},{'Graphorn':'WrongAns'}]},
+{'Where did Professor Snape claim the Kappa is most commonly found?':[{'Russia':'WrongAns'},{'China':'WrongAns'},{'Mongolia':'CorrectAns'},{'Japan':'WrongAns'}]},
+{'Where is a Kappa most commonly found?':[{'Japan':'CorrectAns'},{'Mongolia':'WrongAns'},{'China':'WrongAns'},{'Korea':'WrongAns'}]},
+{'What is the opposite of the Alohamora spell?':[{'Closaportus':'WrongAns'},{'Clauditis':'WrongAns'},{'Alohimara':'WrongAns'},{'Colloportus':'CorrectAns'}]},
+{'What spell causes rapid growth of the victims teeth?':[{'Depulso':'WrongAns'},{'Growtio':'WrongAns'},{'Densaugeo':'CorrectAns'},{'Denturio':'WrongAns'}]},
+{'What spell did Bagman use to cancel Sonorus at the Quidditch World Cup?':[{'Finite Incantatum':'WrongAns'},{'Finite':'WrongAns'},{'Quietus':'CorrectAns'},{'Silencio':'WrongAns'}]},
+{'What is the counter to Levicorpus':[{'Liberacorpus':'CorrectAns'},{'Finite':'WrongAns'},{'Collocorpus':'WrongAns'},{'Dissendium':'WrongAns'}]},
+{'What is an ingredient Hermione uses when creating an antidote to an unknown poison in 6th year?':[{'Her blood':'WrongAns'},{'Her own hair':'CorrectAns'},{'A Bezoar':'WrongAns'},{'Boomslang skin':'WrongAns'}]},
+{'The Dreamless sleep potion is what when taken regularly?':[{'No effect':'WrongAns'},{'Less effective':'WrongAns'},{'Poisonus':'WrongAns'},{'Addictive':'CorrectAns'}]},
+]
 
 
 # chatterbot = ChatBot("Harry Botter")
@@ -211,6 +331,27 @@ def webhook():
                     elif message_payload == "Harry_Botter_Places":
                         handle_places(sender_id)
 
+                    elif message_payload == "Harry_Botter_SortHat":
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handleSortingHat(db, sender_id)
+
+                    elif message_payload == "Harry_Botter_Trivia_Question":
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handleTempTest(db, sender_id)
+
+                    elif message_payload == "Harry_Botter_Profile":
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handleProfile(db, sender_id)
+
+                    elif message_payload == "Harry_Botter_Houses":
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handleViewHouses(db, sender_id)
+
+                    elif message_payload == "Harry_Botter_LeaderBoard":
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        handleLeaderBoard(db, sender_id)
+
+
                     elif message_payload == "character-harry-potter":
                         sendFromQuickReply(sender_id,'Harry Potter')
                     elif message_payload == "character-ron-weasley":
@@ -237,6 +378,7 @@ def webhook():
                         sendFromQuickReply(sender_id,'hogsmeade')
                     elif message_payload == "place-hogwarts-express":
                         sendFromQuickReply(sender_id,'hogwarts express')
+
 
                 if messaging_event.get("referral"):
                     sender_id = messaging_event["sender"]["id"]
@@ -385,7 +527,7 @@ def webhook():
                                 db.session.commit()
                                 SortingResult(db, sender_id)
                         elif message_payload == "WrongAns":
-                            send_message(sender_id, 'Wrong Answer')
+                            handleWrongAnswer(db,sender_id)
 
                         elif message_payload == "CorrectAns":
                             handleCorrectAnswer(db,sender_id)
@@ -1773,12 +1915,59 @@ def handleTempTest(db,user_id):
     if r.status_code != requests.codes.ok:
         print r.text
 
+def handleWrongAnswer(db,user_id):
+    images = ['wrong1.jpg','wrong2.gif','wrong3.jpg','wrong4.jpg','wrong5.gif']
+    image = NLP.oneOf(images)
+    FB.send_picture(token, user_id, url_for('static', filename="assets/img/"+ str(image), _external=True))
+    data = {
+        "recipient": {"id": user_id},
+        "message": {
+            "text": 'Wrong Answer!!',
+            "quick_replies": [
+                {
+                    "content_type": "text",
+                    "title": 'Another Question',
+                    "payload": 'Harry_Botter_Trivia_Question'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'My House',
+                    "payload": 'Harry_Botter_House'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'My Profile',
+                    "payload": 'Harry_Botter_Profile'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'All Houses',
+                    "payload": 'Harry_Botter_Houses'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'Leaderboard',
+                    "payload": 'Harry_Botter_LeaderBoard'
+                },
+            ]
+        }
+    }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
 def handleCorrectAnswer(db,user_id):
+    images = ['correct1.gif', 'correct2.jpg', 'correct3.gif', 'correct4.gif', 'correct5.gif']
+    image = NLP.oneOf(images)
+    FB.send_picture(token, user_id, url_for('static', filename="assets/img/" + str(image), _external=True))
     user = dbAPI.user_exists(db, user_id)
     house = user.house
     house_obj = House.query.filter_by(name=house).first()
     send_message(user_id,'Correct Answer!!')
-    send_message(user_id, '10 Point to '+ str(house))
+    # send_message(user_id, '10 Point to '+ str(house))
     print 'Points isssss ' + str(user.points)
     user_points = user.points
     house_points = house_obj.points
@@ -1789,6 +1978,45 @@ def handleCorrectAnswer(db,user_id):
     user.points = user_points
     house_obj.points = house_points
     db.session.commit()
+    data = {
+        "recipient": {"id": user_id},
+        "message": {
+            "text": '10 Point to '+ str(house),
+            "quick_replies": [
+                {
+                    "content_type": "text",
+                    "title": 'Another Question',
+                    "payload": 'Harry_Botter_Trivia_Question'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'My House',
+                    "payload": 'Harry_Botter_House'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'My Profile',
+                    "payload": 'Harry_Botter_Profile'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'All Houses',
+                    "payload": 'Harry_Botter_Houses'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'Leaderboard',
+                    "payload": 'Harry_Botter_LeaderBoard'
+                },
+            ]
+        }
+    }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
 
 def handleProfile(db,user_id):
     user = dbAPI.user_exists(db,user_id)
