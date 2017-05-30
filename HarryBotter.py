@@ -1554,23 +1554,23 @@ def handleViewHouse(db,user_id):
                                             {
                                                 "title": house_name,
                                                 "image_url": house_url,
-                                                "subtitle":'\n' +  house_traits,
+                                                "subtitle":'\n' +  str(house_traits),
 
                                             },
                                             {
                                                 "title": 'House Founder',
                                                 "image_url": house_founder_url,
-                                                "subtitle":'\n' +  house_founder,
+                                                "subtitle":'\n' +  str(house_founder),
                                             },
                                             {
                                                 "title": 'House Members Number',
-                                                "subtitle":'\n' +  house_members_number,
+                                                "subtitle":'\n' +  str(house_members_number),
                                                 "image_url": 'http://www.wetpaint.com/wp-content/uploads/2016/04/harry-potter-cast-then-and-now.jpg',
 
                                             },
                                             {
                                                 "title": 'House Overall Points',
-                                                "subtitle":'\n' +  house_points,
+                                                "subtitle":'\n' +  str(house_points),
                                                 "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
                                             }
                                         ]
@@ -2207,25 +2207,25 @@ def handleViewHouses(db, user_id):
                                           {
                                               "title": title1,
                                               "image_url": house1_url,
-                                              "subtitle": '\n' + subtitle1,
+                                              "subtitle": '\n' + str(subtitle1),
 
                                           },
                                           {
                                               "title": title2,
                                               "image_url": house2_url,
-                                              "subtitle": '\n' + subtitle2,
+                                              "subtitle": '\n' + str(subtitle2),
 
                                           },
                                           {
                                               "title": title3,
                                               "image_url": house3_url,
-                                              "subtitle": '\n' + subtitle3,
+                                              "subtitle": '\n' + str(subtitle3),
 
                                           },
                                           {
                                               "title": title4,
                                               "image_url": house4_url,
-                                              "subtitle": '\n' + subtitle4,
+                                              "subtitle": '\n' + str(subtitle4),
 
                                           }
                                       ]
