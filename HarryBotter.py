@@ -2077,7 +2077,7 @@ def handleProfile(db,user_id):
                                           {
                                               "title": 'House Name',
                                               "image_url": house_url,
-                                              "subtitle": '\n' + house,
+                                              "subtitle": '\n' + str(house),
                                               "buttons": [
                                                   {
                                                       "title": "View House",
@@ -2089,7 +2089,7 @@ def handleProfile(db,user_id):
                                           },
                                           {
                                               "title": 'Points',
-                                              "subtitle": '\n' + points,
+                                              "subtitle": '\n' + str(points),
                                               "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
                                           }
                                       ]
