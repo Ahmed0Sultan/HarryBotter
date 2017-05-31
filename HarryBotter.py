@@ -2480,7 +2480,7 @@ def GreateHallReplies(user_id):
     data = {
         "recipient": {"id": user_id},
         "message": {
-            "text": 'Wrong Answer!!',
+            "text": '',
             "quick_replies": [
                 {
                     "content_type": "text",
