@@ -324,7 +324,7 @@ def webhook():
                         elif message_payload == "Harry_Botter_House":
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleViewHouse(db, sender_id)
-                            GreateHallReplies(sender_id)
+
 
 
                         elif message_payload == "Harry_Botter_Spells":
@@ -344,12 +344,12 @@ def webhook():
                         elif message_payload == "Harry_Botter_Profile":
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleProfile(db, sender_id)
-                            GreateHallReplies(sender_id)
+
 
                         elif message_payload == "Harry_Botter_Houses":
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleViewHouses(db, sender_id)
-                            GreateHallReplies(sender_id)
+
 
                         elif message_payload == "Harry_Botter_LeaderBoard":
                             FB.show_typing(token, sender_id, 'typing_off')
@@ -359,7 +359,7 @@ def webhook():
                         elif message_payload == "Harry_Botter_Share":
                             FB.show_typing(token, sender_id, 'typing_off')
                             sortHatResult(sender_id)
-                            GreateHallReplies(sender_id)
+
 
                         elif message_payload == "Harry_Botter_Get_Points":
                             FB.show_typing(token, sender_id, 'typing_off')
@@ -549,13 +549,13 @@ def webhook():
                             elif message_payload == "Harry_Botter_House":
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleViewHouse(db, sender_id)
-                                GreateHallReplies(sender_id)
+
 
 
                             elif message_payload == "Harry_Botter_SortHat":
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleSortingHat(db, sender_id)
-                                GreateHallReplies(sender_id)
+
 
                             elif message_payload == "Harry_Botter_Trivia_Question":
                                 FB.show_typing(token, sender_id, 'typing_off')
@@ -564,12 +564,12 @@ def webhook():
                             elif message_payload == "Harry_Botter_Profile":
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleProfile(db, sender_id)
-                                GreateHallReplies(sender_id)
+
 
                             elif message_payload == "Harry_Botter_Houses":
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleViewHouses(db, sender_id)
-                                GreateHallReplies(sender_id)
+
 
                             elif message_payload == "Harry_Botter_LeaderBoard":
                                 FB.show_typing(token, sender_id, 'typing_off')
@@ -579,7 +579,7 @@ def webhook():
                             elif message_payload == "Harry_Botter_Share":
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleSortingHat(db, sender_id)
-                                GreateHallReplies(sender_id)
+
 
                             elif message_payload == "Harry_Botter_Get_Points":
                                 FB.show_typing(token, sender_id, 'typing_off')
@@ -1445,6 +1445,7 @@ def sortHatResult(user_id):
         sendHouseResult(user_id,'Yaaay!! I have been sorted into Slytherin.','You should try yourself and see which house you will be sorted into', 'Congratulations!! You have been sorted into Slytherin',
                         'Or perhaps in Slytherin,You\'ll make your real friends,Those cunning folk use any means,To achieve their ends.',
                         'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85')
+    GreateHallReplies(user_id)
 
 def sendHouseResult(user_id,title_share,subtitle_share,title,subtitle,url):
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
@@ -1617,6 +1618,7 @@ def handleViewHouse(db,user_id):
                           headers={'Content-type': 'application/json'})
         if r.status_code != requests.codes.ok:
             print r.text
+        GreateHallReplies(user_id)
 
 def send_q1(user_id):
     Q1 = [ {"What would you least like to be called?":
@@ -2145,6 +2147,7 @@ def handleProfile(db,user_id):
                           headers={'Content-type': 'application/json'})
         if r.status_code != requests.codes.ok:
             print r.text
+        GreateHallReplies(user_id)
 
 def handleViewHouses(db, user_id):
     user = dbAPI.user_exists(db, user_id)
@@ -2284,6 +2287,7 @@ def handleViewHouses(db, user_id):
                           headers={'Content-type': 'application/json'})
         if r.status_code != requests.codes.ok:
             print r.text
+        GreateHallReplies(user_id)
 
 def handleShare(db,user_id,sender_id):
     shared = False
