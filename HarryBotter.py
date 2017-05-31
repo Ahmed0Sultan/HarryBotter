@@ -270,6 +270,7 @@ RESPONSE_STARTERS = ['', 'Well, ' 'You see, ', 'I know that ', 'I believe that '
                      'To my knowledge, ']
 dbAPI.addHouses(db)
 # dbAPI.resetPoints(db)
+dbAPI.deleteUser(db,'1139478602829591')
 @app.route('/privacy', methods=['GET'])
 def privacy():
     return render_template('privacy.html')

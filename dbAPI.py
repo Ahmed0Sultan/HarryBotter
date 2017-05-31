@@ -8,6 +8,11 @@ def resetPoints(db):
         user.points = 0
     db.session.commit()
 
+def deleteUser(db,user_id):
+    user = HB.User.query.filter_by(user_id=user_id).first()
+    db.session.delete(user)
+    db.session.commit()
+
 def addHouses(db):
     house1 = HB.House('Hufflepuff')
     house2 = HB.House('Ravenclaw')
