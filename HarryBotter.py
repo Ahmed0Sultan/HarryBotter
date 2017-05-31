@@ -2456,7 +2456,7 @@ def pointsInstructions(user_id):
         "image_url": url_for('static', filename="assets/img/wrong4.jpg", _external=True),
     }
     points2 = {
-        "title": "hare Harry Botter with a friend and get him to try it",
+        "title": "Share Harry Botter with a friend and get him to try it",
         "image_url": url_for('static', filename="assets/img/share.jpg", _external=True),
     }
     options = [points1,points2]
