@@ -380,6 +380,10 @@ def send_quick_replies_help(token, user_id,intro):
          {"content_type": "text",
          "title": "Places",
          "payload": 'Harry_Botter_Places'
+         },
+         {"content_type": "text",
+         "title": "Get Points",
+         "payload": 'Harry_Botter_Get_Points'
          }
     ]
     data = json.dumps({
@@ -427,21 +431,26 @@ def send_intro_screenshots(app, token, user_id):
     characters = {
         "title": "Get to know characters better",
         "image_url": url_for('static', filename="assets/img/hpcast1.jpg", _external=True),
-        "subtitle": "Type \"Characters\" to use this option"
+        "subtitle": "Type \"Characters\" or choose from menu"
     }
     spells = {
         "title": "Get to know spells and how they work",
         "image_url": url_for('static', filename="assets/img/harrypotterspells.jpg", _external=True),
-        "subtitle": "Type \"Spells\" to use this option",
+        "subtitle": "Type \"Spells\" or choose from menu",
     }
     places = {
         "title": "Get to know more places in the magic world",
         "image_url": url_for('static', filename="assets/img/places.jpg", _external=True),
-        "subtitle": "Type \"Places\" to use this option"
+        "subtitle": "Type \"Places\" or choose from menu"
+    }
+    compete = {
+        "title": "Compete with friends to win the House Cup",
+        "image_url": url_for('static', filename="assets/img/cup.jpg", _external=True),
+        "subtitle": "Choose Great Hall from menu and begin your journey"
     }
 
 
-    options = [chat_speak, characters, spells, places]
+    options = [chat_speak, characters, spells, places,compete]
 
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
           params={"access_token": token},

@@ -321,7 +321,9 @@ def webhook():
                         handle_characters(sender_id)
 
                     elif message_payload == "Harry_Botter_House":
+                        FB.show_typing(token, sender_id, 'typing_off')
                         handleViewHouse(db, sender_id)
+                        GreateHallReplies(sender_id)
 
 
                     elif message_payload == "Harry_Botter_Spells":
@@ -336,19 +338,31 @@ def webhook():
 
                     elif message_payload == "Harry_Botter_Trivia_Question":
                         FB.show_typing(token, sender_id, 'typing_off')
-                        handleTempTest(db, sender_id)
+                        handleTrivia(db, sender_id)
 
                     elif message_payload == "Harry_Botter_Profile":
                         FB.show_typing(token, sender_id, 'typing_off')
                         handleProfile(db, sender_id)
+                        GreateHallReplies(sender_id)
 
                     elif message_payload == "Harry_Botter_Houses":
                         FB.show_typing(token, sender_id, 'typing_off')
                         handleViewHouses(db, sender_id)
+                        GreateHallReplies(sender_id)
 
                     elif message_payload == "Harry_Botter_LeaderBoard":
                         FB.show_typing(token, sender_id, 'typing_off')
                         handleLeaderBoard(db, sender_id)
+                        GreateHallReplies(sender_id)
+
+                    elif message_payload == "Harry_Botter_Share":
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        sortHatResult(sender_id)
+                        GreateHallReplies(sender_id)
+
+                    elif message_payload == "Harry_Botter_Get_Points":
+                        FB.show_typing(token, sender_id, 'typing_off')
+                        getpoints(sender_id)
 
 
                     elif message_payload == "character-harry-potter":
@@ -532,28 +546,43 @@ def webhook():
                             handleCorrectAnswer(db,sender_id)
 
                         elif message_payload == "Harry_Botter_House":
+                            FB.show_typing(token, sender_id, 'typing_off')
                             handleViewHouse(db, sender_id)
+                            GreateHallReplies(sender_id)
 
 
                         elif message_payload == "Harry_Botter_SortHat":
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleSortingHat(db, sender_id)
+                            GreateHallReplies(sender_id)
 
                         elif message_payload == "Harry_Botter_Trivia_Question":
                             FB.show_typing(token, sender_id, 'typing_off')
-                            handleTempTest(db, sender_id)
+                            handleTrivia(db, sender_id)
 
                         elif message_payload == "Harry_Botter_Profile":
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleProfile(db, sender_id)
+                            GreateHallReplies(sender_id)
 
                         elif message_payload == "Harry_Botter_Houses":
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleViewHouses(db, sender_id)
+                            GreateHallReplies(sender_id)
 
                         elif message_payload == "Harry_Botter_LeaderBoard":
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleLeaderBoard(db, sender_id)
+                            GreateHallReplies(sender_id)
+
+                        elif message_payload == "Harry_Botter_Share":
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleSortingHat(db, sender_id)
+                            GreateHallReplies(sender_id)
+
+                        elif message_payload == "Harry_Botter_Get_Points":
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            getpoints(sender_id)
 
                         else:
                             user = FB.get_user_fb(token, sender_id)
@@ -568,7 +597,7 @@ def webhook():
                                 handleSortingHat(db, sender_id)
                             elif response == 'temptest':
                                 FB.show_typing(token, sender_id, 'typing_off')
-                                handleTempTest(db, sender_id)
+                                handleTrivia(db, sender_id)
                             elif response == 'profiletest':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleProfile(db, sender_id)
@@ -610,7 +639,7 @@ def webhook():
                             handleSortingHat(db, sender_id)
                         elif response == 'temptest':
                             FB.show_typing(token, sender_id, 'typing_off')
-                            handleTempTest(db, sender_id)
+                            handleTrivia(db, sender_id)
                         elif response == 'profiletest':
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleProfile(db, sender_id)
@@ -1323,7 +1352,7 @@ def refineWikiaArticleContent(specificQuery, articleData, queries, searchRefinem
         return ['', 0],images
 
 def handle_help(user_id):
-    intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and much more!!"
+    intro = "I can help you know more about the Harry Potter World ,Characters ,Spells and sort you in a house to compete with your friends and see who will win the House Cup at the end of each month."
     FB.send_message(os.environ["PAGE_ACCESS_TOKEN"], user_id, intro)
     FB.send_intro_screenshots(app, os.environ["PAGE_ACCESS_TOKEN"], user_id)
 
@@ -1448,7 +1477,7 @@ def sendHouseResult(user_id,title_share,subtitle_share,title,subtitle,url):
                                                                   "buttons":[
                                                                         {
                                                                             "type": "web_url",
-                                                                            "title": "View House",
+                                                                            "title": "Try It!!",
                                                                             "url": "https://www.messenger.com/t/harrybottermessenger?ref=Harry_Botter_Add_Share_Points,"+str(user_id)
                                                                         }
                                                                     ]
@@ -1911,7 +1940,7 @@ def SortingResult(db,user_id):
             db.session.commit()
     sortHatResult(user_id)
 
-def handleTempTest(db,user_id):
+def handleTrivia(db,user_id):
     user = dbAPI.user_exists(db,user_id)
     if not user.house:
         handleSortingHat(db,user_id)
@@ -2048,6 +2077,8 @@ def handleCorrectAnswer(db,user_id):
 
 def handleProfile(db,user_id):
     user = dbAPI.user_exists(db,user_id)
+    if not user.house:
+        handleSortingHat(db,user_id)
     house = user.house
     points = user.points
     if house == 'Hufflepuff':
@@ -2396,7 +2427,6 @@ def handleEveryDayPoints(db,user_id):
             house_obj.points = house_points
             db.session.commit()
 
-
 def send_message(recipient_id, message_text):
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
@@ -2419,6 +2449,68 @@ def send_message(recipient_id, message_text):
     if r.status_code != 200:
         log(r.status_code)
         log(r.text)
+
+def getpoints(user_id):
+    data = {
+        "recipient": {"id": user_id},
+        "message": {
+            "text": 'You have two ways of getting points and glory to your house:\n1)Answer Trivia questions correctly\n2)Share Harry Botter with a friend and get him to try it',
+            "quick_replies": [
+                {
+                    "content_type": "text",
+                    "title": 'Trivia',
+                    "payload": 'Harry_Botter_Trivia_Question'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'Share',
+                    "payload": 'Harry_Botter_Share'
+                }
+            ]
+        }
+    }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def GreateHallReplies(user_id):
+    data = {
+        "recipient": {"id": user_id},
+        "message": {
+            "text": 'Wrong Answer!!',
+            "quick_replies": [
+                {
+                    "content_type": "text",
+                    "title": 'My House',
+                    "payload": 'Harry_Botter_House'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'My Profile',
+                    "payload": 'Harry_Botter_Profile'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'All Houses',
+                    "payload": 'Harry_Botter_Houses'
+                },
+                {
+                    "content_type": "text",
+                    "title": 'Leaderboard',
+                    "payload": 'Harry_Botter_LeaderBoard'
+                },
+            ]
+        }
+    }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
 
 def log(message):  # simple wrapper for logging to stdout on heroku
     # print str(message)
