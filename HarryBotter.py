@@ -162,7 +162,7 @@ QBank = [
 {'The Dreamless sleep potion is what when taken regularly?':[{'No effect':'WrongAns'},{'Less effective':'WrongAns'},{'Poisonus':'WrongAns'},{'Addictive':'CorrectAns'}]},
 ]
 
-
+dbAPI.resetPoints(db)
 # chatterbot = ChatBot("Harry Botter")
 # chatterbot.set_trainer(ChatterBotCorpusTrainer)
 # chatterbot.train(

@@ -2,7 +2,11 @@ from datetime import datetime
 import HarryBotter as HB
 
 
-
+def resetPoints(db):
+    users = HB.User.query.all()
+    for user in users:
+        user.points = 0
+    db.session.commit()
 
 def addHouses(db):
     house1 = HB.House('Hufflepuff')
