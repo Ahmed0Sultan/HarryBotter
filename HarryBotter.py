@@ -2302,6 +2302,11 @@ def handleLeaderBoard(db,user_id):
             third = user
             tpoints = third.points
 
+    if fpoints==0:
+        first = users[0]
+        second = users[1]
+        third = users[2]
+
     FBUser1 = FB.get_user_fb(token, first.user_id)
     FBUser2 = FB.get_user_fb(token, second.user_id)
     FBUser3 = FB.get_user_fb(token, third.user_id)
