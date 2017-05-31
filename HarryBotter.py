@@ -2470,7 +2470,11 @@ def pointsInstructions(user_id):
         "title": "Share Harry Botter with a friend and get him to use it",
         "image_url": url_for('static', filename="assets/img/share.jpg", _external=True),
     }
-    options = [points1,points2]
+    points3 = {
+        "title": "Everyday you interact with Harry Botter you get 10 Points",
+        "image_url": url_for('static', filename="assets/img/points3.jpg", _external=True),
+    }
+    options = [points1,points2,points3]
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps({
