@@ -1500,117 +1500,119 @@ def handleViewHouse(db,user_id):
     user = dbAPI.user_exists(db,user_id)
     if not user.house:
         handleSortingHat(db,user_id)
-    house = user.get_house()
+    else:
 
-    houses = User.query.all()
-    if not house:
-        handleSortingHat(db,user_id)
-        return 'OK'
-    elif house == 'Hufflepuff':
-        house_obj = House.query.filter_by(name=house).first()
-        house_name = 'House Hufflepuff'
-        house_traits = 'Dedication,Hard Work,Fair play,Patience,Kindness'
-        house_founder = 'Helga Hufflepuff'
-        house_founder_url = 'https://vignette3.wikia.nocookie.net/harrypotter/images/8/8c/PR_007_001-e1313269883743.jpg/revision/latest?cb=20140615154415'
-        num = 0
-        points = 0
-        for house_n in houses:
-            if house_n.house == 'Hufflepuff':
-                num += 1
-                points += house_n.points
+        house = user.get_house()
 
-        house_points = points
-        house_members_number = num
-        house_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
-    elif house == 'Ravenclaw':
-        house_obj = House.query.filter_by(name=house).first()
-        house_name = 'House Ravenclaw'
-        house_traits = 'Intelligence,Wit,Wisdom,Creativity,Originality'
-        house_founder = 'Rowena Ravenclaw'
-        house_founder_url = 'https://vignette1.wikia.nocookie.net/harrypotter/images/4/4a/PR_007_007-e1313269741697.jpg/revision/latest?cb=20140615151812'
-        num = 0
-        points = 0
-        for house_n in houses:
-            if house_n.house == 'Ravenclaw':
-                num += 1
-                points += house_n.points
+        houses = User.query.all()
+        if not house:
+            handleSortingHat(db,user_id)
+            return 'OK'
+        elif house == 'Hufflepuff':
+            house_obj = House.query.filter_by(name=house).first()
+            house_name = 'House Hufflepuff'
+            house_traits = 'Dedication,Hard Work,Fair play,Patience,Kindness'
+            house_founder = 'Helga Hufflepuff'
+            house_founder_url = 'https://vignette3.wikia.nocookie.net/harrypotter/images/8/8c/PR_007_001-e1313269883743.jpg/revision/latest?cb=20140615154415'
+            num = 0
+            points = 0
+            for house_n in houses:
+                if house_n.house == 'Hufflepuff':
+                    num += 1
+                    points += house_n.points
 
-        house_points = points
-        house_members_number = num
-        house_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
-    elif house == 'Gryffindor':
-        house_obj = House.query.filter_by(name=house).first()
-        house_name = 'House Gryffindor'
-        house_traits = 'Bravery,Nerve,Chivalry,Courage,Daring'
-        house_founder = 'Godric Gryffindor'
-        house_founder_url = 'https://vignette2.wikia.nocookie.net/harrypotter/images/3/38/PR_007_003-e1313269822422.jpg/revision/latest?cb=20140615154246'
-        num = 0
-        points = 0
-        for house_n in houses:
-            if house_n.house == 'Gryffindor':
-                num += 1
-                points += house_n.points
+            house_points = points
+            house_members_number = num
+            house_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
+        elif house == 'Ravenclaw':
+            house_obj = House.query.filter_by(name=house).first()
+            house_name = 'House Ravenclaw'
+            house_traits = 'Intelligence,Wit,Wisdom,Creativity,Originality'
+            house_founder = 'Rowena Ravenclaw'
+            house_founder_url = 'https://vignette1.wikia.nocookie.net/harrypotter/images/4/4a/PR_007_007-e1313269741697.jpg/revision/latest?cb=20140615151812'
+            num = 0
+            points = 0
+            for house_n in houses:
+                if house_n.house == 'Ravenclaw':
+                    num += 1
+                    points += house_n.points
 
-        house_points = points
-        house_members_number = num
-        house_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
-    elif house == 'Slytherin':
-        house_obj = House.query.filter_by(name=house).first()
-        house_name = 'House Slytherin'
-        house_traits = 'Resourcefulness,Cunning,Ambition,Determination,Self-Preservation'
-        house_founder = 'Salazar Slytherin'
-        house_founder_url = 'https://vignette3.wikia.nocookie.net/harrypotter/images/2/2b/PR_007_005-e1313269785740.jpg/revision/latest?cb=20140615154545'
+            house_points = points
+            house_members_number = num
+            house_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
+        elif house == 'Gryffindor':
+            house_obj = House.query.filter_by(name=house).first()
+            house_name = 'House Gryffindor'
+            house_traits = 'Bravery,Nerve,Chivalry,Courage,Daring'
+            house_founder = 'Godric Gryffindor'
+            house_founder_url = 'https://vignette2.wikia.nocookie.net/harrypotter/images/3/38/PR_007_003-e1313269822422.jpg/revision/latest?cb=20140615154246'
+            num = 0
+            points = 0
+            for house_n in houses:
+                if house_n.house == 'Gryffindor':
+                    num += 1
+                    points += house_n.points
 
-        num = 0
-        points = 0
-        for house_n in houses:
-            if house_n.house == 'Slytherin':
-                num += 1
-                points += house_n.points
+            house_points = points
+            house_members_number = num
+            house_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
+        elif house == 'Slytherin':
+            house_obj = House.query.filter_by(name=house).first()
+            house_name = 'House Slytherin'
+            house_traits = 'Resourcefulness,Cunning,Ambition,Determination,Self-Preservation'
+            house_founder = 'Salazar Slytherin'
+            house_founder_url = 'https://vignette3.wikia.nocookie.net/harrypotter/images/2/2b/PR_007_005-e1313269785740.jpg/revision/latest?cb=20140615154545'
 
-        house_points = points
-        house_members_number = num
-        house_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
-                      data=json.dumps({
-                          "recipient": {"id": user_id},
-                          "message": {
-                              "attachment": {
-                                  "type": "template",
-                                  "payload": {
-                                        "template_type": "list",
-                                        "elements": [
-                                            {
-                                                "title": house_name,
-                                                "image_url": house_url,
-                                                "subtitle":'\n' +  str(house_traits),
+            num = 0
+            points = 0
+            for house_n in houses:
+                if house_n.house == 'Slytherin':
+                    num += 1
+                    points += house_n.points
 
-                                            },
-                                            {
-                                                "title": 'House Founder',
-                                                "image_url": house_founder_url,
-                                                "subtitle":'\n' +  str(house_founder),
-                                            },
-                                            {
-                                                "title": 'House Members Number',
-                                                "subtitle":'\n' +  str(house_members_number),
-                                                "image_url": 'http://www.wetpaint.com/wp-content/uploads/2016/04/harry-potter-cast-then-and-now.jpg',
+            house_points = points
+            house_members_number = num
+            house_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                          params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                          data=json.dumps({
+                              "recipient": {"id": user_id},
+                              "message": {
+                                  "attachment": {
+                                      "type": "template",
+                                      "payload": {
+                                            "template_type": "list",
+                                            "elements": [
+                                                {
+                                                    "title": house_name,
+                                                    "image_url": house_url,
+                                                    "subtitle":'\n' +  str(house_traits),
 
-                                            },
-                                            {
-                                                "title": 'House Overall Points',
-                                                "subtitle":'\n' +  str(house_points),
-                                                "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
-                                            }
-                                        ]
+                                                },
+                                                {
+                                                    "title": 'House Founder',
+                                                    "image_url": house_founder_url,
+                                                    "subtitle":'\n' +  str(house_founder),
+                                                },
+                                                {
+                                                    "title": 'House Members Number',
+                                                    "subtitle":'\n' +  str(house_members_number),
+                                                    "image_url": 'http://www.wetpaint.com/wp-content/uploads/2016/04/harry-potter-cast-then-and-now.jpg',
+
+                                                },
+                                                {
+                                                    "title": 'House Overall Points',
+                                                    "subtitle":'\n' +  str(house_points),
+                                                    "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
+                                                }
+                                            ]
+                                      }
                                   }
                               }
-                          }
-                      }),
-                      headers={'Content-type': 'application/json'})
-    if r.status_code != requests.codes.ok:
-        print r.text
+                          }),
+                          headers={'Content-type': 'application/json'})
+        if r.status_code != requests.codes.ok:
+            print r.text
 
 def send_q1(user_id):
     Q1 = [ {"What would you least like to be called?":
@@ -1944,33 +1946,35 @@ def handleTrivia(db,user_id):
     user = dbAPI.user_exists(db,user_id)
     if not user.house:
         handleSortingHat(db,user_id)
-    question = NLP.oneOf(QBank)
-    title = question.keys()[0]
-    answers = question.get(title)
-    buttons = []
-    for answer in answers:
-        key = answer.keys()[0]
-        value = answer.values()[0]
-        button = {
-            "content_type": "text",
-            "title": key,
-            "payload": value
-        }
-        buttons.append(button)
+    else:
 
-    data = {
-        "recipient": {"id": user_id},
-        "message": {
-            "text": title,
-            "quick_replies": buttons
+        question = NLP.oneOf(QBank)
+        title = question.keys()[0]
+        answers = question.get(title)
+        buttons = []
+        for answer in answers:
+            key = answer.keys()[0]
+            value = answer.values()[0]
+            button = {
+                "content_type": "text",
+                "title": key,
+                "payload": value
+            }
+            buttons.append(button)
+
+        data = {
+            "recipient": {"id": user_id},
+            "message": {
+                "text": title,
+                "quick_replies": buttons
+            }
         }
-    }
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
-                      data=json.dumps(data),
-                      headers={'Content-type': 'application/json'})
-    if r.status_code != requests.codes.ok:
-        print r.text
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                          params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                          data=json.dumps(data),
+                          headers={'Content-type': 'application/json'})
+        if r.status_code != requests.codes.ok:
+            print r.text
 
 def handleWrongAnswer(db,user_id):
     images = ['wrong1.jpg','wrong2.gif','wrong3.jpg','wrong4.jpg','wrong5.gif']
@@ -2079,200 +2083,203 @@ def handleProfile(db,user_id):
     user = dbAPI.user_exists(db,user_id)
     if not user.house:
         handleSortingHat(db,user_id)
-    house = user.house
-    points = user.points
-    if house == 'Hufflepuff':
-        house_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
-    elif house == 'Ravenclaw':
-        house_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
-    elif house == 'Gryffindor':
-        house_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
-    elif house == 'Slytherin':
-        house_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
-    FBUser = FB.get_user_fb(token,user_id)
-    profile_pic = FBUser['profile_pic']
-    first_name = FBUser['first_name']
-    last_name = FBUser['last_name']
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
-                      data=json.dumps({
-                          "recipient": {"id": user_id},
-                          "message": {
-                              "attachment": {
-                                  "type": "template",
-                                  "payload": {
-                                      "template_type": "list",
-                                      "elements": [
-                                          {
-                                              "title": 'Name',
-                                              "image_url": profile_pic,
-                                              "subtitle": '\n' + str(first_name) + ' '+ str(last_name),
+    else:
 
-                                          },
-                                          {
-                                              "title": 'House Name',
-                                              "image_url": house_url,
-                                              "subtitle": '\n' + str(house),
-                                              "buttons": [
-                                                  {
-                                                      "title": "View House",
-                                                      "type": "postback",
-                                                      "payload": "Harry_Botter_House" ,
-                                                  }
+        house = user.house
+        points = user.points
+        if house == 'Hufflepuff':
+            house_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
+        elif house == 'Ravenclaw':
+            house_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
+        elif house == 'Gryffindor':
+            house_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
+        elif house == 'Slytherin':
+            house_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
+        FBUser = FB.get_user_fb(token,user_id)
+        profile_pic = FBUser['profile_pic']
+        first_name = FBUser['first_name']
+        last_name = FBUser['last_name']
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                          params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                          data=json.dumps({
+                              "recipient": {"id": user_id},
+                              "message": {
+                                  "attachment": {
+                                      "type": "template",
+                                      "payload": {
+                                          "template_type": "list",
+                                          "elements": [
+                                              {
+                                                  "title": 'Name',
+                                                  "image_url": profile_pic,
+                                                  "subtitle": '\n' + str(first_name) + ' '+ str(last_name),
 
-                                              ]
-                                          },
-                                          {
-                                              "title": 'Points',
-                                              "subtitle": '\n' + str(points),
-                                              "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
-                                          }
-                                      ]
+                                              },
+                                              {
+                                                  "title": 'House Name',
+                                                  "image_url": house_url,
+                                                  "subtitle": '\n' + str(house),
+                                                  "buttons": [
+                                                      {
+                                                          "title": "View House",
+                                                          "type": "postback",
+                                                          "payload": "Harry_Botter_House" ,
+                                                      }
+
+                                                  ]
+                                              },
+                                              {
+                                                  "title": 'Points',
+                                                  "subtitle": '\n' + str(points),
+                                                  "image_url": 'http://2.bp.blogspot.com/-mHWyCRTthHY/VeDQ6kDRnsI/AAAAAAAAXZ4/WmIvI9ANNL0/s1600/HP3.jpg',
+                                              }
+                                          ]
+                                      }
                                   }
                               }
-                          }
-                      }),
-                      headers={'Content-type': 'application/json'})
-    if r.status_code != requests.codes.ok:
-        print r.text
+                          }),
+                          headers={'Content-type': 'application/json'})
+        if r.status_code != requests.codes.ok:
+            print r.text
 
 def handleViewHouses(db, user_id):
     user = dbAPI.user_exists(db, user_id)
     if not user.house:
         handleSortingHat(db,user_id)
-    houses = User.query.all()
-    house = user.get_house()
-    num_h = 0
-    points_h = 0
-    num_r = 0
-    points_r = 0
-    num_g = 0
-    points_g = 0
-    num_s = 0
-    points_s = 0
-    for house_n in houses:
-        if house_n.house == 'Slytherin':
-            num_s += 1
-            points_s += house_n.points
+    else:
+        houses = User.query.all()
+        house = user.get_house()
+        num_h = 0
+        points_h = 0
+        num_r = 0
+        points_r = 0
+        num_g = 0
+        points_g = 0
+        num_s = 0
+        points_s = 0
+        for house_n in houses:
+            if house_n.house == 'Slytherin':
+                num_s += 1
+                points_s += house_n.points
 
-        elif house_n.house == 'Hufflepuff':
-            num_h += 1
-            points_h += house_n.points
+            elif house_n.house == 'Hufflepuff':
+                num_h += 1
+                points_h += house_n.points
 
-        elif house_n.house == 'Ravenclaw':
-            num_r += 1
-            points_r += house_n.points
+            elif house_n.house == 'Ravenclaw':
+                num_r += 1
+                points_r += house_n.points
 
-        elif house_n.house == 'Gryffindor':
-            num_g += 1
-            points_g += house_n.points
-
-
-    house_points_s = points_s
-    house_members_number_s = num_s
-    house_points_r = points_r
-    house_members_number_r = num_r
-    house_points_h = points_h
-    house_members_number_h = num_h
-    house_points_g = points_g
-    house_members_number_g = num_g
+            elif house_n.house == 'Gryffindor':
+                num_g += 1
+                points_g += house_n.points
 
 
-    if house == 'Hufflepuff':
-        house1_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title1 = 'Hufflepuff'
-        subtitle1 = 'Members: '+ str(house_members_number_h) + '\n\nPoints: '+ str(house_points_h)
-        house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title2 = 'Ravenclaw'
-        subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
-        house3_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title3 = 'Gryffindor'
-        subtitle3 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
-        house4_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title4 = 'Slytherin'
-        subtitle4 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
-    elif house == 'Ravenclaw':
-        house2_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title2 = 'Hufflepuff'
-        subtitle2 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
-        house1_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title1 = 'Ravenclaw'
-        subtitle1 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
-        house3_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title3 = 'Gryffindor'
-        subtitle3 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
-        house4_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title4 = 'Slytherin'
-        subtitle4 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
-    elif house == 'Gryffindor':
-        house3_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title3 = 'Hufflepuff'
-        subtitle3 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
-        house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title2 = 'Ravenclaw'
-        subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
-        house1_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title1 = 'Gryffindor'
-        subtitle1 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
-        house4_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title4 = 'Slytherin'
-        subtitle4 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
-    elif house == 'Slytherin':
-        house4_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title4 = 'Hufflepuff'
-        subtitle4 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
-        house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title2 = 'Ravenclaw'
-        subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
-        house3_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title3 = 'Gryffindor'
-        subtitle3 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
-        house1_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
-        title1 = 'Slytherin'
-        subtitle1 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
+        house_points_s = points_s
+        house_members_number_s = num_s
+        house_points_r = points_r
+        house_members_number_r = num_r
+        house_points_h = points_h
+        house_members_number_h = num_h
+        house_points_g = points_g
+        house_members_number_g = num_g
 
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
-                      data=json.dumps({
-                          "recipient": {"id": user_id},
-                          "message": {
-                              "attachment": {
-                                  "type": "template",
-                                  "payload": {
-                                      "template_type": "list",
-                                      "elements": [
-                                          {
-                                              "title": title1,
-                                              "image_url": house1_url,
-                                              "subtitle": '\n' + str(subtitle1),
 
-                                          },
-                                          {
-                                              "title": title2,
-                                              "image_url": house2_url,
-                                              "subtitle": '\n' + str(subtitle2),
+        if house == 'Hufflepuff':
+            house1_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title1 = 'Hufflepuff'
+            subtitle1 = 'Members: '+ str(house_members_number_h) + '\n\nPoints: '+ str(house_points_h)
+            house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title2 = 'Ravenclaw'
+            subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
+            house3_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title3 = 'Gryffindor'
+            subtitle3 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
+            house4_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title4 = 'Slytherin'
+            subtitle4 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
+        elif house == 'Ravenclaw':
+            house2_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title2 = 'Hufflepuff'
+            subtitle2 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
+            house1_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title1 = 'Ravenclaw'
+            subtitle1 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
+            house3_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title3 = 'Gryffindor'
+            subtitle3 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
+            house4_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title4 = 'Slytherin'
+            subtitle4 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
+        elif house == 'Gryffindor':
+            house3_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title3 = 'Hufflepuff'
+            subtitle3 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
+            house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title2 = 'Ravenclaw'
+            subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
+            house1_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title1 = 'Gryffindor'
+            subtitle1 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
+            house4_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title4 = 'Slytherin'
+            subtitle4 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
+        elif house == 'Slytherin':
+            house4_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title4 = 'Hufflepuff'
+            subtitle4 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
+            house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title2 = 'Ravenclaw'
+            subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
+            house3_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title3 = 'Gryffindor'
+            subtitle3 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
+            house1_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
+            title1 = 'Slytherin'
+            subtitle1 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
 
-                                          },
-                                          {
-                                              "title": title3,
-                                              "image_url": house3_url,
-                                              "subtitle": '\n' + str(subtitle3),
+        r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                          params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                          data=json.dumps({
+                              "recipient": {"id": user_id},
+                              "message": {
+                                  "attachment": {
+                                      "type": "template",
+                                      "payload": {
+                                          "template_type": "list",
+                                          "elements": [
+                                              {
+                                                  "title": title1,
+                                                  "image_url": house1_url,
+                                                  "subtitle": '\n' + str(subtitle1),
 
-                                          },
-                                          {
-                                              "title": title4,
-                                              "image_url": house4_url,
-                                              "subtitle": '\n' + str(subtitle4),
+                                              },
+                                              {
+                                                  "title": title2,
+                                                  "image_url": house2_url,
+                                                  "subtitle": '\n' + str(subtitle2),
 
-                                          }
-                                      ]
+                                              },
+                                              {
+                                                  "title": title3,
+                                                  "image_url": house3_url,
+                                                  "subtitle": '\n' + str(subtitle3),
+
+                                              },
+                                              {
+                                                  "title": title4,
+                                                  "image_url": house4_url,
+                                                  "subtitle": '\n' + str(subtitle4),
+
+                                              }
+                                          ]
+                                      }
                                   }
                               }
-                          }
-                      }),
-                      headers={'Content-type': 'application/json'})
-    if r.status_code != requests.codes.ok:
-        print r.text
+                          }),
+                          headers={'Content-type': 'application/json'})
+        if r.status_code != requests.codes.ok:
+            print r.text
 
 def handleShare(db,user_id,sender_id):
     shared = False
@@ -2280,31 +2287,32 @@ def handleShare(db,user_id,sender_id):
     user = dbAPI.user_exists(db, user_id)
     if not user.house:
         handleSortingHat(db,user_id)
-    # sender = dbAPI.user_exists(db, user_id)
-    user_sharings = Shared_with.query.all()
-    for sharing in user_sharings:
-        if sharing.shared_with_id == sender_id:
-            print 'Shared With before'
-            shared = True
-            break
-    if shared == False:
-        print 'Not Shared With before'
-        share = Shared_with(user_id,sender_id)
-        db.session.add(share)
-        house = user.house
-        house_obj = House.query.filter_by(name=house).first()
-        send_message(user_id, 'You have Shared Harry Botter Successfully with a friend.')
-        send_message(user_id, '10 Point to ' + str(house))
-        # print 'Points isssss ' + str(user.points)
-        user_points = user.points
-        house_points = house_obj.points
-        user_points += 10
-        house_points += 10
-        # user.update_score(points)
-        # house_obj.update_score(points)
-        user.points = user_points
-        house_obj.points = house_points
-        db.session.commit()
+    else:
+        # sender = dbAPI.user_exists(db, user_id)
+        user_sharings = Shared_with.query.all()
+        for sharing in user_sharings:
+            if sharing.shared_with_id == sender_id:
+                print 'Shared With before'
+                shared = True
+                break
+        if shared == False:
+            print 'Not Shared With before'
+            share = Shared_with(user_id,sender_id)
+            db.session.add(share)
+            house = user.house
+            house_obj = House.query.filter_by(name=house).first()
+            send_message(user_id, 'You have Shared Harry Botter Successfully with a friend.')
+            send_message(user_id, '10 Point to ' + str(house))
+            # print 'Points isssss ' + str(user.points)
+            user_points = user.points
+            house_points = house_obj.points
+            user_points += 10
+            house_points += 10
+            # user.update_score(points)
+            # house_obj.update_score(points)
+            user.points = user_points
+            house_obj.points = house_points
+            db.session.commit()
 
 def handleLeaderBoard(db,user_id):
     users = User.query.all()
@@ -2456,7 +2464,7 @@ def pointsInstructions(user_id):
         "image_url": url_for('static', filename="assets/img/wrong4.jpg", _external=True),
     }
     points2 = {
-        "title": "Share Harry Botter with a friend and get him to try it",
+        "title": "Share Harry Botter with a friend and get him to use it",
         "image_url": url_for('static', filename="assets/img/share.jpg", _external=True),
     }
     options = [points1,points2]
