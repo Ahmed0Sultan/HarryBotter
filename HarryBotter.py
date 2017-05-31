@@ -162,7 +162,6 @@ QBank = [
 {'The Dreamless sleep potion is what when taken regularly?':[{'No effect':'WrongAns'},{'Less effective':'WrongAns'},{'Poisonus':'WrongAns'},{'Addictive':'CorrectAns'}]},
 ]
 
-dbAPI.resetPoints(db)
 # chatterbot = ChatBot("Harry Botter")
 # chatterbot.set_trainer(ChatterBotCorpusTrainer)
 # chatterbot.train(
@@ -270,7 +269,7 @@ NO_INFORMATION_AVAILABLE = 'Even \"Hogwarts: A History\" couldn\'t answer that q
 RESPONSE_STARTERS = ['', 'Well, ' 'You see, ', 'I know that ', 'I believe that ', 'It is said that ',
                      'To my knowledge, ']
 dbAPI.addHouses(db)
-
+dbAPI.resetPoints(db)
 @app.route('/privacy', methods=['GET'])
 def privacy():
     return render_template('privacy.html')
