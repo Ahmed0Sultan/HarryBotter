@@ -293,257 +293,32 @@ def webhook():
 
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
+    try:
+        if data["object"] == "page":
 
-    if data["object"] == "page":
+            for entry in data["entry"]:
+                for messaging_event in entry["messaging"]:
+                    if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
+                        sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
+                        handleEveryDayPoints(db, sender_id)
+                        recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+                        message_payload = messaging_event["postback"]["payload"]
+                        if messaging_event["postback"].get("referral"):
+                            message_ref = messaging_event["postback"]["referral"]["ref"]
+                            reply = message_ref.split(',')
+                            if reply[0] == 'Harry_Botter_Add_Share_Points':
+                                handleShare(db, reply[1],sender_id)
+                            print 'Reeeeeeeeeeef is ' + str(message_ref)
+                        user = FB.get_user_fb(token,sender_id)
+                        print 'Message Payload is '+ str(message_payload)
+                        if message_payload == "Harry_Botter_Help":
+                            handle_help(sender_id)
+                            FB.send_quick_replies_help(token, sender_id, '...')
+                        elif message_payload == "Harry_Botter_Get_Started":
+                            handle_first_time_user(db,sender_id,user)
 
-        for entry in data["entry"]:
-            for messaging_event in entry["messaging"]:
-                if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
-                    sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
-                    handleEveryDayPoints(db, sender_id)
-                    recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
-                    message_payload = messaging_event["postback"]["payload"]
-                    if messaging_event["postback"].get("referral"):
-                        message_ref = messaging_event["postback"]["referral"]["ref"]
-                        reply = message_ref.split(',')
-                        if reply[0] == 'Harry_Botter_Add_Share_Points':
-                            handleShare(db, reply[1],sender_id)
-                        print 'Reeeeeeeeeeef is ' + str(message_ref)
-                    user = FB.get_user_fb(token,sender_id)
-                    print 'Message Payload is '+ str(message_payload)
-                    if message_payload == "Harry_Botter_Help":
-                        handle_help(sender_id)
-                        FB.send_quick_replies_help(token, sender_id, '...')
-                    elif message_payload == "Harry_Botter_Get_Started":
-                        handle_first_time_user(db,sender_id,user)
-
-                    elif message_payload == "Harry_Botter_Characters":
-                        handle_characters(sender_id)
-
-                    elif message_payload == "Harry_Botter_House":
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handleViewHouse(db, sender_id)
-                        GreateHallReplies(sender_id)
-
-
-                    elif message_payload == "Harry_Botter_Spells":
-                        handle_spells(sender_id)
-
-                    elif message_payload == "Harry_Botter_Places":
-                        handle_places(sender_id)
-
-                    elif message_payload == "Harry_Botter_SortHat":
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handleSortingHat(db, sender_id)
-
-                    elif message_payload == "Harry_Botter_Trivia_Question":
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handleTrivia(db, sender_id)
-
-                    elif message_payload == "Harry_Botter_Profile":
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handleProfile(db, sender_id)
-                        GreateHallReplies(sender_id)
-
-                    elif message_payload == "Harry_Botter_Houses":
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handleViewHouses(db, sender_id)
-                        GreateHallReplies(sender_id)
-
-                    elif message_payload == "Harry_Botter_LeaderBoard":
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        handleLeaderBoard(db, sender_id)
-                        GreateHallReplies(sender_id)
-
-                    elif message_payload == "Harry_Botter_Share":
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        sortHatResult(sender_id)
-                        GreateHallReplies(sender_id)
-
-                    elif message_payload == "Harry_Botter_Get_Points":
-                        FB.show_typing(token, sender_id, 'typing_off')
-                        getpoints(sender_id)
-
-
-                    elif message_payload == "character-harry-potter":
-                        sendFromQuickReply(sender_id,'Harry Potter')
-                    elif message_payload == "character-ron-weasley":
-                        sendFromQuickReply(sender_id,'Ron Weasley')
-                    elif message_payload == "character-hermione-granger":
-                        sendFromQuickReply(sender_id,'hermione granger')
-                    elif message_payload == "character-albus-dumbledore":
-                        sendFromQuickReply(sender_id,'albus dumbledore')
-
-                    elif message_payload == "spell-aguamenti":
-                        sendFromQuickReply(sender_id,'aguamenti')
-                    elif message_payload == "spell-expecto-patronum":
-                        sendFromQuickReply(sender_id,'expecto patronum')
-                    elif message_payload == "spell-avada-kedavra":
-                        sendFromQuickReply(sender_id,'avada-kedavra')
-                    elif message_payload == "spell-alohomora":
-                        sendFromQuickReply(sender_id,'alohomora')
-
-                    elif message_payload == "place-diagon-alley":
-                        sendFromQuickReply(sender_id,'diagon alley')
-                    elif message_payload == "place-godric-hollow":
-                        sendFromQuickReply(sender_id,'godric\'s hollow')
-                    elif message_payload == "place-hogsmeade":
-                        sendFromQuickReply(sender_id,'hogsmeade')
-                    elif message_payload == "place-hogwarts-express":
-                        sendFromQuickReply(sender_id,'hogwarts express')
-
-
-                if messaging_event.get("referral"):
-                    sender_id = messaging_event["sender"]["id"]
-                    message_ref = messaging_event["referral"]["ref"]
-                    reply = message_ref.split(',')
-                    if reply[0] == 'Harry_Botter_Add_Share_Points':
-                        handleShare(db, reply[1], sender_id)
-
-                print 'Messaging Event is '+ str(messaging_event)
-                if messaging_event.get("message"):  # someone sent us a message
-                    sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
-                    handleEveryDayPoints(db,sender_id)
-                    recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
-                    message = messaging_event["message"]  # the message's text
-                    if messaging_event.get("referral"):
-                        message_ref = messaging_event["referral"]["ref"]
-                        reply = message_ref.split(',')
-                        if reply[0]=='Harry_Botter_Add_Share_Points':
-                            handleShare(db,reply[1],sender_id)
-                        print 'Reeeeeeeeeeef is ' + str(message_ref)
-                    print 'Heeeeeeeeeeeeeeeere '+ str(messaging_event['message'].get('quick_reply'))
-                    if messaging_event['message'].get('quick_reply'):
-                        message_payload = messaging_event['message']['quick_reply']['payload']
-                        if message_payload == "Q1_H":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q1 = 'H'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q1_G":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q1 = 'G'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q1_R":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q1 = 'R'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q1_S":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q1 = 'S'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-
-                        elif message_payload == "Q2_H":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q2 = 'H'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q2_G":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q2 = 'G'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q2_R":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q2 = 'R'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q2_S":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q2 = 'S'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-
-                        elif message_payload == "Q3_H":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q3 = 'H'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q3_G":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q3 = 'G'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q3_R":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q3 = 'R'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q3_S":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q3 = 'S'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-
-                        elif message_payload == "Q4_H":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q4 = 'H'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q4_G":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q4 = 'G'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q4_R":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q4 = 'R'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-                        elif message_payload == "Q4_S":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q4 = 'S'
-                                db.session.commit()
-                                handleSortingHat(db, sender_id)
-
-                        elif message_payload == "Q5_H":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q5 = 'H'
-                                db.session.commit()
-                                SortingResult(db, sender_id)
-                        elif message_payload == "Q5_G":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q5 = 'G'
-                                db.session.commit()
-                                SortingResult(db, sender_id)
-                        elif message_payload == "Q5_R":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q5 = 'R'
-                                db.session.commit()
-                                SortingResult(db, sender_id)
-                        elif message_payload == "Q5_S":
-                            user = User.query.filter_by(user_id=sender_id).first()
-                            if user:
-                                user.q5 = 'S'
-                                db.session.commit()
-                                SortingResult(db, sender_id)
-                        elif message_payload == "WrongAns":
-                            handleWrongAnswer(db,sender_id)
-
-                        elif message_payload == "CorrectAns":
-                            handleCorrectAnswer(db,sender_id)
+                        elif message_payload == "Harry_Botter_Characters":
+                            handle_characters(sender_id)
 
                         elif message_payload == "Harry_Botter_House":
                             FB.show_typing(token, sender_id, 'typing_off')
@@ -551,10 +326,15 @@ def webhook():
                             GreateHallReplies(sender_id)
 
 
+                        elif message_payload == "Harry_Botter_Spells":
+                            handle_spells(sender_id)
+
+                        elif message_payload == "Harry_Botter_Places":
+                            handle_places(sender_id)
+
                         elif message_payload == "Harry_Botter_SortHat":
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleSortingHat(db, sender_id)
-                            GreateHallReplies(sender_id)
 
                         elif message_payload == "Harry_Botter_Trivia_Question":
                             FB.show_typing(token, sender_id, 'typing_off')
@@ -577,13 +357,275 @@ def webhook():
 
                         elif message_payload == "Harry_Botter_Share":
                             FB.show_typing(token, sender_id, 'typing_off')
-                            handleSortingHat(db, sender_id)
+                            sortHatResult(sender_id)
                             GreateHallReplies(sender_id)
 
                         elif message_payload == "Harry_Botter_Get_Points":
                             FB.show_typing(token, sender_id, 'typing_off')
                             getpoints(sender_id)
 
+
+                        elif message_payload == "character-harry-potter":
+                            sendFromQuickReply(sender_id,'Harry Potter')
+                        elif message_payload == "character-ron-weasley":
+                            sendFromQuickReply(sender_id,'Ron Weasley')
+                        elif message_payload == "character-hermione-granger":
+                            sendFromQuickReply(sender_id,'hermione granger')
+                        elif message_payload == "character-albus-dumbledore":
+                            sendFromQuickReply(sender_id,'albus dumbledore')
+
+                        elif message_payload == "spell-aguamenti":
+                            sendFromQuickReply(sender_id,'aguamenti')
+                        elif message_payload == "spell-expecto-patronum":
+                            sendFromQuickReply(sender_id,'expecto patronum')
+                        elif message_payload == "spell-avada-kedavra":
+                            sendFromQuickReply(sender_id,'avada-kedavra')
+                        elif message_payload == "spell-alohomora":
+                            sendFromQuickReply(sender_id,'alohomora')
+
+                        elif message_payload == "place-diagon-alley":
+                            sendFromQuickReply(sender_id,'diagon alley')
+                        elif message_payload == "place-godric-hollow":
+                            sendFromQuickReply(sender_id,'godric\'s hollow')
+                        elif message_payload == "place-hogsmeade":
+                            sendFromQuickReply(sender_id,'hogsmeade')
+                        elif message_payload == "place-hogwarts-express":
+                            sendFromQuickReply(sender_id,'hogwarts express')
+
+
+                    if messaging_event.get("referral"):
+                        sender_id = messaging_event["sender"]["id"]
+                        message_ref = messaging_event["referral"]["ref"]
+                        reply = message_ref.split(',')
+                        if reply[0] == 'Harry_Botter_Add_Share_Points':
+                            handleShare(db, reply[1], sender_id)
+
+                    print 'Messaging Event is '+ str(messaging_event)
+                    if messaging_event.get("message"):  # someone sent us a message
+                        sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+                        handleEveryDayPoints(db,sender_id)
+                        recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+                        message = messaging_event["message"]  # the message's text
+                        if messaging_event.get("referral"):
+                            message_ref = messaging_event["referral"]["ref"]
+                            reply = message_ref.split(',')
+                            if reply[0]=='Harry_Botter_Add_Share_Points':
+                                handleShare(db,reply[1],sender_id)
+                            print 'Reeeeeeeeeeef is ' + str(message_ref)
+                        print 'Heeeeeeeeeeeeeeeere '+ str(messaging_event['message'].get('quick_reply'))
+                        if messaging_event['message'].get('quick_reply'):
+                            message_payload = messaging_event['message']['quick_reply']['payload']
+                            if message_payload == "Q1_H":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q1 = 'H'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q1_G":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q1 = 'G'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q1_R":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q1 = 'R'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q1_S":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q1 = 'S'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+
+                            elif message_payload == "Q2_H":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q2 = 'H'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q2_G":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q2 = 'G'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q2_R":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q2 = 'R'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q2_S":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q2 = 'S'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+
+                            elif message_payload == "Q3_H":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q3 = 'H'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q3_G":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q3 = 'G'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q3_R":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q3 = 'R'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q3_S":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q3 = 'S'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+
+                            elif message_payload == "Q4_H":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q4 = 'H'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q4_G":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q4 = 'G'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q4_R":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q4 = 'R'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+                            elif message_payload == "Q4_S":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q4 = 'S'
+                                    db.session.commit()
+                                    handleSortingHat(db, sender_id)
+
+                            elif message_payload == "Q5_H":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q5 = 'H'
+                                    db.session.commit()
+                                    SortingResult(db, sender_id)
+                            elif message_payload == "Q5_G":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q5 = 'G'
+                                    db.session.commit()
+                                    SortingResult(db, sender_id)
+                            elif message_payload == "Q5_R":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q5 = 'R'
+                                    db.session.commit()
+                                    SortingResult(db, sender_id)
+                            elif message_payload == "Q5_S":
+                                user = User.query.filter_by(user_id=sender_id).first()
+                                if user:
+                                    user.q5 = 'S'
+                                    db.session.commit()
+                                    SortingResult(db, sender_id)
+                            elif message_payload == "WrongAns":
+                                handleWrongAnswer(db,sender_id)
+
+                            elif message_payload == "CorrectAns":
+                                handleCorrectAnswer(db,sender_id)
+
+                            elif message_payload == "Harry_Botter_House":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleViewHouse(db, sender_id)
+                                GreateHallReplies(sender_id)
+
+
+                            elif message_payload == "Harry_Botter_SortHat":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleSortingHat(db, sender_id)
+                                GreateHallReplies(sender_id)
+
+                            elif message_payload == "Harry_Botter_Trivia_Question":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleTrivia(db, sender_id)
+
+                            elif message_payload == "Harry_Botter_Profile":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleProfile(db, sender_id)
+                                GreateHallReplies(sender_id)
+
+                            elif message_payload == "Harry_Botter_Houses":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleViewHouses(db, sender_id)
+                                GreateHallReplies(sender_id)
+
+                            elif message_payload == "Harry_Botter_LeaderBoard":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleLeaderBoard(db, sender_id)
+                                GreateHallReplies(sender_id)
+
+                            elif message_payload == "Harry_Botter_Share":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleSortingHat(db, sender_id)
+                                GreateHallReplies(sender_id)
+
+                            elif message_payload == "Harry_Botter_Get_Points":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                getpoints(sender_id)
+
+                            else:
+                                user = FB.get_user_fb(token, sender_id)
+                                FB.show_typing(token, sender_id)
+                                response, images = processIncoming(sender_id, message)
+                                if response == 'help':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    handle_help(sender_id)
+                                    FB.send_quick_replies_help(token, sender_id, '...')
+                                elif response == 'sorthattest':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    handleSortingHat(db, sender_id)
+                                elif response == 'temptest':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    handleTrivia(db, sender_id)
+                                elif response == 'profiletest':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    handleProfile(db, sender_id)
+                                elif response == 'housestest':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    handleViewHouses(db, sender_id)
+
+                                elif response == 'leaderboardtest':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    handleLeaderBoard(db, sender_id)
+                                elif response == 'characters':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    handle_characters(sender_id)
+                                elif response == 'spells':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    handle_spells(sender_id)
+                                elif response == 'places':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    handle_places(sender_id)
+                                elif response == 'How can I help you?':
+                                    FB.send_quick_replies_help(token, sender_id, 'How can I help you?')
+                                else:
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    FB.send_message(token, sender_id, response)
+                                    if images:
+                                        print 'Images here ' + str(images)
+                                        FB.send_message(token, sender_id, 'Here are some pictures ;)')
+                                        FB.send_group_pictures(app, token, sender_id, images)
                         else:
                             user = FB.get_user_fb(token, sender_id)
                             FB.show_typing(token, sender_id)
@@ -625,51 +667,12 @@ def webhook():
                                 if images:
                                     print 'Images here ' + str(images)
                                     FB.send_message(token, sender_id, 'Here are some pictures ;)')
-                                    FB.send_group_pictures(app, token, sender_id, images)
-                    else:
-                        user = FB.get_user_fb(token, sender_id)
-                        FB.show_typing(token, sender_id)
-                        response, images = processIncoming(sender_id, message)
-                        if response == 'help':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handle_help(sender_id)
-                            FB.send_quick_replies_help(token, sender_id, '...')
-                        elif response == 'sorthattest':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handleSortingHat(db, sender_id)
-                        elif response == 'temptest':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handleTrivia(db, sender_id)
-                        elif response == 'profiletest':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handleProfile(db, sender_id)
-                        elif response == 'housestest':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handleViewHouses(db, sender_id)
+                                    FB.send_group_pictures(app,token,sender_id,images)
 
-                        elif response == 'leaderboardtest':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handleLeaderBoard(db, sender_id)
-                        elif response == 'characters':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handle_characters(sender_id)
-                        elif response == 'spells':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handle_spells(sender_id)
-                        elif response == 'places':
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            handle_places(sender_id)
-                        elif response == 'How can I help you?':
-                            FB.send_quick_replies_help(token, sender_id, 'How can I help you?')
-                        else:
-                            FB.show_typing(token, sender_id, 'typing_off')
-                            FB.send_message(token, sender_id, response)
-                            if images:
-                                print 'Images here ' + str(images)
-                                FB.send_message(token, sender_id, 'Here are some pictures ;)')
-                                FB.send_group_pictures(app,token,sender_id,images)
+                    return "ok"
+    except Exception, e:
+        print e
 
-                return "ok"
 
 
 
