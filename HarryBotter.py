@@ -86,58 +86,58 @@ QBank = [
 {'How does the Sorting Hat aid Harry in the Chamber of Secrets?':[{'It kills the Basilisk':'WrongAns'},{'It presents him with Gryffindor\'s sword':'CorrectAns'},{'It pokes out the Basilisk\'s eye':'WrongAns'},{'It shouts words of encouragement':'WrongAns'}]},
 {'What do Ron and Hermione find in the Chamber of Secrets that can kill Horcruxes?':[{'Sword of Gryffindor Fangs':'WrongAns'},{'Basilisk Fangs':'CorrectAns'},{'Stinging Nettles':'WrongAns'},{'Blood-Soaked Dagger':'WrongAns'}]},
 {'What deed must one perform to create a Horcrux?':[{'Throw a party':'WrongAns'},{'Give a blood sacrifice':'WrongAns'},{'Love Someone':'WrongAns'},{'Murder Someone':'CorrectAns'}]},
-{'Which of these is not one of Voldemort\'s Horcruxes?':[{'Snape\'s Potions Textbook':'CorrectAns'},{'Tom Riddle\'s Diary':'WrongAns'},{'Gaunt\'s Ring':'WrongAns'},{'Slytherin&apos;s Locket':'WrongAns'}]},
-{'What is the consequence of breaking an unbreakable vow?':[{'You&apos;re Cursed':'WrongAns'},{'You Shrink':'WrongAns'},{'You Die':'CorrectAns'},{'You Disappear':'WrongAns'}]},
+{'Which of these is not one of Voldemort\'s Horcruxes?':[{'Snape\'s Potions Textbook':'CorrectAns'},{'Tom Riddle\'s Diary':'WrongAns'},{'Gaunt\'s Ring':'WrongAns'},{'Slytherin\'s Locket':'WrongAns'}]},
+{'What is the consequence of breaking an unbreakable vow?':[{'You\'re Cursed':'WrongAns'},{'You Shrink':'WrongAns'},{'You Die':'CorrectAns'},{'You Disappear':'WrongAns'}]},
 {'What spell does Hermione use to set a flock of birds on Ron?':[{'Avis':'CorrectAns'},{'Avifors':'WrongAns'},{'Avios':'WrongAns'},{'Avifo':'WrongAns'}]},
-{'Which charm, which enforces the Hogsmeade curfew, produces a loud screech when someone steps into it&apos;s radius?':[{'Bubble-Head Charm':'WrongAns'},{'Revealing Charm':'WrongAns'},{'Caterwauling Charm':'CorrectAns'},{'Intruder Charm':'WrongAns'}]},
-{'Which spell does Hermione cast to freeze the pixies in Professor Lockhart&apos;s class?':[{'Impedimenta':'WrongAns'},{'Immobolus':'CorrectAns'},{'Inanimatus Conjurus':'WrongAns'},{'Incarcerous':'WrongAns'}]},
+{'Which charm, which enforces the Hogsmeade curfew, produces a loud screech when someone steps into it\'s radius?':[{'Bubble-Head Charm':'WrongAns'},{'Revealing Charm':'WrongAns'},{'Caterwauling Charm':'CorrectAns'},{'Intruder Charm':'WrongAns'}]},
+{'Which spell does Hermione cast to freeze the pixies in Professor Lockhart\'s class?':[{'Impedimenta':'WrongAns'},{'Immobolus':'CorrectAns'},{'Inanimatus Conjurus':'WrongAns'},{'Incarcerous':'WrongAns'}]},
 {'Which spell does Dumbledore use to save Harry when he falls off his broom during a Quidditch match?':[{'Ascendio':'WrongAns'},{'Anteoculatia':'WrongAns'},{'Aresto Momentum':'CorrectAns'},{'Baubillious':'WrongAns'}]},
-{'The curse whose incantation is &quot;Mucus ad Nauseam&quot; has what effect on it&apos;s target?':[{'Enlarged ears':'WrongAns'},{'Lack of airflow to lungs':'WrongAns'},{'A massive headache':'WrongAns'},{'An extremely runny nose':'CorrectAns'}]},
+{'The curse whose incantation is \"Mucus ad Nauseam\" has what effect on it\'s target?':[{'Enlarged ears':'WrongAns'},{'Lack of airflow to lungs':'WrongAns'},{'A massive headache':'WrongAns'},{'An extremely runny nose':'CorrectAns'}]},
 {'Depulso (Banishing charm) has the opposite effect to which spell?':[{'Crucio':'WrongAns'},{'Accio':'CorrectAns'},{'Defodio':'WrongAns'},{'Confringo':'WrongAns'}]},
 {'Which spell causes the target to swell in physical size?':[{'Entomorphis':'WrongAns'},{'Engorgio':'CorrectAns'},{'Evanesce':'WrongAns'},{'Incarcerous':'WrongAns'}]},
 {'Locomotor Wibbly is known by what other name?':[{'Jelly-Fingers Curse':'WrongAns'},{'Jelly-Brain Jinx':'WrongAns'},{'Jelly-Legs Curse':'CorrectAns'},{'Jelly-Arms Curse':'WrongAns'}]},
 {'What spell does James Potter cast on Severus Snape in his teenage years, that levitates Snape upside-down by his ankles?':[{'Liberacorpus':'WrongAns'},{'Wingardium-Corpus':'WrongAns'},{'Levicorpus':'CorrectAns'},{'Corpus-Leviosa':'WrongAns'}]},
 {'What curse prevents witches and wizards from discussing the location of Grimmault place, when it acts as the headquarters for the Order?':[{'Tongue-Tying Curse':'CorrectAns'},{'Full Body-Bind Curse':'WrongAns'},{'Reductor Curse':'WrongAns'},{'Conjunctivitis Curse':'WrongAns'}]},
-{'Which potion does Harry brew in Slughorn&apos;s class to win a vial of Felix Felicis?':[{'Draught of Dying':'WrongAns'},{'Draught of Living Death':'CorrectAns'},{'Lifeless Draught':'WrongAns'},{'Invigoration Draught':'WrongAns'}]},
+{'Which potion does Harry brew in Slughorn\'s class to win a vial of Felix Felicis?':[{'Draught of Dying':'WrongAns'},{'Draught of Living Death':'CorrectAns'},{'Lifeless Draught':'WrongAns'},{'Invigoration Draught':'WrongAns'}]},
 {'Wolfsbane potion eases the symptoms of what?':[{'Rhumanthropy':'WrongAns'},{'Tyronthropy':'WrongAns'},{'Lycanthropy':'CorrectAns'},{'Ayanthropy':'WrongAns'}]},
-{'Which potion did Voldemort use to protect Salazar Slytherin&apos;s locket (a horcrux)?':[{'Dogbane Potion':'WrongAns'},{'Baneberry Poision':'WrongAns'},{'Dragon Poison':'WrongAns'},{'Drink of Despair':'CorrectAns'}]},
+{'Which potion did Voldemort use to protect Salazar Slytherin\'s locket (a horcrux)?':[{'Dogbane Potion':'WrongAns'},{'Baneberry Poision':'WrongAns'},{'Dragon Poison':'WrongAns'},{'Drink of Despair':'CorrectAns'}]},
 {'At the start of the Quidditch World Cup, which spell does Bagman use to increase the volume of his voice as he announces the game?':[{'Sonorus':'CorrectAns'},{'Amplifie':'WrongAns'},{'Incantum Sonar':'WrongAns'},{'Volum Maxima':'WrongAns'}]},
-{'Which spell, which caused her to grow antlers, was used on Pansy Parkinson during a student rebellion after Fred and George&apos;s departure from Hogwarts?':[{'Aparceium':'WrongAns'},{'Antleroneo':'WrongAns'},{'Antlamoria':'WrongAns'},{'Anteoculatia':'CorrectAns'}]},
+{'Which spell, which caused her to grow antlers, was used on Pansy Parkinson during a student rebellion after Fred and George\'s departure from Hogwarts?':[{'Aparceium':'WrongAns'},{'Antleroneo':'WrongAns'},{'Antlamoria':'WrongAns'},{'Anteoculatia':'CorrectAns'}]},
 {'Which spell blasts away arachnids?':[{'Arania Expulso':'WrongAns'},{'Arania Exumai':'CorrectAns'},{'Arachnia Expulso':'WrongAns'},{'Arachnia Aspiria':'WrongAns'}]},
-{'Lockhart unsuccessfuly tries to fix Harry&apos;s broken arm after he falls from his broom with which spell?':[{'Brackium Emendo':'CorrectAns'},{'Skele-Gro':'WrongAns'},{'Corpio Mendes':'WrongAns'},{'Skeleta Engorgio':'WrongAns'}]},
-{'Which of these charms is NOT included in Harry&apos;s OWL exam for Charms.':[{'Levitation Charm':'WrongAns'},{'Cheering Charm':'WrongAns'},{'Cushioning Charm':'CorrectAns'},{'Color Change Charm':'WrongAns'}]},
+{'Lockhart unsuccessfuly tries to fix Harry\'s broken arm after he falls from his broom with which spell?':[{'Brackium Emendo':'CorrectAns'},{'Skele-Gro':'WrongAns'},{'Corpio Mendes':'WrongAns'},{'Skeleta Engorgio':'WrongAns'}]},
+{'Which of these charms is NOT included in Harry\'s OWL exam for Charms.':[{'Levitation Charm':'WrongAns'},{'Cheering Charm':'WrongAns'},{'Cushioning Charm':'CorrectAns'},{'Color Change Charm':'WrongAns'}]},
 {'What did Crabbe conjure in the final novel that ultimately resulted in his death?':[{'Firestorm':'WrongAns'},{'Fiendfyre':'CorrectAns'},{'Bewitched Snowballs':'WrongAns'},{'Bluebell flames':'WrongAns'}]},
 {'What charm did medieval witches use to protect themselves during witch burnings?':[{'Flame-Repelling Charm':'WrongAns'},{'Flame-Freezing Charm':'CorrectAns'},{'Flame-Protection Charm':'WrongAns'},{'Fire-Extinguishing Charm':'WrongAns'}]},
 {'Which spell does Hermione use to detect the presence of humans in Grimmauld place?':[{'Homeorevel':'WrongAns'},{'Homenum Expelia':'WrongAns'},{'Homeosape Revel':'WrongAns'},{'Homenum Revelio':'CorrectAns'}]},
 {'The Impervius Charm has what effect?':[{'It makes doors impenetrable':'WrongAns'},{'It makes the target cry':'WrongAns'},{'It repels substance':'CorrectAns'},{'It controls the mind':'WrongAns'}]},
-{'In Harry&apos;s private lessons with Professor Snape, what is he learning to protect himself against?':[{'The Imperio Curse':'WrongAns'},{'Legilimency':'CorrectAns'},{'Voldemort&apos;s Horcrux':'WrongAns'},{'Prior Incantato':'WrongAns'}]},
+{'In Harry\'s private lessons with Professor Snape, what is he learning to protect himself against?':[{'The Imperio Curse':'WrongAns'},{'Legilimency':'CorrectAns'},{'Voldemort\'s Horcrux':'WrongAns'},{'Prior Incantato':'WrongAns'}]},
 {'What is the name of the magical phenomenon that occurs when two wands that share the same core are forced to compete in combat?':[{'Priorita Incantem':'WrongAns'},{'Prioincantema':'WrongAns'},{'Priori Incantatem':'CorrectAns'},{'Prior Incantato':'WrongAns'}]},
 {'What spell is used to make the target release whatever it is holding or binding?':[{'Rennervate':'WrongAns'},{'Relashio':'CorrectAns'},{'Reparifors':'WrongAns'},{'Reducto':'WrongAns'}]},
 {'Rennervate reverses the effects of what?':[{'Being Tired':'WrongAns'},{'Being Disfigured':'WrongAns'},{'Being Burned':'WrongAns'},{'Being Stunned':'CorrectAns'}]},
 {'Rictusempra induces what sensation?':[{'Sleeping':'WrongAns'},{'Laughing':'WrongAns'},{'Smiling':'WrongAns'},{'Tickling':'CorrectAns'}]},
 {'Which hex does Hermione cast on Harry to hide his true identity from the snatchers?':[{'Bedazzling Hex':'WrongAns'},{'Bat-Bogey Hex':'WrongAns'},{'Stinging Hex':'CorrectAns'},{'Hurling Hex':'WrongAns'}]},
 {'Which curse showed the snatchers the location of Harry Potter in the Second Wizarding War?':[{'The Ear-Shrivelling Curse':'WrongAns'},{'The Babbling Curse':'WrongAns'},{'The Taboo Curse':'CorrectAns'},{'The Imperius Curse':'WrongAns'}]},
-{'In Harry&apos;s final transfiguration exam of his third year at Hogwarts, which transforming spell is he required to perform?':[{'Raven to Writing Desk':'WrongAns'},{'Snail to Teapot':'WrongAns'},{'Human to Chicken':'WrongAns'},{'Teapot to Tortoise':'CorrectAns'}]},
-{'Which of these is not a piece of security in Gringotts?':[{'Veritaserum':'CorrectAns'},{'The Gemino Charm':'WrongAns'},{'A Dragon':'WrongAns'},{'The Thief&apos;s Downfall':'WrongAns'}]},
+{'In Harry\'s final transfiguration exam of his third year at Hogwarts, which transforming spell is he required to perform?':[{'Raven to Writing Desk':'WrongAns'},{'Snail to Teapot':'WrongAns'},{'Human to Chicken':'WrongAns'},{'Teapot to Tortoise':'CorrectAns'}]},
+{'Which of these is not a piece of security in Gringotts?':[{'Veritaserum':'CorrectAns'},{'The Gemino Charm':'WrongAns'},{'A Dragon':'WrongAns'},{'The Thief\'s Downfall':'WrongAns'}]},
 {'What is the incantation to transform an animal into a water goblet?':[{'Vero Verta':'WrongAns'},{'Vera Verto':'CorrectAns'},{'Piertotum Locomotor':'WrongAns'},{'Vipera Evanesca':'WrongAns'}]},
 {'Which of these love potions is the strongest?':[{'Twilight Moonbeams':'WrongAns'},{'Beguiling Bubbles':'WrongAns'},{'Amortentia':'CorrectAns'},{'Cupid Crystals':'WrongAns'}]},
-{'Which of these creatures was not part of Professor Lupin&apos;s curriculum when he taught Defense Against the Dark Arts at Hogwarts?':[{'Grindylows':'WrongAns'},{'Hinkypunks':'WrongAns'},{'Cornish Pixies':'CorrectAns'},{'Vampires':'WrongAns'}]},
+{'Which of these creatures was not part of Professor Lupin\'s curriculum when he taught Defense Against the Dark Arts at Hogwarts?':[{'Grindylows':'WrongAns'},{'Hinkypunks':'WrongAns'},{'Cornish Pixies':'CorrectAns'},{'Vampires':'WrongAns'}]},
 {'What happens when Bubotuber pus comes in contact with human skin?':[{'Burns your skin':'WrongAns'},{'Sticks to your skin':'WrongAns'},{'A rash forms':'WrongAns'},{'Boils appear':'CorrectAns'}]},
 {'Mimbulus Mimbletonia spews what when touched?':[{'Bubotuber Pus':'WrongAns'},{'Stinksap':'CorrectAns'},{'Draught of Living Death':'WrongAns'},{'Elixir of Life':'WrongAns'}]},
-{'Which of these tree&apos;s wood is not used in the making of wands':[{'Oak':'WrongAns'},{'Yew':'WrongAns'},{'Cherry':'WrongAns'},{'Palm':'CorrectAns'}]},
+{'Which of these tree\'s wood is not used in the making of wands':[{'Oak':'WrongAns'},{'Yew':'WrongAns'},{'Cherry':'WrongAns'},{'Palm':'CorrectAns'}]},
 {'Which of these dragons was not in the Triwizard Tournament?':[{'Norweigan Ridgeback':'WrongAns'},{'Common Welsh Creen':'WrongAns'},{'Ukranian Ironbelly':'CorrectAns'},{'Hungarian Horntail':'WrongAns'}]},
-{'What do niffler&apos;s sniff out?':[{'Wands':'WrongAns'},{'Lava Rocks':'WrongAns'},{'Dead Wizards':'WrongAns'},{'Shiny Treasure':'CorrectAns'}]},
+{'What do niffler\'s sniff out?':[{'Wands':'WrongAns'},{'Lava Rocks':'WrongAns'},{'Dead Wizards':'WrongAns'},{'Shiny Treasure':'CorrectAns'}]},
 {'What piece of jewellery holds the curse that hits Katie Bell when she touches it?':[{'Anklet':'WrongAns'},{'Ring':'WrongAns'},{'Necklace':'CorrectAns'},{'Bracelet':'WrongAns'}]},
 {'How does Umbridge torture her students in detention?':[{'A Blood Quill':'CorrectAns'},{'She Curses Them':'WrongAns'},{'She Hits Them':'WrongAns'},{'Crucio':'WrongAns'}]},
 {'What charm does Hermione use to expand the space available inside her handbag in the Deathly Hallows?':[{'Expanding Space Charm':'WrongAns'},{'Undetectable Extension Charm':'CorrectAns'},{'Increased Area Charm':'WrongAns'},{'Never-Full Charm':'WrongAns'}]},
-{'Which spell does Harry use to fill Dumbledore&apos;s crystal goblet with water in the Horcrux cave?':[{'Aquamenta':'WrongAns'},{'Aguamenti':'CorrectAns'},{'Agua-Conjurus':'WrongAns'},{'Agua Eructo':'WrongAns'}]},
+{'Which spell does Harry use to fill Dumbledore\'s crystal goblet with water in the Horcrux cave?':[{'Aquamenta':'WrongAns'},{'Aguamenti':'CorrectAns'},{'Agua-Conjurus':'WrongAns'},{'Agua Eructo':'WrongAns'}]},
 {'What spell does James Potter use on Severus Snape that prevents Snape from moving towards James?':[{'Protego Horribilis':'WrongAns'},{'Mobiliarbus':'WrongAns'},{'Locomotor Wibbly':'WrongAns'},{'Impedimenta':'CorrectAns'}]},
 {'What is the incantation for the spell that Lockhart unsuccessfuly uses to get rid of the pixies in his classrom?':[{'Peskipsi Postoni':'WrongAns'},{'Peski Pixies Nomi':'WrongAns'},{'Piksi Pestroni':'WrongAns'},{'Peskipiksi Pesternomi':'CorrectAns'}]},
 {'Which charm fills the ears of anyone in the vicinity with a buzzing noise?':[{'Fidelius Charm':'WrongAns'},{'Caterwauling Charm':'WrongAns'},{'Muffliato Charm':'CorrectAns'},{'Homorphus Charm':'WrongAns'}]},
 {'Which spell does Lockhart use unsuccessfully during duelling club to banish the snake that has been set on Harry?':[{'Crucio':'WrongAns'},{'Alarte Ascendare':'CorrectAns'},{'Confringo':'WrongAns'},{'Defodio':'WrongAns'}]},
 {'Which spell does Horace Slughorn use on Marcus Belby to clear his airway while choking on pheasant?':[{'Ascenda Oesophago':'WrongAns'},{'Anteoculatia':'WrongAns'},{'Anapneo':'CorrectAns'},{'Arania Eructo':'WrongAns'}]},
-{'Which spell does Ollivander use to test Fleur&apos;s wand before the Tri-Wizard Tournament?':[{'Muffliato':'WrongAns'},{'Lumos':'WrongAns'},{'Deletrius':'WrongAns'},{'Orchideous':'CorrectAns'}]},
-{'What is the twelfth use of Dragon&apos;s Blood?':[{'Curing Wounds':'WrongAns'},{'Immortality':'WrongAns'},{'Deadly Poison':'WrongAns'},{'Oven Cleaning':'CorrectAns'}]},
+{'Which spell does Ollivander use to test Fleur\'s wand before the Tri-Wizard Tournament?':[{'Muffliato':'WrongAns'},{'Lumos':'WrongAns'},{'Deletrius':'WrongAns'},{'Orchideous':'CorrectAns'}]},
+{'What is the twelfth use of Dragon\'s Blood?':[{'Curing Wounds':'WrongAns'},{'Immortality':'WrongAns'},{'Deadly Poison':'WrongAns'},{'Oven Cleaning':'CorrectAns'}]},
 {'According to Luna, Gurdyroot is effective at warding off what?':[{'Crumple-Horned Snorkack':'WrongAns'},{'Gulping Plimpies':'CorrectAns'},{'Wrackspurts':'WrongAns'},{'Dabberblimps':'WrongAns'}]},
 {'What is not an ingredient in Polyjuice potion?':[{'Boomslang Skin':'WrongAns'},{'Lacewing Flies':'WrongAns'},{'Aconite':'CorrectAns'},{'Bicorn Horn':'WrongAns'}]},
 {'What is a characteristic of Amortenia?':[{'Clear and Odourless appearance':'WrongAns'},{'Heart shaped smoke':'WrongAns'},{'Sweet Smell':'WrongAns'},{'Mother of Pearl Sheen':'CorrectAns'}]},
@@ -148,10 +148,10 @@ QBank = [
 {'What incantation conjures a fiery rope?':[{'Flagrate':'CorrectAns'},{'Incendiope':'WrongAns'},{'Avis':'WrongAns'},{'Dormiens':'WrongAns'}]},
 {'What is the incantation for the vanishing spell?':[{'Revoir':'WrongAns'},{'Fleum':'WrongAns'},{'Vanishia':'WrongAns'},{'Evanesco':'CorrectAns'}]},
 {'How long does Felix Felicis take to brew?':[{'1 year':'WrongAns'},{'1 month':'WrongAns'},{'6 months':'CorrectAns'},{'4 months':'WrongAns'}]},
-{'How many shades appear out of Voldemort&apos;s wand in Priori Incantatem?':[{'3':'WrongAns'},{'4':'WrongAns'},{'5':'CorrectAns'},{'6':'WrongAns'}]},
+{'How many shades appear out of Voldemort\'s wand in Priori Incantatem?':[{'3':'WrongAns'},{'4':'WrongAns'},{'5':'CorrectAns'},{'6':'WrongAns'}]},
 {'What creature did Tom Riddle accuse Hagrid of raising and using to petrify students when the Chamber of Secrets was first opened?':[{'Dragon':'WrongAns'},{'Basilisk':'WrongAns'},{'Acromantula':'CorrectAns'},{'Fire Crab':'WrongAns'}]},
 {'What creature is commonly found in wand-wood trees?':[{'Crumple Horned Snorkack':'WrongAns'},{'Phoenix':'WrongAns'},{'Augury':'WrongAns'},{'Bowtruckle':'CorrectAns'}]},
-{'What horn was present on the wall of Xenophilius&apos;s Lovegood&apos;s house?':[{'Crumple Horned Snorkack':'WrongAns'},{'Erumpent':'CorrectAns'},{'Unicorn':'WrongAns'},{'Graphorn':'WrongAns'}]},
+{'What horn was present on the wall of Xenophilius\'s Lovegood\'s house?':[{'Crumple Horned Snorkack':'WrongAns'},{'Erumpent':'CorrectAns'},{'Unicorn':'WrongAns'},{'Graphorn':'WrongAns'}]},
 {'Where did Professor Snape claim the Kappa is most commonly found?':[{'Russia':'WrongAns'},{'China':'WrongAns'},{'Mongolia':'CorrectAns'},{'Japan':'WrongAns'}]},
 {'Where is a Kappa most commonly found?':[{'Japan':'CorrectAns'},{'Mongolia':'WrongAns'},{'China':'WrongAns'},{'Korea':'WrongAns'}]},
 {'What is the opposite of the Alohamora spell?':[{'Closaportus':'WrongAns'},{'Clauditis':'WrongAns'},{'Alohimara':'WrongAns'},{'Colloportus':'CorrectAns'}]},
@@ -2450,11 +2450,40 @@ def send_message(recipient_id, message_text):
         log(r.status_code)
         log(r.text)
 
+def pointsInstructions(user_id):
+    points1 = {
+        "title": "Answer Trivia questions correctly",
+        "image_url": url_for('static', filename="assets/img/wrong4.jpg", _external=True),
+    }
+    points2 = {
+        "title": "hare Harry Botter with a friend and get him to try it",
+        "image_url": url_for('static', filename="assets/img/share.jpg", _external=True),
+    }
+    options = [points1,points2]
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=json.dumps({
+                          "recipient": {"id": user_id},
+                          "message": {
+                              "attachment": {
+                                  "type": "template",
+                                  "payload": {
+                                      "template_type": "generic",
+                                      "elements": options
+                                  }
+                              }
+                          }
+                      }),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
 def getpoints(user_id):
+    pointsInstructions(user_id)
     data = {
         "recipient": {"id": user_id},
         "message": {
-            "text": 'You have two ways of getting points and glory to your house:\n1)Answer Trivia questions correctly\n2)Share Harry Botter with a friend and get him to try it',
+            "text": 'Now, What do you want to do?',
             "quick_replies": [
                 {
                     "content_type": "text",
