@@ -1469,6 +1469,8 @@ def sendHouseResult(user_id,title_share,subtitle_share,title,subtitle,url):
 
 def handleViewHouse(db,user_id):
     user = dbAPI.user_exists(db,user_id)
+    if not user.house:
+        handleSortingHat(db,user_id)
     house = user.get_house()
 
     houses = User.query.all()
@@ -1910,6 +1912,9 @@ def SortingResult(db,user_id):
     sortHatResult(user_id)
 
 def handleTempTest(db,user_id):
+    user = dbAPI.user_exists(db,user_id)
+    if not user.house:
+        handleSortingHat(db,user_id)
     question = NLP.oneOf(QBank)
     title = question.keys()[0]
     answers = question.get(title)
@@ -2102,6 +2107,8 @@ def handleProfile(db,user_id):
 
 def handleViewHouses(db, user_id):
     user = dbAPI.user_exists(db, user_id)
+    if not user.house:
+        handleSortingHat(db,user_id)
     houses = User.query.all()
     house = user.get_house()
     num_h = 0
@@ -2240,6 +2247,8 @@ def handleShare(db,user_id,sender_id):
     shared = False
     # print ' Wooowzzaaaaaa'
     user = dbAPI.user_exists(db, user_id)
+    if not user.house:
+        handleSortingHat(db,user_id)
     # sender = dbAPI.user_exists(db, user_id)
     user_sharings = Shared_with.query.all()
     for sharing in user_sharings:
@@ -2306,6 +2315,13 @@ def handleLeaderBoard(db,user_id):
         first = users[0]
         second = users[1]
         third = users[2]
+
+    elif spoints==0:
+        second = users[0]
+        third = users[1]
+
+    elif tpoints==0:
+        third = users[0]
 
     FBUser1 = FB.get_user_fb(token, first.user_id)
     FBUser2 = FB.get_user_fb(token, second.user_id)
