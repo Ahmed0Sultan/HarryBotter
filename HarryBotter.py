@@ -2204,7 +2204,7 @@ def handleViewHouses(db, user_id):
         if house == 'Hufflepuff':
             house1_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
             title1 = 'Hufflepuff'
-            subtitle1 = 'Members: '+ str(house_members_number_h) + '|Points: '+ str(house_points_h)
+            subtitle1 = 'Members: '+ str(house_members_number_h) + '\n\nPoints: '+ str(house_points_h)
             house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
             title2 = 'Ravenclaw'
             subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
@@ -2220,7 +2220,7 @@ def handleViewHouses(db, user_id):
             subtitle2 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
             house1_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
             title1 = 'Ravenclaw'
-            subtitle1 = 'Members: ' + str(house_members_number_r) + '|Points: ' + str(house_points_r)
+            subtitle1 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
             house3_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
             title3 = 'Gryffindor'
             subtitle3 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
@@ -2236,7 +2236,7 @@ def handleViewHouses(db, user_id):
             subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
             house1_url = 'https://images.pottermore.com/bxd3o8b291gf/49zkCzoZlekCmSq6OsycAm/da6278c1af372f18f8b6a71b226e0814/PM_House_Pages_400_x_400_px_FINAL_CREST2.png?w=550&h=550&fit=thumb&f=center&q=85'
             title1 = 'Gryffindor'
-            subtitle1 = 'Members: ' + str(house_members_number_g) + '|Points: ' + str(house_points_g)
+            subtitle1 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
             house4_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
             title4 = 'Slytherin'
             subtitle4 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
@@ -2252,7 +2252,7 @@ def handleViewHouses(db, user_id):
             subtitle3 = 'Members: ' + str(house_members_number_g) + '\n\nPoints: ' + str(house_points_g)
             house1_url = 'https://images.pottermore.com/bxd3o8b291gf/4U98maPA5aEUWcO8uOisOq/e01e17cc414b960380acbf8ace1dc1d5/PM_House_Pages_400_x_400_px_FINAL_CREST4.png?w=550&h=550&fit=thumb&f=center&q=85'
             title1 = 'Slytherin'
-            subtitle1 = 'Members: ' + str(house_members_number_s) + '|Points: ' + str(house_points_s)
+            subtitle1 = 'Members: ' + str(house_members_number_s) + '\n\nPoints: ' + str(house_points_s)
 
         r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                           params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
@@ -2267,7 +2267,7 @@ def handleViewHouses(db, user_id):
                                               {
                                                   "title": title1,
                                                   "image_url": house1_url,
-                                                  "subtitle": '\n' + str(subtitle1),
+                                                  "subtitle":str(subtitle1),
 
                                               },
                                               {
