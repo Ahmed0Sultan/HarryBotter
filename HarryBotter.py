@@ -605,6 +605,10 @@ def webhook():
                                 elif response == 'view houses':
                                     FB.show_typing(token, sender_id, 'typing_off')
                                     handleViewHouses(db, sender_id)
+                                elif response == 'great hall':
+                                    FB.show_typing(token, sender_id, 'typing_off')
+                                    GreateHallReplies(sender_id)
+
 
                                 elif response == 'leaderboard':
                                     FB.show_typing(token, sender_id, 'typing_off')
@@ -662,6 +666,9 @@ def webhook():
                                 handle_places(sender_id)
                             elif response == 'How can I help you?':
                                 FB.send_quick_replies_help(token, sender_id, 'How can I help you?')
+                            elif response == 'great hall':
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                GreateHallReplies(sender_id)
                             else:
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 FB.send_message(token, sender_id, response)
@@ -718,6 +725,8 @@ def processIncoming(user_id, message):
             return 'view houses',[]
         elif userInput.lower() == 'leaderboard':
             return 'leaderboard',[]
+        elif userInput.lower() == 'great hall':
+            return 'great hall',[]
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
 
@@ -1591,7 +1600,7 @@ def handleViewHouse(db,user_id):
                                                 {
                                                     "title": house_name,
                                                     "image_url": house_url,
-                                                    "subtitle":'\n' +  str(house_traits),
+                                                    "subtitle":str(house_traits),
 
                                                 },
                                                 {
@@ -2118,7 +2127,7 @@ def handleProfile(db,user_id):
                                               {
                                                   "title": 'Name',
                                                   "image_url": profile_pic,
-                                                  "subtitle": '\n' + str(first_name) + ' '+ str(last_name),
+                                                  "subtitle":str(first_name) + ' '+ str(last_name),
 
                                               },
                                               {
@@ -2195,7 +2204,7 @@ def handleViewHouses(db, user_id):
         if house == 'Hufflepuff':
             house1_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
             title1 = 'Hufflepuff'
-            subtitle1 = 'Members: '+ str(house_members_number_h) + '\n\nPoints: '+ str(house_points_h)
+            subtitle1 = 'Members: '+ str(house_members_number_h) + ' | Points: '+ str(house_points_h)
             house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
             title2 = 'Ravenclaw'
             subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
@@ -2208,7 +2217,7 @@ def handleViewHouses(db, user_id):
         elif house == 'Ravenclaw':
             house2_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
             title2 = 'Hufflepuff'
-            subtitle2 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
+            subtitle2 = 'Members: ' + str(house_members_number_h) + ' | Points: ' + str(house_points_h)
             house1_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
             title1 = 'Ravenclaw'
             subtitle1 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
@@ -2221,7 +2230,7 @@ def handleViewHouses(db, user_id):
         elif house == 'Gryffindor':
             house3_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
             title3 = 'Hufflepuff'
-            subtitle3 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
+            subtitle3 = 'Members: ' + str(house_members_number_h) + ' | Points: ' + str(house_points_h)
             house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
             title2 = 'Ravenclaw'
             subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
@@ -2234,7 +2243,7 @@ def handleViewHouses(db, user_id):
         elif house == 'Slytherin':
             house4_url = 'https://images.pottermore.com/bxd3o8b291gf/2GyJvxXe40kkkG0suuqUkw/e1a64ec404cf5f19afe9053b9d375230/PM_House_Pages_400_x_400_px_FINAL_CREST3.png?w=550&h=550&fit=thumb&f=center&q=85'
             title4 = 'Hufflepuff'
-            subtitle4 = 'Members: ' + str(house_members_number_h) + '\n\nPoints: ' + str(house_points_h)
+            subtitle4 = 'Members: ' + str(house_members_number_h) + ' | Points: ' + str(house_points_h)
             house2_url = 'https://images.pottermore.com/bxd3o8b291gf/5pnnQ5puTuywEEW06w2gSg/91abff3d923b4785ed79e9abda07bd07/PM_House_Pages_400_x_400_px_FINAL_CREST.png?w=550&h=550&fit=thumb&f=center&q=85'
             title2 = 'Ravenclaw'
             subtitle2 = 'Members: ' + str(house_members_number_r) + '\n\nPoints: ' + str(house_points_r)
@@ -2551,6 +2560,11 @@ def GreateHallReplies(user_id):
                     "title": 'Leaderboard',
                     "payload": 'Harry_Botter_LeaderBoard'
                 },
+                {
+                    "content_type": "text",
+                    "title": 'Trivia',
+                    "payload": 'Harry_Botter_Trivia_Question'
+                }
             ]
         }
     }
