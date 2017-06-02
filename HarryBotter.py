@@ -593,20 +593,20 @@ def webhook():
                                     FB.show_typing(token, sender_id, 'typing_off')
                                     handle_help(sender_id)
                                     FB.send_quick_replies_help(token, sender_id, '...')
-                                elif response == 'sorthattest':
+                                elif response == 'share':
                                     FB.show_typing(token, sender_id, 'typing_off')
                                     handleSortingHat(db, sender_id)
-                                elif response == 'temptest':
+                                elif response == 'trivia':
                                     FB.show_typing(token, sender_id, 'typing_off')
                                     handleTrivia(db, sender_id)
-                                elif response == 'profiletest':
+                                elif response == 'view profile':
                                     FB.show_typing(token, sender_id, 'typing_off')
                                     handleProfile(db, sender_id)
-                                elif response == 'housestest':
+                                elif response == 'view houses':
                                     FB.show_typing(token, sender_id, 'typing_off')
                                     handleViewHouses(db, sender_id)
 
-                                elif response == 'leaderboardtest':
+                                elif response == 'leaderboard':
                                     FB.show_typing(token, sender_id, 'typing_off')
                                     handleLeaderBoard(db, sender_id)
                                 elif response == 'characters':
@@ -635,20 +635,20 @@ def webhook():
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handle_help(sender_id)
                                 FB.send_quick_replies_help(token, sender_id, '...')
-                            elif response == 'sorthattest':
+                            elif response == 'share':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleSortingHat(db, sender_id)
-                            elif response == 'temptest':
+                            elif response == 'trivia':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleTrivia(db, sender_id)
-                            elif response == 'profiletest':
+                            elif response == 'view profile':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleProfile(db, sender_id)
-                            elif response == 'housestest':
+                            elif response == 'view houses':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleViewHouses(db, sender_id)
 
-                            elif response == 'leaderboardtest':
+                            elif response == 'leaderboard':
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleLeaderBoard(db, sender_id)
                             elif response == 'characters':
@@ -708,16 +708,16 @@ def processIncoming(user_id, message):
             return 'characters',[]
         elif userInput.lower() == 'spells' or userInput.lower() == 'spell':
             return 'spells',[]
-        elif userInput.lower() == 'sorthattest':
-            return 'sorthattest',[]
-        elif userInput.lower() == 'temptest':
-            return 'temptest',[]
-        elif userInput.lower() == 'profiletest':
-            return 'profiletest',[]
-        elif userInput.lower() == 'housestest':
-            return 'housestest',[]
-        elif userInput.lower() == 'leaderboardtest':
-            return 'leaderboardtest',[]
+        elif userInput.lower() == 'share':
+            return 'share',[]
+        elif userInput.lower() == 'trivia':
+            return 'trivia',[]
+        elif userInput.lower() == 'view profile':
+            return 'view profile',[]
+        elif userInput.lower() == 'view houses':
+            return 'view houses',[]
+        elif userInput.lower() == 'leaderboard':
+            return 'leaderboard',[]
         elif userInput.lower() == 'places' or userInput.lower() == 'place':
             return 'places',[]
 

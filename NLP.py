@@ -357,7 +357,7 @@ def getNewsQuery(sentence):
         return m[0].group(2).string.replace('.','')
 def answerWithOkay(sentence):
     reply = 'Okay'
-    m = re.search(r'Yes|yes|No|no|Okay|okay|Ok|ok|stop|aha|Aha|ah|Ah|Stop|shut up|Shut up', sentence,re.I)
+    m = re.search(r'\b(Yes|yes|No|no|Okay|okay|Ok|ok|stop|aha|Aha|ah|Ah|Stop|shut up|Shut up)\b', sentence,re.I)
     if m:
         return True
 
