@@ -2609,7 +2609,7 @@ def handleLicense(user_id):
                                               }
                                             ]
                                   }
-                              }
+                              }}
                           }
                       }),
                       headers={'Content-type': 'application/json'})
