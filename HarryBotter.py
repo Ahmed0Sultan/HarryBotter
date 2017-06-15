@@ -2584,24 +2584,6 @@ def GreateHallReplies(user_id):
         print r.text
 
 def handleLicense(user_id):
-    obj = {
-        "title":'All Content is licensed to Harry Potter Wiki under CC BY-SA 3',
-        "subtitle":'No edit has been done to the original content.',
-        "image_url": 'https://vignette2.wikia.nocookie.net/harrypotter/images/5/52/Harry-potter-wiki-welcome.png/revision/latest?cb=20170303211316',
-        "buttons": [
-            {
-                "type": "web_url",
-                "url": "http://harrypotter.wikia.com/wiki/Main_Page",
-                "title": "Harry Potter Wiki"
-            },
-            {
-                "type": "web_url",
-                "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
-                "title": "CC BY-SA 3"
-
-            }
-        ]
-    }
 
     points1 = {
         "title":'All Content is licensed to Harry Potter Wiki under CC BY-SA 3',
@@ -2621,14 +2603,7 @@ def handleLicense(user_id):
             }
         ]
     }
-    points2 = {
-        "title": "Share Harry Botter with a friend and get him to use it",
-        "image_url": url_for('static', filename="assets/img/share.jpg", _external=True),
-    }
-    points3 = {
-        "title": "Everyday you interact with Harry Botter you get 10 Points",
-        "image_url": url_for('static', filename="assets/img/points3.jpg", _external=True),
-    }
+
     options = [points1, points2, points3]
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
@@ -2639,7 +2614,7 @@ def handleLicense(user_id):
                                   "type": "template",
                                   "payload": {
                                       "template_type": "generic",
-                                      "elements": options
+                                      "elements": points1
                                   }
                               }
                           }
