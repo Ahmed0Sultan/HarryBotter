@@ -2583,7 +2583,7 @@ def GreateHallReplies(user_id):
     if r.status_code != requests.codes.ok:
         print r.text
 
-def handleLicense():
+def handleLicense(user_id):
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps({
