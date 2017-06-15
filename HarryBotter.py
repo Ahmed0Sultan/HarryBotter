@@ -2604,7 +2604,7 @@ def handleLicense(user_id):
         ]
     }
 
-    options = [points1, points2, points3]
+    # options = [points1, points2, points3]
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps({
