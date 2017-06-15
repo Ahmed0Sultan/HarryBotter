@@ -2586,6 +2586,7 @@ def GreateHallReplies(user_id):
 def handleLicense(user_id):
     obj = {
         "title":'All Content is licensed to Harry Potter Wiki under CC BY-SA 3',
+        "subtitle":'No edit has been done to the original content.',
         "image_url": 'https://vignette2.wikia.nocookie.net/harrypotter/images/5/52/Harry-potter-wiki-welcome.png/revision/latest?cb=20170303211316',
         "buttons": [
             {
