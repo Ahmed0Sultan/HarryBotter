@@ -589,6 +589,10 @@ def webhook():
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 getpoints(sender_id)
 
+                            elif message_payload == "Harry_Botter_License":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                handleLicense(sender_id)
+
                             else:
                                 user = FB.get_user_fb(token, sender_id)
                                 FB.show_typing(token, sender_id)
