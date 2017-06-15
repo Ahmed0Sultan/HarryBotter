@@ -2596,19 +2596,18 @@ def handleLicense(user_id):
                                       "elements": {
                                             "title": "All Content is licensed to Harry Potter Wiki under CC BY-SA 3",
                                             "image_url": 'https://vignette2.wikia.nocookie.net/harrypotter/images/5/52/Harry-potter-wiki-welcome.png/revision/latest?cb=20170303211316',
-                                    },
-                                    "buttons":[
-                                      {
-                                        "type":"web_url",
-                                        "url":"http://harrypotter.wikia.com/wiki/Main_Page",
-                                        "title":"Harry Potter Wiki"
-                                      },
-                                      {
-                                        "type":"web_url",
-                                        "title":"CC BY-SA 3",
-                                        "url":"https://creativecommons.org/licenses/by-sa/3.0/legalcode"
-                                      }
-                                    ]
+                                            "buttons":[
+                                              {
+                                                "type":"web_url",
+                                                "url":"http://harrypotter.wikia.com/wiki/Main_Page",
+                                                "title":"Harry Potter Wiki"
+                                              },
+                                              {
+                                                "type":"web_url",
+                                                "title":"CC BY-SA 3",
+                                                "url":"https://creativecommons.org/licenses/by-sa/3.0/legalcode"
+                                              }
+                                            ]
                                   }
                               }
                           }
