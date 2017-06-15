@@ -2608,8 +2608,9 @@ def handleLicense(user_id):
                                                 "url":"https://creativecommons.org/licenses/by-sa/3.0/legalcode"
                                               }
                                             ]
+                                      }
                                   }
-                              }}
+                              }
                           }
                       }),
                       headers={'Content-type': 'application/json'})
