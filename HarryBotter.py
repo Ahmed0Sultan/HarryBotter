@@ -2584,6 +2584,24 @@ def GreateHallReplies(user_id):
         print r.text
 
 def handleLicense(user_id):
+    obj = {
+        "title":'All Content is licensed to Harry Potter Wiki under CC BY-SA 3',
+        "image_url": 'https://vignette2.wikia.nocookie.net/harrypotter/images/5/52/Harry-potter-wiki-welcome.png/revision/latest?cb=20170303211316',
+        "buttons": [
+            {
+                "type": "web_url",
+                "url": "http://harrypotter.wikia.com/wiki/Main_Page",
+                "title": "Harry Potter Wiki"
+            },
+            {
+                "type": "web_url",
+                "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+                "title": "CC BY-SA 3"
+
+            }
+        ]
+    }
+
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
                       data=json.dumps({
@@ -2593,22 +2611,7 @@ def handleLicense(user_id):
                                   "type": "template",
                                   "payload": {
                                       "template_type": "generic",
-                                      "elements": {
-                                            "title": "All Content is licensed to Harry Potter Wiki under CC BY-SA 3",
-                                            "image_url": 'https://vignette2.wikia.nocookie.net/harrypotter/images/5/52/Harry-potter-wiki-welcome.png/revision/latest?cb=20170303211316',
-                                            "buttons":[
-                                              {
-                                                "type":"web_url",
-                                                "url":"http://harrypotter.wikia.com/wiki/Main_Page",
-                                                "title":"Harry Potter Wiki"
-                                              },
-                                              {
-                                                "type":"web_url",
-                                                "title":"CC BY-SA 3",
-                                                "url":"https://creativecommons.org/licenses/by-sa/3.0/legalcode"
-                                              }
-                                            ]
-                                      }
+                                      "elements": obj
                                   }
                               }
                           }
