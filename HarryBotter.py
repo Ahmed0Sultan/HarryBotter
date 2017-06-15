@@ -365,6 +365,10 @@ def webhook():
                             FB.show_typing(token, sender_id, 'typing_off')
                             getpoints(sender_id)
 
+                        elif message_payload == "Harry_Botter_License":
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            handleLicense(sender_id)
+
 
                         elif message_payload == "character-harry-potter":
                             sendFromQuickReply(sender_id,'Harry Potter')
@@ -2571,6 +2575,40 @@ def GreateHallReplies(user_id):
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
                       data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def handleLicense():
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": token},
+                      data=json.dumps({
+                          "recipient": {"id": user_id},
+                          "message": {
+                              "attachment": {
+                                  "type": "template",
+                                  "payload": {
+                                      "template_type": "generic",
+                                      "elements": {
+                                            "title": "All Content is licensed to Harry Potter Wiki under CC BY-SA 3",
+                                            "image_url": 'https://vignette2.wikia.nocookie.net/harrypotter/images/5/52/Harry-potter-wiki-welcome.png/revision/latest?cb=20170303211316',
+                                    },
+                                    "buttons":[
+                                      {
+                                        "type":"web_url",
+                                        "url":"http://harrypotter.wikia.com/wiki/Main_Page",
+                                        "title":"Harry Potter Wiki"
+                                      },
+                                      {
+                                        "type":"web_url",
+                                        "title":"CC BY-SA 3",
+                                        "url":"https://creativecommons.org/licenses/by-sa/3.0/legalcode"
+                                      }
+                                    ]
+                                  }
+                              }
+                          }
+                      }),
                       headers={'Content-type': 'application/json'})
     if r.status_code != requests.codes.ok:
         print r.text
