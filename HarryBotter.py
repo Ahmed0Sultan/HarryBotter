@@ -2607,6 +2607,19 @@ def handleLicense(user_id):
         "title":'All Content is licensed to Harry Potter Wiki under CC BY-SA 3',
         "subtitle":'No edit has been done to the original content.',
         "image_url": 'https://vignette2.wikia.nocookie.net/harrypotter/images/5/52/Harry-potter-wiki-welcome.png/revision/latest?cb=20170303211316',
+        "buttons": [
+            {
+                "type": "web_url",
+                "url": "http://harrypotter.wikia.com/wiki/Main_Page",
+                "title": "Harry Potter Wiki"
+            },
+            {
+                "type": "web_url",
+                "url": "https://creativecommons.org/licenses/by-sa/3.0/legalcode",
+                "title": "CC BY-SA 3"
+
+            }
+        ]
     }
     points2 = {
         "title": "Share Harry Botter with a friend and get him to use it",
