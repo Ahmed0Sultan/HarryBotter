@@ -2348,10 +2348,10 @@ def handleLeaderBoard(db,user_id):
     tpoints = 0
     for user in users:
         # print str(user.points)
-        userFB = FB.get_user_fb(token,user.user_id)
-        # print 'Errrrrroooor is ************ ' + str(userFB)
-        if userFB != None:
-            if user.points > fpoints:
+        # userFB = FB.get_user_fb(token,user.user_id)
+        if user.points > fpoints:
+            userFB1 = FB.get_user_fb(token, user.user_id)
+            if userFB1 != None:
                 # print ' Oneeeee'
                 if second != 0:
                     third = second
@@ -2364,7 +2364,9 @@ def handleLeaderBoard(db,user_id):
                 fpoints = first.points
 
 
-            elif user.points > spoints:
+        elif user.points > spoints:
+            userFB2 = FB.get_user_fb(token, user.user_id)
+            if userFB2 != None:
                 # print 'Twooooooo'
                 if second != 0:
                     third = second
@@ -2372,12 +2374,12 @@ def handleLeaderBoard(db,user_id):
                 second = user
                 spoints = second.points
 
-            elif user.points > tpoints:
+        elif user.points > tpoints:
+            userFB3 = FB.get_user_fb(token, user.user_id)
+            if userFB3 != None:
                 # print ' Threeeeeeeeee'
                 third = user
                 tpoints = third.points
-        elif userFB == None:
-            print 'Errrrrrrrrrrorrrr heree  ********************'
 
     if fpoints==0:
         first = users[0]
