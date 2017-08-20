@@ -368,6 +368,10 @@ def webhook():
                             FB.show_typing(token, sender_id, 'typing_off')
                             handleLicense(sender_id)
 
+                        elif message_payload == "Harry_Botter_Get_Feedback":
+                            FB.show_typing(token, sender_id, 'typing_off')
+                            FeedbackReplies(sender_id)
+
 
                         elif message_payload == "character-harry-potter":
                             sendFromQuickReply(sender_id,'Harry Potter')
@@ -591,6 +595,11 @@ def webhook():
                             elif message_payload == "Harry_Botter_License":
                                 FB.show_typing(token, sender_id, 'typing_off')
                                 handleLicense(sender_id)
+
+                            elif message_payload == "Harry_Botter_Feedback":
+                                FB.show_typing(token, sender_id, 'typing_off')
+                                FB.send_message(token,sender_id,'Thanks for your feedback.')
+                                GreateHallReplies(sender_id)
 
                             else:
                                 user = FB.get_user_fb(token, sender_id)
@@ -2584,6 +2593,72 @@ def GreateHallReplies(user_id):
                     "title": 'Trivia',
                     "payload": 'Harry_Botter_Trivia_Question'
                 }
+            ]
+        }
+    }
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params={"access_token": os.environ["PAGE_ACCESS_TOKEN"]},
+                      data=json.dumps(data),
+                      headers={'Content-type': 'application/json'})
+    if r.status_code != requests.codes.ok:
+        print r.text
+
+def FeedbackReplies(user_id):
+    data = {
+        "recipient": {"id": user_id},
+        "message": {
+            "text": 'On a scale of 1 to 10, What would you give your experience with the Bot ?',
+            "quick_replies": [
+                {
+                    "content_type": "text",
+                    "title": '1',
+                    "payload": 'Harry_Botter_Feedback'
+                },
+                {
+                    "content_type": "text",
+                    "title": '2',
+                    "payload": 'Harry_Botter_Feedback'
+                },
+                {
+                    "content_type": "text",
+                    "title": '3',
+                    "payload": 'Harry_Botter_Feedback'
+                },
+                {
+                    "content_type": "text",
+                    "title": '4',
+                    "payload": 'Harry_Botter_Feedback'
+                },
+                {
+                    "content_type": "text",
+                    "title": '5',
+                    "payload": 'Harry_Botter_Feedback'
+                },
+                {
+                    "content_type": "text",
+                    "title": '6',
+                    "payload": 'Harry_Botter_Feedback'
+                },
+                {
+                    "content_type": "text",
+                    "title": '7',
+                    "payload": 'Harry_Botter_Feedback'
+                },
+                {
+                    "content_type": "text",
+                    "title": '8',
+                    "payload": 'Harry_Botter_Feedback'
+                },
+                {
+                    "content_type": "text",
+                    "title": '9',
+                    "payload": 'Harry_Botter_Feedback'
+                },
+                {
+                    "content_type": "text",
+                    "title": '10',
+                    "payload": 'Harry_Botter_Feedback'
+                },
             ]
         }
     }
