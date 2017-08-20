@@ -2349,6 +2349,7 @@ def handleLeaderBoard(db,user_id):
     for user in users:
         # print str(user.points)
         userFB = FB.get_user_fb(token,user.user_id)
+        print 'Errrrrroooor is ************ ' + str(userFB)
         if userFB != None:
             if user.points > fpoints:
                 # print ' Oneeeee'
