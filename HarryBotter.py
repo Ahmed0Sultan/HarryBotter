@@ -2389,9 +2389,12 @@ def handleLeaderBoard(db,user_id):
     FBUser1 = FB.get_user_fb(token, first.user_id)
     FBUser2 = FB.get_user_fb(token, second.user_id)
     FBUser3 = FB.get_user_fb(token, third.user_id)
+    print first.house
+    print second.house
+    print third.house
+    print FBUser1
     print FBUser1['first_name']
     print FBUser1['profile_pic']
-    print second.house
     print second.points
     r = requests.post("https://graph.facebook.com/v2.6/me/messages",
                       params={"access_token": token},
